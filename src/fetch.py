@@ -820,6 +820,8 @@ def map_source_target(source_study_name:str , target_study_name:str, vector_db, 
         elif omop_domain in ['condition_occurrence', 'condition_era', 'drug_era', 'procedure_occurrence', "device_exposure"]:
             # 2 or 3 depth not sure
             reachable_by_graph = graph.bfs_bidirectional_reachable(source_id, target_ids_same_domain, max_depth=2)
+        if omop_domain in ['measurement']:
+            reachable_by_graph = graph.only_upward_or_downward(source_id, target_ids_same_domain, max_depth=1)
         # elif omop_domain in ['measurement']: # only lab tests with same direct parent
         #     reachable_by_graph = graph.find_sibling_targets(source_id, target_ids_same_domain, max_depth=1)
         if reachable_by_graph:

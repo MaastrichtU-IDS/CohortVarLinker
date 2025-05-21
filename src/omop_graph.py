@@ -171,6 +171,9 @@ class OmopGraphNX:
         return nodes
     
 
+
+    
+    
    
     def bfs_upward_reachable(self, start, target_ids, max_depth=5):
         """
@@ -229,6 +232,15 @@ class OmopGraphNX:
 
         return list(reachable_targets)
 
+    def only_upward_or_downward(self, start, target_ids, max_depth=5) -> set:
+        upward = self.bfs_upward_reachable(start, target_ids, max_depth)
+        downward = self.bfs_downward_reachable(start, target_ids, max_depth)
+        equivalents = self.get_equivalent_nodes(start, max_depth=1)
+        print(f"upward is {upward} and downward is {downward} and equivalents are {equivalents}")
+        reachable_target_ids = set(upward) | set(downward) | set(equivalents)
+        reachable_target_ids = reachable_target_ids.intersection(target_ids)
+
+        return reachable_target_ids
     def get_equivalent_nodes(self, node, max_depth=3):
         """
         Recursively find all equivalent nodes to the given node via 'eq' relationships (multi-hop).
@@ -822,4 +834,9 @@ if __name__ == "__main__":
     # print(omop_nx.bfs_bidirectional_reachable(21601665, target_ids=[1338005], max_depth=2))
     # print(omop_nx.bfs_bidirectional_reachable(956874, target_ids=[4186998], max_depth=2))    
     #print(omop_nx.bfs_bidirectional_reachable(21601782, target_ids=[1308216], max_depth=3))
-    print(omop_nx.bfs_bidirectional_reachable(2000000057, target_ids=[763968], max_depth=2))
+    # print(omop_nx.bfs_bidirectional_reachable(2000000057, target_ids=[763968], max_depth=2))
+    print(omop_nx.only_upward_or_downward(3020491, target_ids=[4156660], max_depth=1))
+    print(3000285 in omop_nx.graph)
+    
+    # find relationships between two nodes
+    print(omop_nx.bfs_path(3020491, [4156660], max_depth=1))
