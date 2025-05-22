@@ -269,7 +269,7 @@ if __name__ == '__main__':
 
     data_dir = '/Users/komalgilani/Desktop/cmh/data'
     cohort_file_path = f"{data_dir}/cohorts"
-    cohorts_metadata_file = f"{data_dir}/cohort_metadata_sheet_for_knowledgeGraph.csv"
+    cohorts_metadata_file = f"{data_dir}/cohort_metadata_sheet_v2.csv"
     create_study_metadata_graph(cohorts_metadata_file, recreate=True)
     create_cohort_specific_metadata_graph(cohort_file_path, recreate=True)
     vector_db, embedding_model = generate_studies_embeddings(cohort_file_path, "localhost", "studies_metadata", recreate_db=True)

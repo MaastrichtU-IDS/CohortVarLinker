@@ -16,7 +16,7 @@ def generate_studies_kg(filepath: str) -> Graph:
     """
     try:
         df = pd.read_csv(filepath, encoding="utf-8")
-        df = df.apply(lambda col: col.map(lambda x: x.lower() if isinstance(x, str) else x))
+        # df = df.apply(lambda col: col.map(lambda x: x.lower() if isinstance(x, str) else x))
         df.columns = df.columns.str.lower()
     except UnicodeDecodeError:
         raise ValueError("Failed to read the file -- Upload with Correct CSV format")
@@ -332,18 +332,25 @@ def add_age_group_inclusion_criterion(g: Graph, study_uri: URIRef, inclusion_cri
     g.add((age_group_inclusion_criterion_uri, OntologyNamespaces.CMEO.value.has_value, Literal(inclusion_criteria_value, datatype=XSD.string), metadata_graph))
     
     agic_value_ranges = extract_age_range(inclusion_criteria_value)
- 
+    print(f"Age group inclusion criterion value ranges: {agic_value_ranges}")
     if agic_value_ranges:
         min_age, max_age = agic_value_ranges
+        if min_age is not None:
+            min_age = float(min_age)
+           
         # print(f"Age group inclusion criterion value ranges: {min_age}, {max_age}")  
-        min_age_value_specification =  URIRef(age_group_inclusion_criterion_uri + "/minimum_age_value_specification")
-        max_age_value_specification =  URIRef(age_group_inclusion_criterion_uri + "/maximum_age_value_specification")
-        g.add((min_age_value_specification, RDF.type, OntologyNamespaces.OBI.value.minimum_age_value_specification, metadata_graph))
-        g.add((max_age_value_specification, RDF.type, OntologyNamespaces.OBI.value.maximum_age_value_specification, metadata_graph))
-        g.add((age_group_inclusion_criterion_uri, OntologyNamespaces.RO.value.has_part, min_age_value_specification, metadata_graph))
-        g.add((age_group_inclusion_criterion_uri, OntologyNamespaces.RO.value.has_part, max_age_value_specification, metadata_graph))
-        g.add((min_age_value_specification, OntologyNamespaces.CMEO.value.has_value, Literal(min_age, datatype=XSD.float), metadata_graph))
-        g.add((max_age_value_specification, OntologyNamespaces.CMEO.value.has_value, Literal(max_age, datatype=XSD.float), metadata_graph))
+            min_age_value_specification =  URIRef(age_group_inclusion_criterion_uri + "/minimum_age_value_specification")
+            g.add((min_age_value_specification, RDF.type, OntologyNamespaces.OBI.value.minimum_age_value_specification, metadata_graph))
+            g.add((min_age_value_specification, OntologyNamespaces.CMEO.value.has_value, Literal(min_age, datatype=XSD.float), metadata_graph))
+            g.add((age_group_inclusion_criterion_uri, OntologyNamespaces.RO.value.has_part, min_age_value_specification, metadata_graph))
+
+        if max_age is not None:
+            max_age = float(max_age)
+            max_age_value_specification =  URIRef(age_group_inclusion_criterion_uri + "/maximum_age_value_specification")
+            
+            g.add((max_age_value_specification, RDF.type, OntologyNamespaces.OBI.value.maximum_age_value_specification, metadata_graph))
+            g.add((age_group_inclusion_criterion_uri, OntologyNamespaces.RO.value.has_part, max_age_value_specification, metadata_graph))
+            g.add((max_age_value_specification, OntologyNamespaces.CMEO.value.has_value, Literal(max_age, datatype=XSD.float), metadata_graph))
         
     return g
 
