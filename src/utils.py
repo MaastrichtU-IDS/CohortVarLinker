@@ -148,16 +148,39 @@ def get_var_uri(cohort_id: str | URIRef, var_id: str) -> URIRef:
 
 
 
+
 def extract_age_range(text):
-    # print(f"Extracting age range from text: {text}")
-    match = re.search(r'between\s+(\d+(?:\.\d+)?)\s*[-–]\s*(\d+(?:\.\d+)?)\s*years?', text)
+    # Normalize Unicode comparison symbols
+    text = text.strip().replace("≥", ">=").replace("≤", "<=")
+
+    # Patterns for extracting min and max age
+    age_conditions = re.findall(r'(?:age\s*)?(>=|<=|>|<)\s*(\d+(?:\.\d+)?)\s*(?:years\s*old|years)?', text, flags=re.IGNORECASE)
+
+    min_age = None
+    max_age = None
+
+    for operator, value in age_conditions:
+        value = float(value)
+        if operator in ('>=', '>'):
+            if min_age is None or value > min_age:
+                min_age = value if operator == '>' else value  # can adjust to value + epsilon if needed
+        elif operator in ('<=', '<'):
+            if max_age is None or value < max_age:
+                max_age = value if operator == '<' else value  # can adjust to value - epsilon if needed
+
+    # Also handle "between X and Y years" separately
+    match = re.search(r'between\s+(\d+(?:\.\d+)?)\s*(?:and|[-–])\s*(\d+(?:\.\d+)?)\s*years?', text, flags=re.IGNORECASE)
     if match:
-        min_age = float(match.group(1))
-        max_age = float(match.group(2))
-        # print(f"Extracted min_age: {min_age}, max_age: {max_age}")
-        if min_age > max_age:
-            return None
+        min_val = float(match.group(1))
+        max_val = float(match.group(2))
+        if min_age is None or min_val > min_age:
+            min_age = min_val
+        if max_age is None or max_val < max_age:
+            max_age = max_val
+
+    if min_age is not None or max_age is not None:
         return min_age, max_age
+
     return None
 def determine_var_uri(g, cohort_id, var_name,multi_class_categorical, binary_categorical, data_type=None):
     # cohort_uri = get_cohort_uri(cohort_id)
@@ -350,7 +373,7 @@ def apply_rules(domain, src_info, tgt_info):
     tgt_data_type = tgt_info.get('data_type', '').lower()
     domains_list = ["observation", "drug_exposure", "device_exposure", "condition_era", "condition_occurrence","measurement", "procedure_occurrence", "observation_period", "demographic", "person"]
   #  print(f"src_type: {src_type} tgt_type: {tgt_type} src_unit: {src_unit} tgt_unit: {tgt_unit}")
-    valid_types = {"continuous_variable", "binary_class_variable", "multi_class_variable"}
+    valid_types = {"continuous_variable", "binary_class_variable", "multi_class_variable","qualitative_variable"}
     if src_type not in valid_types or tgt_type not in valid_types and ("derived" not in src_var_name or "derived" not in tgt_var_name):
         return "Transformation Not applicable (invalid statistical type)"
 
@@ -378,7 +401,7 @@ def apply_rules(domain, src_info, tgt_info):
         (src_type == "binary_class_variable" and tgt_type == "multi_class_variable") or
         (src_type == "multi_class_variable" and tgt_type == "binary_class_variable")
     ):
-        if domain == "drug_exposure":
+        if domain in [ "drug_exposure", "drug_era"]:
             return "For harmonization convert multi-class variables to binary classes, but accept only the degree of information loss justified by the research question. For drug-related variables, scrutinize the surrounding categorical context—e.g., therapy adjustments or supplemental medication descriptors—before deciding on the optimal harmonization, because these details may not map cleanly onto a binary split."
         else:
             return "For harmonization, convert multi-class variables to binary classes, but accept only the degree of information loss justified by the research question"
@@ -387,17 +410,19 @@ def apply_rules(domain, src_info, tgt_info):
     if (src_type == "continuous_variable" and tgt_type in {"binary_class_variable", "multi_class_variable"}) or src_type in {"binary_class_variable", "multi_class_variable"} and tgt_type == "continuous_variable":
         if src_data_type == "datetime" or tgt_data_type == "datetime":
             return "When harmonizing a datetime variable with a binary or multi class variable, transform the datetime into a presence/absence indicator. Any non-missing datetime value indicates 'presence'; a missing or null datetime indicates 'absence'."
-        if domain == "drug_exposure":
+        if domain in [ "drug_exposure", "drug_era"]:
             return "For drug-related variables in harmonization, first examine any accompanying categorical context—such as therapy adjustments or descriptive qualifiers—because these details may not align neatly with the drug-dosage columns and harmonization may not be possible."
         return "For harmonization, you may discretize continuous variables into categorical classes, but only when the resulting information loss is acceptable for the research question. Represent each clinical domain with two elements: 1Presence/absence flag:a binary indicator showing whether an event exists, 2) Event category: a categorical field specifying which event occurred (e.g., which condition, which procedure, which device etc)."
-        
+    if src_type in {"binary_class_variable", "multi_class_variable"} and tgt_type == "qualitative_variable":
+        return "This variable pair involves a qualitative variable (string/text-based) and a categorical variable (binary or multi-class). Harmonization is conditionally possible if the qualitative variable contains a finite and consistently used set of values that can be reliably mapped to the categorical codes. Transformation requires: (1) value normalization (e.g., spelling, casing), and (2) manual or automated mapping to standardized categories. This process may incur minor information loss and should be justified based on the harmonization goal. Applicability is limited to cases where the qualitative variable represents discrete categories, not unstructured narrative text."
+    if src_type == "qualitative_variable" and tgt_type in {"binary_class_variable", "multi_class_variable"}:
+        return "This variable pair involves a qualitative variable (string/text-based) and a categorical variable (binary or multi-class). Harmonization is conditionally possible if the qualitative variable contains a finite and consistently used set of values that can be reliably mapped to the categorical codes. Transformation requires: (1) value normalization (e.g., spelling, casing), and (2) manual or automated mapping to standardized categories. This process may incur minor information loss and should be justified based on the harmonization goal. Applicability is limited to cases where the qualitative variable represents discrete categories, not unstructured narrative text."
     # # Case 4: Categorical → Continuous (rare)
     # if src_type in {"binary_class_variable", "multi_class_variable"} and tgt_type == "continuous_variable":
     #     if src_data_type == "datetime" or src_data_type == "datetime":
     #         return "transformation Not applicable"
     #     return "Transform categorical to continuous (acceptable loss, RQ dependent)"
 
-   
     return "Transformation rule not defined"
 
 
