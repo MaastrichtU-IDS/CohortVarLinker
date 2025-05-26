@@ -58,9 +58,12 @@ class OmopGraphNX:
             'atc - rxnorm pr lat': 'rxnorm - atc pr lat',
             'mapped from': 'maps to',
             'maps to': 'mapped from',
+            'component of': 'has component',
+            'has component': 'component of',
             # 'atc - snomed eq': 'snomed - atc eq',
             # 'snomed - atc eq': 'atc - snomed eq',
         }
+   
         directed_child_to_parent = {
             'is a': 'subsumes',
             'subsumes': 'is a'
@@ -236,10 +239,10 @@ class OmopGraphNX:
         upward = self.bfs_upward_reachable(start, target_ids, max_depth)
         downward = self.bfs_downward_reachable(start, target_ids, max_depth)
         equivalents = self.get_equivalent_nodes(start, max_depth=1)
+        siblings = self.get_share_components(start, target_ids, max_depth=max_depth)
         print(f"upward is {upward} and downward is {downward} and equivalents are {equivalents}")
-        reachable_target_ids = set(upward) | set(downward) | set(equivalents)
+        reachable_target_ids = set(upward) | set(downward) | set(equivalents) | set(siblings)
         reachable_target_ids = reachable_target_ids.intersection(target_ids)
-
         return reachable_target_ids
     def get_equivalent_nodes(self, node, max_depth=3):
         """
@@ -278,144 +281,6 @@ class OmopGraphNX:
         return visited
 
 
-    # def bfs_bidirectional_reachable(self, start, target_ids, max_depth=3):
-    #     """
-    #     Optimized BFS that traverses both directions to find reachable target_ids.
-    #     If not found, tries equivalent nodes and repeats.
-    #     """
-    #     reachable_target_id = set()
-    #     target_ids = set(target_ids)
-
-    #     # Step 1: Try upward
-    #     find_upward = self.bfs_upward_reachable(start, target_ids, max_depth)
-        
-    #     if len(find_upward) > 0:
-    #         for target in find_upward:
-    #             # print(f"[UPWARD] target {target} is in target ids from start {start}")
-    #             reachable_target_id.add(target)
-    #         if len(reachable_target_id)  == len(target_ids):
-    #             print(f"find_upward is {find_upward}")
-    #             return list(reachable_target_id)
-
-
-    #     # Step 2: Try downward
-    #     find_downward = self.bfs_downward_reachable(start, target_ids, max_depth)
-    #     if len(find_downward) > 0:
-    #         for target in find_downward:
-    #             # print(f"[DOWNWARD] target {target} is in target ids")
-    #             reachable_target_id.add(target)
-    #         if len(reachable_target_id)  == len(target_ids):
-    #             print(f"find_downward is {find_downward}")
-    #             return list(reachable_target_id)
-
-    #     # Step 3: Try equivalents 
-
-    #     # find equiavalent of each target and check if it is reachable from start
-
-    #     for target in target_ids:
-    #         # print(f"Trying target {target} via equivalent nodes.")
-    #         equivalents = self.get_equivalent_nodes(target)
-
-    #         # print(f"len of equivalents is {len(equivalents)}")
-    #         for equiv in equivalents:
-    #             # print(f"[EQUIVALENT] Trying equivalent node: {equiv}")
-    #             find_upward = self.bfs_upward_reachable(start, [equiv], max_depth)
-    #             if find_upward and start in find_upward:
-    #                     print(f"[EQUIV-UP] target {target} is in target ids via equivalent {equiv}")
-    #                     reachable_target_id.add(target)
-    #                     break
-
-    #             down_upward = self.bfs_downward_reachable(start, [equiv], max_depth)
-    #             if down_upward and start in down_upward:
-    #                     print(f"[EQUIV-DOWN] target {target} is in target ids via equivalent {equiv}")
-    #                     reachable_target_id.add(target)
-    #                     break
-        
-
-        # step 4 : find equivalent of start and check if it is reachable from target
-
-        # print(f"Trying start {start} via equivalent nodes.")
-        # equivalents = self.get_equivalent_nodes(start)
-        # # print(f"len of equivalents is {len(equivalents)}")
-        # for equiv in equivalents:
-        #     # print(f"[EQUIVALENT] Trying equivalent node: {equiv}")
-        #     find_upward = self.bfs_upward_reachable(equiv, target_ids, max_depth)
-        #     if find_upward:
-        #         for target in find_upward:
-        #             if target in target_ids:
-        #                 # print(f"[EQUIV-UP] target {target} is in target ids via equivalent {equiv}")
-        #                 reachable_target_id.add(target)
-        #     find_downward = self.bfs_downward_reachable(equiv, target_ids, max_depth)
-        #     if find_downward:
-        #         for target in find_downward:
-        #             if target in target_ids:
-        #                 # print(f"[EQUIV-DOWN] target {target} is in target ids via equivalent {equiv}")
-        #                 reachable_target_id.add(target)
-
-        # print(f"start is {start}")
-        # downward_children = self.bfs_all_reachable_subsumes(start, 2)
-        # print(f"downward children are {downward_children}")
-        # for child in downward_children:
-        #     ancestor_equivs = self.get_equivalent_nodes(child)
-        #     intersection = target_ids.intersection(ancestor_equivs)
-        #     if intersection:
-        #         reachable_target_id.update(intersection)
-            
-        # return list(reachable_target_id)
-
-    # def get_siblings(self, node):
-    #     """
-    #     Return all siblings of 'node' in self.graph, ignoring any special edge properties.
-        
-    #     Siblings = other children of node's parent(s). 
-    #     If node has multiple parents, we union siblings across each parent.
-    #     """
-    #     if node not in self.graph:
-    #         return []
-
-    #     # Find edges where parent -> node
-    #     parent_edges = [(u, v, d) for u, v, d in self.graph.edges(data=True) if v == node]
-    #     if not parent_edges:
-    #         # No parent => no siblings
-    #         return []
-
-    #     siblings = set()
-    #     # Each parent is 'u' from the edge (u->v)
-    #     for (parent, _, _) in parent_edges:
-    #         # Gather children from parent -> child
-    #         children_of_parent = [child for _, child in self.graph.out_edges(parent)]
-    #         # Exclude 'node'
-    #         for c in children_of_parent:
-    #             if c != node:
-    #                 siblings.add(c)
-    #     return list(siblings)
-
-    # def get_rich_siblings(self, node):
-    #     """
-    #     Return siblings of 'node' in self.graph, but only follow edges
-    #     where edgeProperty == True (mimicking your pseudocode).
-    #     """
-    #     if node not in self.graph:
-    #         return []
-
-    #     # Find edges where parent -> node and edgeProperty == True
-    #     parent_edges = [
-    #         (u, v, d) for u, v, d in self.graph.edges(data=True)
-    #         if v == node and d.get('edgeProperty') == True
-    #     ]
-    #     if not parent_edges:
-    #         return []
-
-    #     siblings = set()
-    #     for (parent, _, _) in parent_edges:
-    #         # Gather children from parent -> child, but only if edgeProperty == True
-    #         child_nodes = [
-    #             child for _, child, dd in self.graph.out_edges(parent, data=True)
-    #             if dd.get('edgeProperty') == True and child != node
-    #         ]
-    #         siblings.update(child_nodes)
-
-    #     return list(siblings)
 
     def bfs_upward_with_equivalences(self, start, candidate_ids, max_depth=5):
         """
@@ -695,6 +560,74 @@ class OmopGraphNX:
         return is_match, path
 
 
+
+    def get_share_components(self, start: int, target_ids: List[int], max_depth: int = 3):
+        """
+        Identifies if `start` and any of the `target_ids` share a component based on
+        'has component' or 'component of' relationships in the graph.
+
+        Parameters:
+        -----------
+        start : int
+            The source concept_id (typically a lab test or similar).
+        target_ids : List[int]
+            List of concept_ids to check for shared components.
+        max_depth : int
+            Maximum depth to traverse for components.
+
+        Returns:
+        --------
+        List[dict]
+            List of dictionaries for each target with shared component info:
+            [{'target': 123, 'shared_component': 456}, ...]
+        """
+        if start not in self.graph:
+            print(f"[WARN] Start node {start} not in graph.")
+            return []
+
+        target_ids = set(target_ids)
+        shared_results = []
+
+        def get_components(node: int, max_depth=3) -> Set[int]:
+            visited = set()
+            queue = deque([(node, 0)])
+            components = set()
+
+            while queue:
+                current, depth = queue.popleft()
+                if depth >= max_depth:
+                    continue
+
+                for neighbor in self.graph.successors(current):  # e.g., has component
+                    rel = self.graph.get_edge_data(current, neighbor).get("relation", "")
+                    if rel in {"has component"} and neighbor not in visited:
+                        visited.add(neighbor)
+                        components.add(neighbor)
+                        queue.append((neighbor, depth + 1))
+
+                for neighbor in self.graph.predecessors(current):  # e.g., component of
+                    rel = self.graph.get_edge_data(neighbor, current).get("relation", "")
+                    if rel in {"component of"} and neighbor not in visited:
+                        visited.add(neighbor)
+                        components.add(neighbor)
+                        queue.append((neighbor, depth + 1))
+
+            return components
+
+        # Get components of the start node
+        start_components = get_components(start, max_depth=max_depth)
+
+        for tid in target_ids:
+            if tid not in self.graph:
+                continue
+            target_components = get_components(tid, max_depth=max_depth)
+            common = start_components & target_components
+            for c in common:
+                shared_results.append({"target": tid, "shared_component": c})
+
+        return shared_results
+
+    
     def get_all_parents(self, concept_id: int, max_depth: int = 5) -> Set[int]:
         """
         Return the set of all ancestors/parents of `concept_id` in the `graph`,
@@ -835,8 +768,9 @@ if __name__ == "__main__":
     # print(omop_nx.bfs_bidirectional_reachable(956874, target_ids=[4186998], max_depth=2))    
     #print(omop_nx.bfs_bidirectional_reachable(21601782, target_ids=[1308216], max_depth=3))
     # print(omop_nx.bfs_bidirectional_reachable(2000000057, target_ids=[763968], max_depth=2))
-    print(omop_nx.only_upward_or_downward(3020491, target_ids=[4156660], max_depth=1))
-    print(3000285 in omop_nx.graph)
+    print(omop_nx.only_upward_or_downward(3028437, target_ids=[3001308], max_depth=1))
+    # print(3000285 in omop_nx.graph)
     
     # find relationships between two nodes
-    print(omop_nx.bfs_path(3020491, [4156660], max_depth=1))
+    # print(omop_nx.bfs_path(3020491, [4156660], max_depth=1))
+    # print(omop_nx.find_sibling_targets(3028437, [44817294], max_depth=1))
