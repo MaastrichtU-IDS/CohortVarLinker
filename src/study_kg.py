@@ -86,10 +86,16 @@ def generate_studies_kg(filepath: str) -> Graph:
             g.add((data_format_uri, OntologyNamespaces.CMEO.value.has_value, Literal(data_format, datatype=XSD.string), metadata_graph))
             g.add((study_design_variable_specification_uri, OntologyNamespaces.RO.value.has_part, data_format_uri, metadata_graph))
                         
-        if row["study type"]:
-            process_type=row["study type"].lower().strip() if pd.notna(row["study type"]) else ""
-            g.add((study_design_execution_uri, OntologyNamespaces.CMEO.value.has_value, Literal(process_type, datatype=XSD.string), metadata_graph)) 
-            g.add((study_design_uri , RDFS.label, Literal(process_type, datatype=XSD.string), metadata_graph))
+        if pd.notna(row["study type"]):
+            study_descriptor=row["study type"].lower().strip() if pd.notna(row["study type"]) else ""
+            print(f"Study descriptor: {study_descriptor}")
+            # g.add((study_design_execution_uri, OntologyNamespaces.CMEO.value.has_value, Literal(process_type, datatype=XSD.string), metadata_graph)) 
+            # g.add((study_design_uri , RDFS.label, Literal(study_descriptor, datatype=XSD.string), metadata_graph))
+            descriptor_uri = URIRef(study_uri + "/descriptor")
+            g.add((descriptor_uri, RDF.type, OntologyNamespaces.SIO.value.study_descriptor, metadata_graph))
+            g.add((descriptor_uri, RDFS.label, Literal(study_descriptor, datatype=XSD.string), metadata_graph))
+            g.add((study_design_uri, OntologyNamespaces.SIO.value.is_described_by, descriptor_uri, metadata_graph))
+             
         # study design has various "has direct part" which includes primary objective, endpoints, selection criteria, etc.
         if row["study objective"] and pd.notna(row["study objective"]):
             # print(row["Primary objective"])
@@ -299,6 +305,9 @@ def add_inclusion_criterion(g: Graph, row: pd.Series, study_uri: URIRef, eligibi
     inclusion_criteria_columns = [col for col in row.index if "inclusion criterion" in col.lower()]
     for col in inclusion_criteria_columns:
         inclusion_criterion_name = normalize_text(col)
+        row_value = row[col].lower().strip() if pd.notna(row[col]) else ""
+        if row_value == "not applicable":
+            continue
         if "age" in inclusion_criterion_name:
             add_age_group_inclusion_criterion(g, study_uri, inclusion_criterion_uri, metadata_graph, row[col])
         else:
