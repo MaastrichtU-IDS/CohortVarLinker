@@ -1,14 +1,64 @@
 [project]
-name = "cohortvarlinker"
+name = "cmh"
 version = "0.1.0"
-description = ""
+description = "clinical metadata harmonization"
 authors = [
     {name = "Komal Gilani",email = "komalsyeda29@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.13"
-dependencies = [
-]
+requires-python = ">=3.10,<3.12"
+
+
+
+[tool.poetry.dependencies]
+    pandas = "*"
+    numpy = "*"
+    matplotlib = "*"
+    seaborn = "*"
+    requests = "*"
+    tqdm = "*"
+    ydata-profiling = "*"
+    setuptools = "*"
+    pyreadstat = "*"
+    dateinfer = "*"
+    quantulum = "*"
+    rdflib = "*"
+    sparqlwrapper = "*"
+    python-dotenv = "*"
+    chardet = "*"
+    oxrdflib = "*"
+    plotly = "*"
+    networkx = "*"
+    decentriq_util= "*"
+    ontospy="*"
+    pylode= "*"
+    openai="*"
+    langchain = "*"
+    langchain-community = "*"
+    langchain-core = "*"
+    langgraph = "*"
+    faiss-cpu = "*"
+    langchain-together = "*"
+    owlready2 = "*"
+    asyncpg = "*"
+    greenlet = "*"
+    torch = "*"
+    transformers = "*"
+    scipy = "*"
+    langchain-qdrant = "*"
+    scikit-learn = "*"
+    jinja2 = "*"
+    pyvis = "*"
+    optimum = "*"
+    openpyxl = "*"
+thefuzz = "^0.22.1"
+pint = "^0.24.4"
+qdrant-client = "^1.14.2"
+
+
+
+[tool.poetry]
+packages = [{include = "src"}]
 
 
 [build-system]
