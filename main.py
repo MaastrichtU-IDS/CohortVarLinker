@@ -78,7 +78,6 @@ def create_cohort_specific_metadata_graph(dir_path, recreate=False):
                 # ➋ Classify the candidates
                 for file in file_candidates:
                     print(f"File: {file}")
-
                     # Collect *all* metadata spreadsheets
                     if file.lower().endswith((".csv", ".xlsx")):
                         cohort_metadata_file = file
@@ -269,13 +268,13 @@ def cluster_variables_by_omop(endpoint_url):
 
 if __name__ == '__main__':
 
-    data_dir = '/Users/komalgilani/Desktop/cmh/data'
+    data_dir = 'data'
     cohort_file_path = f"{data_dir}/cohorts"
     cohorts_metadata_file = f"{data_dir}/cohort_metadata_sheet.csv"
     start_time = time.time()
-    create_study_metadata_graph(cohorts_metadata_file, recreate=False)
-    create_cohort_specific_metadata_graph(cohort_file_path, recreate=False)
-    vector_db, embedding_model = generate_studies_embeddings(cohort_file_path, "localhost", "studies_metadata", recreate_db=False)
+    create_study_metadata_graph(cohorts_metadata_file, recreate=True)
+    create_cohort_specific_metadata_graph(cohort_file_path, recreate=True)
+    vector_db, embedding_model = generate_studies_embeddings(cohort_file_path, "localhost", "studies_metadata", recreate_db=True)
 
     source_study = "time-chf"
     target_studies = [("gissi-hf", True), ("aachenhf", False), ("cardiateam",False)]

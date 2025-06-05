@@ -210,7 +210,7 @@ class Settings:
     @property
     def concepts_file_path(self) -> str:
         # return  "komal.qdrant.137.120.31.148.nip.io"
-        return  "/Users/komalgilani/Desktop/cmh/data/concept_relationship.csv"
+        return  ".../data/concept_relationship.csv"
 
 
 settings = Settings()

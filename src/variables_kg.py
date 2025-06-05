@@ -747,7 +747,10 @@ def add_categories_to_graph(g: Graph, var_uri: URIRef, cohort_uri: URIRef, row: 
         # Parse categories as value=defined_value pairs
         for category in categories:
             try:
-                value, defined_value = map(str.strip, category.split('='))
+                if "=" not in category:
+                    value, defined_value = category.strip(), category.strip()
+                else:
+                    value, defined_value = map(str.strip, category.split('='))
                 updated_categories.append((value, defined_value))
             except ValueError:
                 continue  # Skip if format is invalid
