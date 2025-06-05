@@ -1,6 +1,8 @@
 import pandas as pd
 # import cProfile
 # import pstats
+from src.omop_graph import OmopGraphNX
+from src.config import settings
 from SPARQLWrapper import SPARQLWrapper, JSON
 import os
 import glob
@@ -19,7 +21,7 @@ from src.utils import (
 
 
 
-from src.fetch import find_hierarchy_of_variables,map_source_target
+from src.fetch import map_source_target
 
 
 
@@ -269,10 +271,11 @@ if __name__ == '__main__':
 
     data_dir = '/Users/komalgilani/Desktop/cmh/data'
     cohort_file_path = f"{data_dir}/cohorts"
-    cohorts_metadata_file = f"{data_dir}/cohort_metadata_sheet_v2.csv"
-    create_study_metadata_graph(cohorts_metadata_file, recreate=True)
-    create_cohort_specific_metadata_graph(cohort_file_path, recreate=True)
-    vector_db, embedding_model = generate_studies_embeddings(cohort_file_path, "localhost", "studies_metadata", recreate_db=True)
+    cohorts_metadata_file = f"{data_dir}/cohort_metadata_sheet.csv"
+    start_time = time.time()
+    create_study_metadata_graph(cohorts_metadata_file, recreate=False)
+    create_cohort_specific_metadata_graph(cohort_file_path, recreate=False)
+    vector_db, embedding_model = generate_studies_embeddings(cohort_file_path, "localhost", "studies_metadata", recreate_db=False)
 
     source_study = "time-chf"
     target_studies = [("gissi-hf", True), ("aachenhf", False), ("cardiateam",False)]
@@ -280,18 +283,20 @@ if __name__ == '__main__':
 #   The code snippet provided is a Python script that iterates over a list of target studies and
 #   performs the following actions for each target study:
 
+    graph = OmopGraphNX(csv_file_path=settings.concepts_file_path)
     for tstudy, vc in target_studies:
         mapping_transformed=map_source_target(source_study_name=source_study, target_study_name=tstudy, 
                                                 embedding_model=embedding_model, vector_db=vector_db, 
                                                 collection_name="studies_metadata",
                                                 
-                                                visit_constraint=vc)
+                                                visit_constraint=vc, graph=graph)
 
         print(mapping_transformed)
         
         mapping_transformed = mapping_transformed.drop_duplicates(keep='first')
         mapping_transformed.to_csv(f'{data_dir}/output/{source_study}_{tstudy}_full.csv', index=False)
-    
+    end_time = time.time()
+    print(f"Time taken to process all cohorts: {end_time - start_time} seconds")
         # find_hierarchy_of_variables(tstudy)
     # res=search_in_db(
     #     vectordb=vector_db,

@@ -529,7 +529,7 @@ def check_visit_sring(visit_string, visit_constraint: bool = True):
     else:
         return visit_string
 def map_source_target(source_study_name:str , target_study_name:str, vector_db, embedding_model,graph_db_repo="https://w3id.org/CMEO/graph", collection_name="studies_metadata",
-                      visit_constraint: bool = True):
+                      visit_constraint: bool = True, graph: Any = None):
 
 
 
@@ -542,8 +542,8 @@ def map_source_target(source_study_name:str , target_study_name:str, vector_db, 
 
     
     """
-    from .omop_graph import OmopGraphNX
-    graph = OmopGraphNX(csv_file_path=settings.concepts_file_path)
+    # from .omop_graph import OmopGraphNX
+    # graph = OmopGraphNX(csv_file_path=settings.concepts_file_path)
     start_time = time.time()
     # common_codes_df = find_common_codes(source_study_name, target_study_name)  # via common code, its first step
 
@@ -684,7 +684,7 @@ def map_source_target(source_study_name:str , target_study_name:str, vector_db, 
 
                     source_visit = check_visit_sring(source_data_elements_visit[i], visit_constraint)
                     target_visit = check_visit_sring(target_data_elements_visit[j], visit_constraint)
-                    print(f"source visit: {source_visit} and target visit: {target_visit} and visit contraint {visit_constraint}")
+                    # print(f"source visit: {source_visit} and target visit: {target_visit} and visit contraint {visit_constraint}")
                     if source_visit == target_visit:
                         final_dict.append({   
                             'source': s,
@@ -813,10 +813,9 @@ def map_source_target(source_study_name:str , target_study_name:str, vector_db, 
         #     continue
         # 🔁 Step 1: Graph-based reachability
         reachable_by_graph = None
-        if omop_domain in ['drug_exposure' or 'drug_era']:
+        if omop_domain in ['drug_exposure', 'drug_era']:
             reachable_by_graph = graph.bfs_bidirectional_reachable(source_id, target_ids_same_domain, max_depth=3)
-            # if source_id == 21601665:
-            #     print(f"reachable_by_graph exist: {reachable_by_graph} and check omopid: {target_ids_same_domain}")
+            # if source_id == 21601554: print(f"reachable_by_graph exist: {reachable_by_graph} and check omopid: {target_ids_same_domain}")
         elif omop_domain in ['condition_occurrence', 'condition_era', 'drug_era', 'procedure_occurrence', "device_exposure"]:
             # 2 or 3 depth not sure
             reachable_by_graph = graph.bfs_bidirectional_reachable(source_id, target_ids_same_domain, max_depth=2)
@@ -860,8 +859,8 @@ def map_source_target(source_study_name:str , target_study_name:str, vector_db, 
                 collection_name=collection_name
             )
             matched_targets = set(target_ids_by_similarity)
-            if  source_id == 3005456:
-                print(f"3005456: {label_source_id} and target_ids_by_similarity: {matched_targets}")
+            if  source_id == 21601554:
+                print(f"21601554: {label_source_id} and target_ids_by_similarity: {matched_targets}")
             # print(f"[VECTOR] Found {len(matched_targets)} matches for {label_source_id}")
 
         # 🔁 Step 3: Add to final_dict if target in target_map
@@ -1187,7 +1186,7 @@ def fetch_variables_statistics(var_names_list:list[str], study_name:str) -> pd.D
         ORDER BY ?identifier
 
         """
-        print(query)
+        # print(query)
         sparql = SPARQLWrapper(settings.query_endpoint)
         sparql.setQuery(query)
         sparql.setReturnFormat(JSON)

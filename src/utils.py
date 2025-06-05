@@ -27,7 +27,7 @@ class OntologyNamespaces(Enum):
     LOINC = Namespace("http://purl.bioontology.org/ontology/LNC/") 
     RO = Namespace("http://purl.obolibrary.org/obo/ro.owl/")
     IAO = Namespace("http://purl.obolibrary.org/obo/iao.owl/")
-    SIO = Namespace("http://semanticscience.org/ontology/sio/v1.59/sio-release.owl")
+    SIO = Namespace("http://semanticscience.org/ontology/sio/v1.59/sio-release.owl#")
     # UCUM = Namespace("http://purl.bioontology.org/ontology/UCUM/")
     # RXNORM = Namespace("http://purl.bioontology.org/ontology/RXNORM/")
 
