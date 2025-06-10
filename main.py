@@ -272,9 +272,9 @@ if __name__ == '__main__':
     cohort_file_path = f"{data_dir}/cohorts"
     cohorts_metadata_file = f"{data_dir}/cohort_metadata_sheet.csv"
     start_time = time.time()
-    create_study_metadata_graph(cohorts_metadata_file, recreate=True)
-    create_cohort_specific_metadata_graph(cohort_file_path, recreate=True)
-    vector_db, embedding_model = generate_studies_embeddings(cohort_file_path, "localhost", "studies_metadata", recreate_db=True)
+    create_study_metadata_graph(cohorts_metadata_file, recreate=False)
+    create_cohort_specific_metadata_graph(cohort_file_path, recreate=False)
+    vector_db, embedding_model = generate_studies_embeddings(cohort_file_path, "localhost", "studies_metadata", recreate_db=False)
 
     source_study = "time-chf"
     target_studies = [("gissi-hf", True), ("aachenhf", False), ("cardiateam",False)]
