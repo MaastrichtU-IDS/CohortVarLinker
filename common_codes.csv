@@ -1,0 +1,300 @@
+source,target,somop_id,tomop_id,scode,slabel,tcode,tlabel,category,mapping type,source_visit,target_visit
+hb18,rbc,3000963,3000963,loinc:718-7,hemoglobin [mass/volume] in blood,loinc:718-7,hemoglobin [mass/volume] in blood,measurement,exact match,baseline time,baseline time
+hb,rbc,3000963,3000963,loinc:718-7,hemoglobin [mass/volume] in blood,loinc:718-7,hemoglobin [mass/volume] in blood,measurement,exact match,baseline time,baseline time
+hb12,rbc,3000963,3000963,loinc:718-7,hemoglobin [mass/volume] in blood,loinc:718-7,hemoglobin [mass/volume] in blood,measurement,exact match,baseline time,baseline time
+hb6,rbc,3000963,3000963,loinc:718-7,hemoglobin [mass/volume] in blood,loinc:718-7,hemoglobin [mass/volume] in blood,measurement,exact match,baseline time,baseline time
+rvramean,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement,exact match,baseline time,baseline time
+bpsyststand3,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement,exact match,baseline time,baseline time
+bpsyststand6,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement,exact match,baseline time,baseline time
+bpsyststand1,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement,exact match,baseline time,baseline time
+bpsyst12,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement,exact match,baseline time,baseline time
+bpsyst1,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement,exact match,baseline time,baseline time
+bpsyst6,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement,exact match,baseline time,baseline time
+bpsyst,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement,exact match,baseline time,baseline time
+bpsyst18,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement,exact match,baseline time,baseline time
+bpsyststand12,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement,exact match,baseline time,baseline time
+rvra,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement,exact match,baseline time,baseline time
+bpsyststand18,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement,exact match,baseline time,baseline time
+bpsyststanding,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement,exact match,baseline time,baseline time
+bpsyst3,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement,exact match,baseline time,baseline time
+hct,haematocrit,3009542,3009542,loinc:20570-8,hematocrit [volume fraction] of blood,loinc:20570-8,hematocrit [volume fraction] of blood,measurement,exact match,baseline time,baseline time
+hct6,haematocrit,3009542,3009542,loinc:20570-8,hematocrit [volume fraction] of blood,loinc:20570-8,hematocrit [volume fraction] of blood,measurement,exact match,baseline time,baseline time
+hct12,haematocrit,3009542,3009542,loinc:20570-8,hematocrit [volume fraction] of blood,loinc:20570-8,hematocrit [volume fraction] of blood,measurement,exact match,baseline time,baseline time
+hct18,haematocrit,3009542,3009542,loinc:20570-8,hematocrit [volume fraction] of blood,loinc:20570-8,hematocrit [volume fraction] of blood,measurement,exact match,baseline time,baseline time
+hscrp_v6,us-crp,3010156,3010156,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,measurement,exact match,baseline time,baseline time
+hscrp_v18,us-crp,3010156,3010156,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,measurement,exact match,baseline time,baseline time
+crpsensitive,us-crp,3010156,3010156,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,measurement,exact match,baseline time,baseline time
+hscrp_v3,us-crp,3010156,3010156,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,measurement,exact match,baseline time,baseline time
+hscrp_v1,us-crp,3010156,3010156,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,measurement,exact match,baseline time,baseline time
+hscrp_v12,us-crp,3010156,3010156,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,measurement,exact match,baseline time,baseline time
+hscrp_bl,us-crp,3010156,3010156,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,measurement,exact match,baseline time,baseline time
+bpdiast,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement,exact match,baseline time,baseline time
+bpdiast18,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement,exact match,baseline time,baseline time
+bpdiaststand12,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement,exact match,baseline time,baseline time
+bpdiast12,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement,exact match,baseline time,baseline time
+bpdiast1,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement,exact match,baseline time,baseline time
+bpdiast3,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement,exact match,baseline time,baseline time
+bpdiast6,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement,exact match,baseline time,baseline time
+bpdiaststand3,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement,exact match,baseline time,baseline time
+bpdiaststand6,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement,exact match,baseline time,baseline time
+bpdiaststand1,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement,exact match,baseline time,baseline time
+bpdiaststand18,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement,exact match,baseline time,baseline time
+bpdiaststanding,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement,exact match,baseline time,baseline time
+ast,asat,3013721,3013721,loinc:1920-8,aspartate aminotransferase [enzymatic activity/volume] in serum or plasma,loinc:1920-8,aspartate aminotransferase [enzymatic activity/volume] in serum or plasma,measurement,exact match,baseline time,baseline time
+creatinine,creatinine,3016723,3016723,loinc:2160-0,creatinine [mass/volume] in serum or plasma,loinc:2160-0,creatinine [mass/volume] in serum or plasma,measurement,exact match,baseline time,baseline time
+crea1,creatinine,3016723,3016723,loinc:2160-0,creatinine [mass/volume] in serum or plasma,loinc:2160-0,creatinine [mass/volume] in serum or plasma,measurement,exact match,baseline time,baseline time
+crea6,creatinine,3016723,3016723,loinc:2160-0,creatinine [mass/volume] in serum or plasma,loinc:2160-0,creatinine [mass/volume] in serum or plasma,measurement,exact match,baseline time,baseline time
+crea12,creatinine,3016723,3016723,loinc:2160-0,creatinine [mass/volume] in serum or plasma,loinc:2160-0,creatinine [mass/volume] in serum or plasma,measurement,exact match,baseline time,baseline time
+crea3,creatinine,3016723,3016723,loinc:2160-0,creatinine [mass/volume] in serum or plasma,loinc:2160-0,creatinine [mass/volume] in serum or plasma,measurement,exact match,baseline time,baseline time
+crea18,creatinine,3016723,3016723,loinc:2160-0,creatinine [mass/volume] in serum or plasma,loinc:2160-0,creatinine [mass/volume] in serum or plasma,measurement,exact match,baseline time,baseline time
+chol,cholesterol total,3019900,3019900,loinc:14647-2,cholesterol [moles/volume] in serum or plasma,loinc:14647-2,cholesterol [moles/volume] in serum or plasma,measurement,exact match,baseline time,baseline time
+age,age_at_b0,3022304,3022304,loinc:30525-0,age,loinc:30525-0,age,person,exact match,baseline time,baseline time
+weight,weight,3025315,3025315,loinc:29463-7,body weight,loinc:29463-7,body weight,measurement,exact match,baseline time,baseline time
+weight6,weight,3025315,3025315,loinc:29463-7,body weight,loinc:29463-7,body weight,measurement,exact match,baseline time,baseline time
+weight18,weight,3025315,3025315,loinc:29463-7,body weight,loinc:29463-7,body weight,measurement,exact match,baseline time,baseline time
+weight3,weight,3025315,3025315,loinc:29463-7,body weight,loinc:29463-7,body weight,measurement,exact match,baseline time,baseline time
+weight1,weight,3025315,3025315,loinc:29463-7,body weight,loinc:29463-7,body weight,measurement,exact match,baseline time,baseline time
+weight12,weight,3025315,3025315,loinc:29463-7,body weight,loinc:29463-7,body weight,measurement,exact match,baseline time,baseline time
+triglyc,triglycerides,3025839,3025839,loinc:14927-8,triglyceride [moles/volume] in serum or plasma,loinc:14927-8,triglyceride [moles/volume] in serum or plasma,measurement,exact match,baseline time,baseline time
+patientid,full_id,4086934,4086934,snomed:184107009,patient hospital number,snomed:184107009,patient hospital number,person,exact match,baseline time,baseline time
+ef_12,albumin to creatinine ratio,4108582,4108582,snomed:250908004,left ventricular ejection fraction,snomed:250908004,left ventricular ejection fraction,measurement,exact match,baseline time,baseline time
+ef_12,efsimpson,4108582,4108582,snomed:250908004,left ventricular ejection fraction,snomed:250908004,left ventricular ejection fraction,measurement,exact match,baseline time,baseline time
+ef_18,albumin to creatinine ratio,4108582,4108582,snomed:250908004,left ventricular ejection fraction,snomed:250908004,left ventricular ejection fraction,measurement,exact match,baseline time,baseline time
+ef_18,efsimpson,4108582,4108582,snomed:250908004,left ventricular ejection fraction,snomed:250908004,left ventricular ejection fraction,measurement,exact match,baseline time,baseline time
+ef,albumin to creatinine ratio,4108582,4108582,snomed:250908004,left ventricular ejection fraction,snomed:250908004,left ventricular ejection fraction,measurement,exact match,baseline time,baseline time
+ef,efsimpson,4108582,4108582,snomed:250908004,left ventricular ejection fraction,snomed:250908004,left ventricular ejection fraction,measurement,exact match,baseline time,baseline time
+v18spiro,aldosterone receptor antagonists,21601533,21601533,atc:c03da,aldosterone antagonists,atc:c03da,aldosterone antagonists,drug_exposure,exact match,baseline time,baseline time
+spiroat_v12,aldosterone receptor antagonists,21601533,21601533,atc:c03da,aldosterone antagonists,atc:c03da,aldosterone antagonists,drug_exposure,exact match,baseline time,baseline time
+v6spiro,aldosterone receptor antagonists,21601533,21601533,atc:c03da,aldosterone antagonists,atc:c03da,aldosterone antagonists,drug_exposure,exact match,baseline time,baseline time
+blspiro,aldosterone receptor antagonists,21601533,21601533,atc:c03da,aldosterone antagonists,atc:c03da,aldosterone antagonists,drug_exposure,exact match,baseline time,baseline time
+spiroat_v1,aldosterone receptor antagonists,21601533,21601533,atc:c03da,aldosterone antagonists,atc:c03da,aldosterone antagonists,drug_exposure,exact match,baseline time,baseline time
+spiroat_v6,aldosterone receptor antagonists,21601533,21601533,atc:c03da,aldosterone antagonists,atc:c03da,aldosterone antagonists,drug_exposure,exact match,baseline time,baseline time
+spiroat_bl,aldosterone receptor antagonists,21601533,21601533,atc:c03da,aldosterone antagonists,atc:c03da,aldosterone antagonists,drug_exposure,exact match,baseline time,baseline time
+v1spiro,aldosterone receptor antagonists,21601533,21601533,atc:c03da,aldosterone antagonists,atc:c03da,aldosterone antagonists,drug_exposure,exact match,baseline time,baseline time
+v3spiro,aldosterone receptor antagonists,21601533,21601533,atc:c03da,aldosterone antagonists,atc:c03da,aldosterone antagonists,drug_exposure,exact match,baseline time,baseline time
+spiroat_v3,aldosterone receptor antagonists,21601533,21601533,atc:c03da,aldosterone antagonists,atc:c03da,aldosterone antagonists,drug_exposure,exact match,baseline time,baseline time
+v12spiro,aldosterone receptor antagonists,21601533,21601533,atc:c03da,aldosterone antagonists,atc:c03da,aldosterone antagonists,drug_exposure,exact match,baseline time,baseline time
+spiroat_v18,aldosterone receptor antagonists,21601533,21601533,atc:c03da,aldosterone antagonists,atc:c03da,aldosterone antagonists,drug_exposure,exact match,baseline time,baseline time
+bb_at_v3,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+bbadjbl,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+v1bb,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+v6bb,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+bbadj1,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+bb_at_v12,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+bbadj12,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+dosebbv1,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+bb_at_bl,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+blbb,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+v3bb,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+v18bb,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+bbadj3,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+dosebbv18,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+bb_at_v18,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+dosebbbl,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+dosebbv3,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+bbadj6,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+dosebbv12,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+bb_at_v6,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+v12bb,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+bb_at_v1,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+dosebbv6,beta-blockers,21601665,21601665,atc:c07a,beta blocking agents,atc:c07a,beta blocking agents,drug_exposure,exact match,baseline time,baseline time
+e_a,ea,40762222,40762222,loinc:59129-7,left ventricular e-wave/a-wave by us,loinc:59129-7,left ventricular e-wave/a-wave by us,measurement,exact match,baseline time,baseline time
+e_a_18,ea,40762222,40762222,loinc:59129-7,left ventricular e-wave/a-wave by us,loinc:59129-7,left ventricular e-wave/a-wave by us,measurement,exact match,baseline time,baseline time
+e_a_12,ea,40762222,40762222,loinc:59129-7,left ventricular e-wave/a-wave by us,loinc:59129-7,left ventricular e-wave/a-wave by us,measurement,exact match,baseline time,baseline time
+hba1c,fasting hba1c,42869630,42869630,loinc:71875-9,hemoglobin a1c/hemoglobin.total [pure mass fraction] in blood,loinc:71875-9,hemoglobin a1c/hemoglobin.total [pure mass fraction] in blood,measurement,exact match,baseline time,baseline time
+alt,alat,46235106,46235106,loinc:76625-3,alanine aminotransferase [enzymatic activity/volume] in blood,loinc:76625-3,alanine aminotransferase [enzymatic activity/volume] in blood,measurement,exact match,baseline time,baseline time
+gender,sex,46235213,46235213,loinc:76689-9,sex assigned at birth,loinc:76689-9,sex assigned at birth,person,exact match,baseline time,baseline time
+bmi,bmi (derived),3038553,3038553,loinc:39156-5,Body mass index (bmi) [ratio],loinc:39156-5,Body mass index (bmi) [ratio],,derived match,baseline time,baseline time
+egfr_cg_bl,egfr (derived),37169169,37169169,snomed:1556501000000100,Estimated creatinine clearance calculated using actual body weight Cockcroft-Gault formula,snomed:1556501000000100,Estimated creatinine clearance calculated using actual body weight Cockcroft-Gault formula,,derived match,baseline time,baseline time
+copd01,copd,255573,255573,snomed:13645005,chronic obstructive lung disease,snomed:13645005,chronic obstructive pulmonary disease,condition_occurrence|observation,cross domain exact match,baseline time,baseline time
+copd,copd,255573,255573,snomed:13645005,chronic obstructive lung disease,snomed:13645005,chronic obstructive pulmonary disease,condition_occurrence|observation,cross domain exact match,baseline time,baseline time
+stopyears,smoking,761009,761009,snomed:1311000175101,smoking assessment,snomed:1311000175101,smoking assessment,condition_occurrence|measurement,cross domain exact match,baseline time,baseline time
+smoking,smoking,761009,761009,snomed:1311000175101,smoking assessment,snomed:1311000175101,smoking assessment,condition_occurrence|measurement,cross domain exact match,baseline time,baseline time
+hb18,rbc,3000963,3000963,loinc:718-7,hemoglobin [mass/volume] in blood,loinc:718-7,red blood cell count,measurement|measurement,cross domain approximate match,baseline time,baseline time
+hb,rbc,3000963,3000963,loinc:718-7,hemoglobin [mass/volume] in blood,loinc:718-7,red blood cell count,measurement|measurement,cross domain approximate match,baseline time,baseline time
+hb12,rbc,3000963,3000963,loinc:718-7,hemoglobin [mass/volume] in blood,loinc:718-7,red blood cell count,measurement|measurement,cross domain approximate match,baseline time,baseline time
+hb6,rbc,3000963,3000963,loinc:718-7,hemoglobin [mass/volume] in blood,loinc:718-7,red blood cell count,measurement|measurement,cross domain approximate match,baseline time,baseline time
+hb18,rbc,3000963,3000963,loinc:718-7,hemoglobin [mass/volume] in blood,loinc:718-7,hemoglobin [mass/volume] in blood,measurement|measurement,cross domain approximate match,baseline time,baseline time
+hb,rbc,3000963,3000963,loinc:718-7,hemoglobin [mass/volume] in blood,loinc:718-7,hemoglobin [mass/volume] in blood,measurement|measurement,cross domain approximate match,baseline time,baseline time
+hb12,rbc,3000963,3000963,loinc:718-7,hemoglobin [mass/volume] in blood,loinc:718-7,hemoglobin [mass/volume] in blood,measurement|measurement,cross domain approximate match,baseline time,baseline time
+hb6,rbc,3000963,3000963,loinc:718-7,hemoglobin [mass/volume] in blood,loinc:718-7,hemoglobin [mass/volume] in blood,measurement|measurement,cross domain approximate match,baseline time,baseline time
+rvramean,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpsyststand3,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpsyststand6,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpsyststand1,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpsyst12,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpsyst1,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpsyst6,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpsyst,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpsyst18,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpsyststand12,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+rvra,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpsyststand18,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpsyststanding,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpsyst3,sysstolic blood pressure,3004249,3004249,loinc:8480-6,systolic blood pressure,loinc:8480-6,systolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+hct,haematocrit,3009542,3009542,loinc:20570-8,hematocrit [volume fraction] of blood,loinc:20570-8,hematocrit [volume fraction] of blood,measurement|measurement,cross domain approximate match,baseline time,baseline time
+hct6,haematocrit,3009542,3009542,loinc:20570-8,hematocrit [volume fraction] of blood,loinc:20570-8,hematocrit [volume fraction] of blood,measurement|measurement,cross domain approximate match,baseline time,baseline time
+hct12,haematocrit,3009542,3009542,loinc:20570-8,hematocrit [volume fraction] of blood,loinc:20570-8,hematocrit [volume fraction] of blood,measurement|measurement,cross domain approximate match,baseline time,baseline time
+hct18,haematocrit,3009542,3009542,loinc:20570-8,hematocrit [volume fraction] of blood,loinc:20570-8,hematocrit [volume fraction] of blood,measurement|measurement,cross domain approximate match,baseline time,baseline time
+hscrp_v6,us-crp,3010156,3010156,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,measurement|measurement,cross domain approximate match,baseline time,baseline time
+hscrp_v18,us-crp,3010156,3010156,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,measurement|measurement,cross domain approximate match,baseline time,baseline time
+crpsensitive,us-crp,3010156,3010156,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,measurement|measurement,cross domain approximate match,baseline time,baseline time
+hscrp_v3,us-crp,3010156,3010156,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,measurement|measurement,cross domain approximate match,baseline time,baseline time
+hscrp_v1,us-crp,3010156,3010156,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,measurement|measurement,cross domain approximate match,baseline time,baseline time
+hscrp_v12,us-crp,3010156,3010156,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,measurement|measurement,cross domain approximate match,baseline time,baseline time
+hscrp_bl,us-crp,3010156,3010156,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,loinc:30522-7,c reactive protein [mass/volume] in serum or plasma by high sensitivity method,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpdiast,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpdiast18,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpdiaststand12,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpdiast12,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpdiast1,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpdiast3,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpdiast6,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpdiaststand3,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpdiaststand6,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpdiaststand1,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpdiaststand18,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+bpdiaststanding,diastolic blood pressure,3012888,3012888,loinc:8462-4,diastolic blood pressure,loinc:8462-4,diastolic blood pressure,measurement|measurement,cross domain approximate match,baseline time,baseline time
+ast,asat,3013721,3013721,loinc:1920-8,aspartate aminotransferase [enzymatic activity/volume] in serum or plasma,loinc:1920-8,aspartate aminotransferase [enzymatic activity/volume] in serum or plasma,measurement|measurement,cross domain approximate match,baseline time,baseline time
+creatinine,creatinine,3016723,3016723,loinc:2160-0,creatinine [mass/volume] in serum or plasma,loinc:2160-0,creatinine [mass/volume] in serum or plasma,measurement|measurement,cross domain approximate match,baseline time,baseline time
+crea1,creatinine,3016723,3016723,loinc:2160-0,creatinine [mass/volume] in serum or plasma,loinc:2160-0,creatinine [mass/volume] in serum or plasma,measurement|measurement,cross domain approximate match,baseline time,baseline time
+crea6,creatinine,3016723,3016723,loinc:2160-0,creatinine [mass/volume] in serum or plasma,loinc:2160-0,creatinine [mass/volume] in serum or plasma,measurement|measurement,cross domain approximate match,baseline time,baseline time
+crea12,creatinine,3016723,3016723,loinc:2160-0,creatinine [mass/volume] in serum or plasma,loinc:2160-0,creatinine [mass/volume] in serum or plasma,measurement|measurement,cross domain approximate match,baseline time,baseline time
+crea3,creatinine,3016723,3016723,loinc:2160-0,creatinine [mass/volume] in serum or plasma,loinc:2160-0,creatinine [mass/volume] in serum or plasma,measurement|measurement,cross domain approximate match,baseline time,baseline time
+crea18,creatinine,3016723,3016723,loinc:2160-0,creatinine [mass/volume] in serum or plasma,loinc:2160-0,creatinine [mass/volume] in serum or plasma,measurement|measurement,cross domain approximate match,baseline time,baseline time
+chol,cholesterol total,3019900,3019900,loinc:14647-2,cholesterol [moles/volume] in serum or plasma,loinc:14647-2,cholesterol [moles/volume] in serum or plasma,measurement|measurement,cross domain approximate match,baseline time,baseline time
+weight,weight,3025315,3025315,loinc:29463-7,body weight,loinc:29463-7,body weight,measurement|measurement,cross domain approximate match,baseline time,baseline time
+weight6,weight,3025315,3025315,loinc:29463-7,body weight,loinc:29463-7,body weight,measurement|measurement,cross domain approximate match,baseline time,baseline time
+weight18,weight,3025315,3025315,loinc:29463-7,body weight,loinc:29463-7,body weight,measurement|measurement,cross domain approximate match,baseline time,baseline time
+weight3,weight,3025315,3025315,loinc:29463-7,body weight,loinc:29463-7,body weight,measurement|measurement,cross domain approximate match,baseline time,baseline time
+weight1,weight,3025315,3025315,loinc:29463-7,body weight,loinc:29463-7,body weight,measurement|measurement,cross domain approximate match,baseline time,baseline time
+weight12,weight,3025315,3025315,loinc:29463-7,body weight,loinc:29463-7,body weight,measurement|measurement,cross domain approximate match,baseline time,baseline time
+triglyc,triglycerides,3025839,3025839,loinc:14927-8,triglyceride [moles/volume] in serum or plasma,loinc:14927-8,triglyceride [moles/volume] in serum or plasma,measurement|measurement,cross domain approximate match,baseline time,baseline time
+ef_12,albumin to creatinine ratio,4108582,4108582,snomed:250908004,left ventricular ejection fraction,snomed:250908004,left ventricular ejection fraction,measurement|measurement,cross domain approximate match,baseline time,baseline time
+ef_18,albumin to creatinine ratio,4108582,4108582,snomed:250908004,left ventricular ejection fraction,snomed:250908004,left ventricular ejection fraction,measurement|measurement,cross domain approximate match,baseline time,baseline time
+ef,albumin to creatinine ratio,4108582,4108582,snomed:250908004,left ventricular ejection fraction,snomed:250908004,left ventricular ejection fraction,measurement|measurement,cross domain approximate match,baseline time,baseline time
+ef_12,efsimpson,4108582,4108582,snomed:250908004,left ventricular ejection fraction,snomed:250908004,left ventricular ejection fraction,measurement|measurement,cross domain approximate match,baseline time,baseline time
+ef_18,efsimpson,4108582,4108582,snomed:250908004,left ventricular ejection fraction,snomed:250908004,left ventricular ejection fraction,measurement|measurement,cross domain approximate match,baseline time,baseline time
+ef,efsimpson,4108582,4108582,snomed:250908004,left ventricular ejection fraction,snomed:250908004,left ventricular ejection fraction,measurement|measurement,cross domain approximate match,baseline time,baseline time
+ef_12,albumin to creatinine ratio,4108582,4108582,snomed:250908004,left ventricular ejection fraction,snomed:250908004,albumin/creatinine [ratio] in urine,measurement|measurement,cross domain approximate match,baseline time,baseline time
+ef_18,albumin to creatinine ratio,4108582,4108582,snomed:250908004,left ventricular ejection fraction,snomed:250908004,albumin/creatinine [ratio] in urine,measurement|measurement,cross domain approximate match,baseline time,baseline time
+ef,albumin to creatinine ratio,4108582,4108582,snomed:250908004,left ventricular ejection fraction,snomed:250908004,albumin/creatinine [ratio] in urine,measurement|measurement,cross domain approximate match,baseline time,baseline time
+ef_12,efsimpson,4108582,4108582,snomed:250908004,left ventricular ejection fraction,snomed:250908004,albumin/creatinine [ratio] in urine,measurement|measurement,cross domain approximate match,baseline time,baseline time
+ef_18,efsimpson,4108582,4108582,snomed:250908004,left ventricular ejection fraction,snomed:250908004,albumin/creatinine [ratio] in urine,measurement|measurement,cross domain approximate match,baseline time,baseline time
+ef,efsimpson,4108582,4108582,snomed:250908004,left ventricular ejection fraction,snomed:250908004,albumin/creatinine [ratio] in urine,measurement|measurement,cross domain approximate match,baseline time,baseline time
+e_a,ea,40762222,40762222,loinc:59129-7,left ventricular e-wave/a-wave by us,loinc:59129-7,left ventricular e-wave/a-wave by us,measurement|measurement,cross domain approximate match,baseline time,baseline time
+e_a_18,ea,40762222,40762222,loinc:59129-7,left ventricular e-wave/a-wave by us,loinc:59129-7,left ventricular e-wave/a-wave by us,measurement|measurement,cross domain approximate match,baseline time,baseline time
+e_a_12,ea,40762222,40762222,loinc:59129-7,left ventricular e-wave/a-wave by us,loinc:59129-7,left ventricular e-wave/a-wave by us,measurement|measurement,cross domain approximate match,baseline time,baseline time
+hba1c,fasting hba1c,42869630,42869630,loinc:71875-9,hemoglobin a1c/hemoglobin.total [pure mass fraction] in blood,loinc:71875-9,hemoglobin a1c/hemoglobin.total [pure mass fraction] in blood,measurement|measurement,cross domain approximate match,baseline time,baseline time
+alt,alat,46235106,46235106,loinc:76625-3,alanine aminotransferase [enzymatic activity/volume] in blood,loinc:76625-3,alanine aminotransferase [enzymatic activity/volume] in blood,measurement|measurement,cross domain approximate match,baseline time,baseline time
+dosespirov1,potassium sparing diuretics,970250,21601532,rxnorm:9997,spironolactone,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+dosespirov3,potassium sparing diuretics,970250,21601532,rxnorm:9997,spironolactone,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+dosespirobl,potassium sparing diuretics,970250,21601532,rxnorm:9997,spironolactone,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+spiroadjbl,potassium sparing diuretics,970250,21601532,rxnorm:9997,spironolactone,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+spiroadj3,potassium sparing diuretics,970250,21601532,rxnorm:9997,spironolactone,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+dosespirov18,potassium sparing diuretics,970250,21601532,rxnorm:9997,spironolactone,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+spiroadj1,potassium sparing diuretics,970250,21601532,rxnorm:9997,spironolactone,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+spiroadj6,potassium sparing diuretics,970250,21601532,rxnorm:9997,spironolactone,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+spiroadj12,potassium sparing diuretics,970250,21601532,rxnorm:9997,spironolactone,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+dosespirov6,potassium sparing diuretics,970250,21601532,rxnorm:9997,spironolactone,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+dosespirov12,potassium sparing diuretics,970250,21601532,rxnorm:9997,spironolactone,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+dosespirov1,aldosterone receptor antagonists,970250,21601533,rxnorm:9997,spironolactone,atc:c03da,aldosterone antagonists,drug_exposure,semantic match,baseline time,baseline time
+dosespirov3,aldosterone receptor antagonists,970250,21601533,rxnorm:9997,spironolactone,atc:c03da,aldosterone antagonists,drug_exposure,semantic match,baseline time,baseline time
+dosespirobl,aldosterone receptor antagonists,970250,21601533,rxnorm:9997,spironolactone,atc:c03da,aldosterone antagonists,drug_exposure,semantic match,baseline time,baseline time
+spiroadjbl,aldosterone receptor antagonists,970250,21601533,rxnorm:9997,spironolactone,atc:c03da,aldosterone antagonists,drug_exposure,semantic match,baseline time,baseline time
+spiroadj3,aldosterone receptor antagonists,970250,21601533,rxnorm:9997,spironolactone,atc:c03da,aldosterone antagonists,drug_exposure,semantic match,baseline time,baseline time
+dosespirov18,aldosterone receptor antagonists,970250,21601533,rxnorm:9997,spironolactone,atc:c03da,aldosterone antagonists,drug_exposure,semantic match,baseline time,baseline time
+spiroadj1,aldosterone receptor antagonists,970250,21601533,rxnorm:9997,spironolactone,atc:c03da,aldosterone antagonists,drug_exposure,semantic match,baseline time,baseline time
+spiroadj6,aldosterone receptor antagonists,970250,21601533,rxnorm:9997,spironolactone,atc:c03da,aldosterone antagonists,drug_exposure,semantic match,baseline time,baseline time
+spiroadj12,aldosterone receptor antagonists,970250,21601533,rxnorm:9997,spironolactone,atc:c03da,aldosterone antagonists,drug_exposure,semantic match,baseline time,baseline time
+dosespirov6,aldosterone receptor antagonists,970250,21601533,rxnorm:9997,spironolactone,atc:c03da,aldosterone antagonists,drug_exposure,semantic match,baseline time,baseline time
+dosespirov12,aldosterone receptor antagonists,970250,21601533,rxnorm:9997,spironolactone,atc:c03da,aldosterone antagonists,drug_exposure,semantic match,baseline time,baseline time
+glucose,fasting glycemia,3020491,4182052,loinc:15074-8,glucose [moles/volume] in blood,loinc52302001,"glucose measurement, fasting",measurement,semantic match,baseline time,baseline time
+v18spiro,potassium sparing diuretics,21601533,21601532,atc:c03da,aldosterone antagonists,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+spiroat_v12,potassium sparing diuretics,21601533,21601532,atc:c03da,aldosterone antagonists,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+v6spiro,potassium sparing diuretics,21601533,21601532,atc:c03da,aldosterone antagonists,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+blspiro,potassium sparing diuretics,21601533,21601532,atc:c03da,aldosterone antagonists,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+spiroat_v1,potassium sparing diuretics,21601533,21601532,atc:c03da,aldosterone antagonists,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+spiroat_v6,potassium sparing diuretics,21601533,21601532,atc:c03da,aldosterone antagonists,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+spiroat_bl,potassium sparing diuretics,21601533,21601532,atc:c03da,aldosterone antagonists,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+v1spiro,potassium sparing diuretics,21601533,21601532,atc:c03da,aldosterone antagonists,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+v3spiro,potassium sparing diuretics,21601533,21601532,atc:c03da,aldosterone antagonists,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+spiroat_v3,potassium sparing diuretics,21601533,21601532,atc:c03da,aldosterone antagonists,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+v12spiro,potassium sparing diuretics,21601533,21601532,atc:c03da,aldosterone antagonists,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+spiroat_v18,potassium sparing diuretics,21601533,21601532,atc:c03da,aldosterone antagonists,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+nbnp,nt-probnp,3029187,3029435,loinc:33762-6,natriuretic peptide.b prohormone n-terminal [mass/volume] in serum or plasma,loinc:41995-2,natriuretic peptide.b prohormone n-terminal [moles/volume] in serum or plasma,measurement,semantic match,baseline time,baseline time
+bnp12,nt-probnp,3029187,3029435,loinc:33762-6,natriuretic peptide.b prohormone n-terminal [mass/volume] in serum or plasma,loinc:41995-2,natriuretic peptide.b prohormone n-terminal [moles/volume] in serum or plasma,measurement,semantic match,baseline time,baseline time
+bnp6,nt-probnp,3029187,3029435,loinc:33762-6,natriuretic peptide.b prohormone n-terminal [mass/volume] in serum or plasma,loinc:41995-2,natriuretic peptide.b prohormone n-terminal [moles/volume] in serum or plasma,measurement,semantic match,baseline time,baseline time
+bnp1,nt-probnp,3029187,3029435,loinc:33762-6,natriuretic peptide.b prohormone n-terminal [mass/volume] in serum or plasma,loinc:41995-2,natriuretic peptide.b prohormone n-terminal [moles/volume] in serum or plasma,measurement,semantic match,baseline time,baseline time
+bnp18,nt-probnp,3029187,3029435,loinc:33762-6,natriuretic peptide.b prohormone n-terminal [mass/volume] in serum or plasma,loinc:41995-2,natriuretic peptide.b prohormone n-terminal [moles/volume] in serum or plasma,measurement,semantic match,baseline time,baseline time
+bnp3,nt-probnp,3029187,3029435,loinc:33762-6,natriuretic peptide.b prohormone n-terminal [mass/volume] in serum or plasma,loinc:41995-2,natriuretic peptide.b prohormone n-terminal [moles/volume] in serum or plasma,measurement,semantic match,baseline time,baseline time
+e,e,21494314,37065791,loinc:80070-6,mitral valve maximum e-wave velocity by us.doppler,loinc:lp99769-9,blood flow velocity e-wave,measurement,semantic match,baseline time,baseline time
+e_18,e,21494314,37065791,loinc:80070-6,mitral valve maximum e-wave velocity by us.doppler,loinc:lp99769-9,blood flow velocity e-wave,measurement,semantic match,baseline time,baseline time
+e_12,e,21494314,37065791,loinc:80070-6,mitral valve maximum e-wave velocity by us.doppler,loinc:lp99769-9,blood flow velocity e-wave,measurement,semantic match,baseline time,baseline time
+lvedd_18,lvedd,3014260,37047549,loinc:29436-3,left ventricular internal diameter minor axis diastole by us,loinc:lp201909-1,diameter at end diastole,measurement,semantic match,baseline time,baseline time
+lvedd_12,lvedd,3014260,37047549,loinc:29436-3,left ventricular internal diameter minor axis diastole by us,loinc:lp201909-1,diameter at end diastole,measurement,semantic match,baseline time,baseline time
+lvedd,lvedd,3014260,37047549,loinc:29436-3,left ventricular internal diameter minor axis diastole by us,loinc:lp201909-1,diameter at end diastole,measurement,semantic match,baseline time,baseline time
+v6tora,loop diuretics,942350,21601517,rxnorm:38413,torsemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+dosetorav18,loop diuretics,942350,21601517,rxnorm:38413,torsemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+dosetorav12,loop diuretics,942350,21601517,rxnorm:38413,torsemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+dosetorav6,loop diuretics,942350,21601517,rxnorm:38413,torsemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+dosetorav1,loop diuretics,942350,21601517,rxnorm:38413,torsemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+v3tora,loop diuretics,942350,21601517,rxnorm:38413,torsemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+v1tora,loop diuretics,942350,21601517,rxnorm:38413,torsemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+v18tora,loop diuretics,942350,21601517,rxnorm:38413,torsemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+bltora,loop diuretics,942350,21601517,rxnorm:38413,torsemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+dosetorav3,loop diuretics,942350,21601517,rxnorm:38413,torsemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+v12tora,loop diuretics,942350,21601517,rxnorm:38413,torsemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+dosetorabl,loop diuretics,942350,21601517,rxnorm:38413,torsemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+tdielat_18,late',2000000019,37066259,icare:icv2000000019,"e lateral,doppler ultrasonography of heart tissue",loinc:lp408103-2,tissue velocity.e-wave.max | mitral valve lateral annulus | cardiac ultrasound,measurement,semantic match,baseline time,baseline time
+tdielat,late',2000000019,37066259,icare:icv2000000019,"e lateral,doppler ultrasonography of heart tissue",loinc:lp408103-2,tissue velocity.e-wave.max | mitral valve lateral annulus | cardiac ultrasound,measurement,semantic match,baseline time,baseline time
+tdielat_12,late',2000000019,37066259,icare:icv2000000019,"e lateral,doppler ultrasonography of heart tissue",loinc:lp408103-2,tissue velocity.e-wave.max | mitral valve lateral annulus | cardiac ultrasound,measurement,semantic match,baseline time,baseline time
+nsar_vor_bl,other dm treatments,4039434,4298744,snomed:16403005,non-steroidal anti-inflammatory agent,snomed:384953001,antidiabetic agent,drug_exposure,semantic match,baseline time,baseline time
+nsar,other dm treatments,4039434,4298744,snomed:16403005,non-steroidal anti-inflammatory agent,snomed:384953001,antidiabetic agent,drug_exposure,semantic match,baseline time,baseline time
+v3furo,loop diuretics,956874,21601517,rxnorm:4603,furosemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+dosefurov12,loop diuretics,956874,21601517,rxnorm:4603,furosemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+v12furo,loop diuretics,956874,21601517,rxnorm:4603,furosemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+dosefurov3,loop diuretics,956874,21601517,rxnorm:4603,furosemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+v1furo,loop diuretics,956874,21601517,rxnorm:4603,furosemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+blfuro,loop diuretics,956874,21601517,rxnorm:4603,furosemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+dosefurov6,loop diuretics,956874,21601517,rxnorm:4603,furosemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+v18furo,loop diuretics,956874,21601517,rxnorm:4603,furosemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+dosefurobl,loop diuretics,956874,21601517,rxnorm:4603,furosemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+dosefurov18,loop diuretics,956874,21601517,rxnorm:4603,furosemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+dosefurov1,loop diuretics,956874,21601517,rxnorm:4603,furosemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+v6furo,loop diuretics,956874,21601517,rxnorm:4603,furosemide,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+diuadj12,loop diuretics,21601461,21601517,atc:c03,diuretics,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+diuadj6,loop diuretics,21601461,21601517,atc:c03,diuretics,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+diuadjbl,loop diuretics,21601461,21601517,atc:c03,diuretics,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+diuadj3,loop diuretics,21601461,21601517,atc:c03,diuretics,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+diuadj1,loop diuretics,21601461,21601517,atc:c03,diuretics,atc:c03ca,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+diuadj12,thiazides,21601461,21601490,atc:c03,diuretics,atc:c03ba,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+diuadj6,thiazides,21601461,21601490,atc:c03,diuretics,atc:c03ba,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+diuadjbl,thiazides,21601461,21601490,atc:c03,diuretics,atc:c03ba,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+diuadj3,thiazides,21601461,21601490,atc:c03,diuretics,atc:c03ba,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+diuadj1,thiazides,21601461,21601490,atc:c03,diuretics,atc:c03ba,"""sulfonamides, plain""",drug_exposure,semantic match,baseline time,baseline time
+diuadj12,potassium sparing diuretics,21601461,21601532,atc:c03,diuretics,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+diuadj6,potassium sparing diuretics,21601461,21601532,atc:c03,diuretics,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+diuadjbl,potassium sparing diuretics,21601461,21601532,atc:c03,diuretics,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+diuadj3,potassium sparing diuretics,21601461,21601532,atc:c03,diuretics,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+diuadj1,potassium sparing diuretics,21601461,21601532,atc:c03,diuretics,atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+diuadj12,aldosterone receptor antagonists,21601461,21601533,atc:c03,diuretics,atc:c03da,aldosterone antagonists,drug_exposure,semantic match,baseline time,baseline time
+diuadj6,aldosterone receptor antagonists,21601461,21601533,atc:c03,diuretics,atc:c03da,aldosterone antagonists,drug_exposure,semantic match,baseline time,baseline time
+diuadjbl,aldosterone receptor antagonists,21601461,21601533,atc:c03,diuretics,atc:c03da,aldosterone antagonists,drug_exposure,semantic match,baseline time,baseline time
+diuadj3,aldosterone receptor antagonists,21601461,21601533,atc:c03,diuretics,atc:c03da,aldosterone antagonists,drug_exposure,semantic match,baseline time,baseline time
+diuadj1,aldosterone receptor antagonists,21601461,21601533,atc:c03,diuretics,atc:c03da,aldosterone antagonists,drug_exposure,semantic match,baseline time,baseline time
+a_12,a,21494310,1030141,loinc:80066-4,mitral valve maximum a-wave velocity by us.doppler,loinc:lp72029-9,a-wave,measurement,semantic match,baseline time,baseline time
+a,a,21494310,1030141,loinc:80066-4,mitral valve maximum a-wave velocity by us.doppler,loinc:lp72029-9,a-wave,measurement,semantic match,baseline time,baseline time
+a_18,a,21494310,1030141,loinc:80066-4,mitral valve maximum a-wave velocity by us.doppler,loinc:lp72029-9,a-wave,measurement,semantic match,baseline time,baseline time
+loop_at_v12,potassium sparing diuretics,21601554,21601532,atc:c03eb01,"furosemide and potassium-sparing agents,systemic",atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+loop_dose_v3,potassium sparing diuretics,21601554,21601532,atc:c03eb01,"furosemide and potassium-sparing agents,systemic",atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+loop_at_v18,potassium sparing diuretics,21601554,21601532,atc:c03eb01,"furosemide and potassium-sparing agents,systemic",atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+loop_dose_v18,potassium sparing diuretics,21601554,21601532,atc:c03eb01,"furosemide and potassium-sparing agents,systemic",atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+loop_dose_v12,potassium sparing diuretics,21601554,21601532,atc:c03eb01,"furosemide and potassium-sparing agents,systemic",atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+loop_at_v6,potassium sparing diuretics,21601554,21601532,atc:c03eb01,"furosemide and potassium-sparing agents,systemic",atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+loop_atv3,potassium sparing diuretics,21601554,21601532,atc:c03eb01,"furosemide and potassium-sparing agents,systemic",atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+loop_at_bl,potassium sparing diuretics,21601554,21601532,atc:c03eb01,"furosemide and potassium-sparing agents,systemic",atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+loop_dose_v6,potassium sparing diuretics,21601554,21601532,atc:c03eb01,"furosemide and potassium-sparing agents,systemic",atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+loop_dose_v1,potassium sparing diuretics,21601554,21601532,atc:c03eb01,"furosemide and potassium-sparing agents,systemic",atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+loop_dose_bl,potassium sparing diuretics,21601554,21601532,atc:c03eb01,"furosemide and potassium-sparing agents,systemic",atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time
+loop_at_v1,potassium sparing diuretics,21601554,21601532,atc:c03eb01,"furosemide and potassium-sparing agents,systemic",atc:c03d,aldosterone antagonists and other potassium-sparing agents,drug_exposure,semantic match,baseline time,baseline time

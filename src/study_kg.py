@@ -151,13 +151,13 @@ def generate_studies_kg(filepath: str) -> Graph:
                     
         if pd.notna(row["number of participants"]):  #number of participants
             try:
-                num_participants = int(row["number of participants"])
+                num_participants = str(row["number of participants"])
                 num_participants_uri = URIRef(study_uri + "/number_of_study_participants_specification")
                 g.add((num_participants_uri, RDF.type, OntologyNamespaces.CMEO.value.number_of_study_participants_specification,metadata_graph))
                 g.add((num_participants_uri, RDFS.label, Literal("number of study participants specification", datatype=XSD.string), metadata_graph))
                 g.add((protocol_uri, OntologyNamespaces.RO.value.has_part, num_participants_uri,metadata_graph))
                 g.add((num_participants_uri, OntologyNamespaces.RO.value.is_part_of, protocol_uri,metadata_graph))
-                g.add((num_participants_uri, OntologyNamespaces.CMEO.value.has_value, Literal(num_participants, datatype=XSD.integer),metadata_graph))
+                g.add((num_participants_uri, OntologyNamespaces.CMEO.value.has_value, Literal(num_participants, datatype=XSD.string),metadata_graph))
                 
             except ValueError:
                 pass
