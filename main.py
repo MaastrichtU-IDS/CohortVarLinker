@@ -277,7 +277,7 @@ if __name__ == '__main__':
     vector_db, embedding_model = generate_studies_embeddings(cohort_file_path, "localhost", "studies_metadata", recreate_db=False)
 
     source_study = "time-chf"
-    target_studies = [("gissi-hf", True), ("aachenhf", False), ("cardiateam",False)]
+    target_studies = [("check-hf", False)]
   
 #   The code snippet provided is a Python script that iterates over a list of target studies and
 #   performs the following actions for each target study:
@@ -292,7 +292,7 @@ if __name__ == '__main__':
 
         print(mapping_transformed)
         
-        mapping_transformed = mapping_transformed.drop_duplicates(keep='first')
+        mapping_transformed = mapping_transformed.drop_duplicates(keep='first') if not mapping_transformed.empty else pd.DataFrame(columns=["source_variable", "target_variable", "source_omop_id", "target_omop_id"])
         mapping_transformed.to_csv(f'{data_dir}/output/{source_study}_{tstudy}_full.csv', index=False)
     end_time = time.time()
     print(f"Time taken to process all cohorts: {end_time - start_time} seconds")

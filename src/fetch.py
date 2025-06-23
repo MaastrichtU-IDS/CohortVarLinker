@@ -581,7 +581,7 @@ def map_source_target(source_study_name:str , target_study_name:str, vector_db, 
                                     ?dataElementA rdf:type cmeo:data_element ;
                                                     dc:identifier ?var_nameA ;
                                                     obi:is_specified_input_of ?catProcessA, ?stdProcessA .
-                                     
+                                     OPTIONAL {{
                                     ?visitdatum  rdf:type cmeo:visit_measurement_datum ;
                                                 iao:is_about ?dataElementA ;
                                                 obi:is_specified_input_of ?vs_stdProcessA .
@@ -589,6 +589,7 @@ def map_source_target(source_study_name:str , target_study_name:str, vector_db, 
                                     
                                     ?vs_stdProcessA obi:has_specified_output ?visit_code.
                                     ?visit_code rdfs:label ?visitcodelabelA.
+                                    }}
                                     ?catProcessA rdf:type cmeo:categorization_process ;
                                                 obi:has_specified_output ?cat_outputA .
                                     ?cat_outputA cmeo:has_value ?val .
@@ -621,13 +622,16 @@ def map_source_target(source_study_name:str , target_study_name:str, vector_db, 
                                     ?dataElementB rdf:type cmeo:data_element ;
                                     dc:identifier ?var_nameB ;
                                     obi:is_specified_input_of ?catProcessB, ?stdProcessB.
+                                    
+                                    OPTIONAL {{
                                     ?visitdatum  rdf:type cmeo:visit_measurement_datum ;
                                                 iao:is_about ?dataElementB ;
                                                 obi:is_specified_input_of ?vs_stdProcessAB .
                                     
-                                    
                                     ?vs_stdProcessAB obi:has_specified_output ?visit_code.
                                     ?visit_code rdfs:label ?visitcodelabelB.
+                                    
+                                    }}
                                     ?catProcessB rdf:type cmeo:categorization_process ;
                                     obi:has_specified_output ?cat_outputB .
                                     ?cat_outputB cmeo:has_value ?val .
@@ -760,8 +764,8 @@ def map_source_target(source_study_name:str , target_study_name:str, vector_db, 
     single_source = {"source":source_elements, "target":target_elements, "mapped": final_dict}
     bmi_row  =  extend_with_dervied_variables(single_source, standard_derived_variable=("loinc:39156-5", "Body mass index (bmi) [ratio]", 3038553), parameters_omop_ids=[3036277, 3025315], variable_name="bmi")
     egfr_row = extend_with_dervied_variables(single_source, standard_derived_variable=("snomed:1556501000000100", "Estimated creatinine clearance calculated using actual body weight Cockcroft-Gault formula", 37169169), parameters_omop_ids=[3016723,3022304,46235213], variable_name="egfr")
-    # print(f"bmi row: {bmi_row}")
-    # print(f"egfr_row row: {egfr_row}")
+    print(f"bmi row: {bmi_row}")
+    print(f"egfr_row row: {egfr_row}")
     final_dict.append(bmi_row)
     final_dict.append(egfr_row)
     final_dict_new =  _cross_domain_matches(source_elements, target_elements, visit_constraint=visit_constraint)
@@ -893,8 +897,8 @@ def map_source_target(source_study_name:str , target_study_name:str, vector_db, 
                         'category': omop_domain,
                         'mapping type': 'text match' if not reachable_by_graph else 'semantic match'
                     })
-
-    final_df_frame = pd.DataFrame.from_dict(final_dict)
+    print(f"two item from final_dict: {final_dict[:2]}")
+    final_df_frame = pd.DataFrame(final_dict)
     print(f"length of final data frame: {len(final_df_frame)}")
 
     final_df_frame.to_csv("common_codes.csv", index=False)
