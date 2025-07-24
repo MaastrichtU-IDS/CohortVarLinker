@@ -416,9 +416,6 @@
     <http://omop.org/OMOP/2000000049> a cmeo:omop_id ;
         cmeo:has_value 2000000049 .
 
-    <http://omop.org/OMOP/201820> a cmeo:omop_id ;
-        cmeo:has_value 201820 .
-
     <http://omop.org/OMOP/21601490> a cmeo:omop_id ;
         cmeo:has_value 21601490 .
 
@@ -554,9 +551,6 @@
     <http://omop.org/OMOP/37165778> a cmeo:omop_id ;
         cmeo:has_value 37165778 .
 
-    <http://omop.org/OMOP/37311948> a cmeo:omop_id ;
-        cmeo:has_value 37311948 .
-
     <http://omop.org/OMOP/37393011> a cmeo:omop_id ;
         cmeo:has_value 37393011 .
 
@@ -584,8 +578,8 @@
     <http://omop.org/OMOP/40479589> a cmeo:omop_id ;
         cmeo:has_value 40479589 .
 
-    <http://omop.org/OMOP/40486933> a cmeo:omop_id ;
-        cmeo:has_value 40486933 .
+    <http://omop.org/OMOP/4058709> a cmeo:omop_id ;
+        cmeo:has_value 4058709 .
 
     <http://omop.org/OMOP/40766651> a cmeo:omop_id ;
         cmeo:has_value 40766651 .
@@ -673,9 +667,6 @@
 
     <http://omop.org/OMOP/4329847> a cmeo:omop_id ;
         cmeo:has_value 4329847 .
-
-    <http://omop.org/OMOP/45766164> a cmeo:omop_id ;
-        cmeo:has_value 45766164 .
 
     <http://omop.org/OMOP/45877994> a cmeo:omop_id ;
         cmeo:has_value 45877994 .
@@ -769,25 +760,19 @@
 
     <http://omop.org/OMOP/omop5000419> rdfs:label "hospital anxiety and depression scale: depression subscale"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/40219458> ;
-        cmeo:has_value "omop5000419"^^xsd:string .
+        cmeo:has_value "omop:omop5000419"^^xsd:string .
 
     <http://omop.org/OMOP/omop5000433> rdfs:label "hospital anxiety and depression scale"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/40219472> ;
-        cmeo:has_value "omop5000433"^^xsd:string .
+        cmeo:has_value "omop:omop5000433"^^xsd:string .
 
     <http://omop.org/OMOP/omop5000505> rdfs:label "hospital anxiety and depression scale: anxiety subscale"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/40219540> ;
-        cmeo:has_value "omop5000505"^^xsd:string .
+        cmeo:has_value "omop:omop5000505"^^xsd:string .
 
-    <http://purl.bioontology.org/ontology/ATC/c03eb01> rdfs:label "furosemide and potassium-sparing agents; systemic"^^xsd:string ;
+    <http://purl.bioontology.org/ontology/ATC/c03eb01> rdfs:label "furosemide and potassium-sparing agents, systemic"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/2160155> ;
         cmeo:has_value "atc:c03eb01"^^xsd:string .
-
-    <http://purl.bioontology.org/ontology/LNC/%20la18978-9> a cmeo:code ;
-        rdfs:label "never smoked"^^xsd:string ;
-        ns2:denotes <http://omop.org/OMOP/45879404> ;
-        obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/smoker/categorical_value_specification/never/data_standardization> ;
-        cmeo:has_value "loinc: la18978-9"^^xsd:string .
 
     <http://purl.bioontology.org/ontology/LNC/14338-8> rdfs:label "prealbumin [mass/volume] in serum or plasma"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/3013742> ;
@@ -939,6 +924,12 @@
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/smoker/categorical_value_specification/former/data_standardization> ;
         cmeo:has_value "loinc:la15920-4"^^xsd:string .
 
+    <http://purl.bioontology.org/ontology/LNC/la18978-9> a cmeo:code ;
+        rdfs:label "never smoked"^^xsd:string ;
+        ns2:denotes <http://omop.org/OMOP/45879404> ;
+        obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/smoker/categorical_value_specification/never/data_standardization> ;
+        cmeo:has_value "loinc:la18978-9"^^xsd:string .
+
     <http://purl.bioontology.org/ontology/LNC/la2-8> a cmeo:code ;
         rdfs:label "male"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/45880669> ;
@@ -965,12 +956,6 @@
         ns2:denotes <http://omop.org/OMOP/606289> ;
         cmeo:has_value "snomed:1144649008"^^xsd:string .
 
-    <http://purl.bioontology.org/ontology/SNOMEDCT/1255665007> a cmeo:code ;
-        rdfs:label "moderate"^^xsd:string ;
-        ns2:denotes <http://omop.org/OMOP/37165778> ;
-        obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/moderate/data_standardization> ;
-        cmeo:has_value "snomed:1255665007"^^xsd:string .
-
     <http://purl.bioontology.org/ontology/SNOMEDCT/1311000175101> rdfs:label "smoking assessment"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/761009> ;
         cmeo:has_value "snomed:1311000175101"^^xsd:string .
@@ -991,6 +976,10 @@
         ns2:denotes <http://omop.org/OMOP/3019900> ;
         cmeo:has_value "snomed:14647-2"^^xsd:string .
 
+    <http://purl.bioontology.org/ontology/SNOMEDCT/161445009> rdfs:label "h/o: diabetes mellitus"^^xsd:string ;
+        ns2:denotes <http://omop.org/OMOP/4058709> ;
+        cmeo:has_value "snomed:161445009"^^xsd:string .
+
     <http://purl.bioontology.org/ontology/SNOMEDCT/184107009> rdfs:label "patient hospital number"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/4086934> ;
         cmeo:has_value "snomed:184107009"^^xsd:string .
@@ -999,21 +988,9 @@
         ns2:denotes <http://omop.org/OMOP/4329847> ;
         cmeo:has_value "snomed:22298006"^^xsd:string .
 
-    <http://purl.bioontology.org/ontology/SNOMEDCT/24484000> a cmeo:code ;
-        rdfs:label "severe"^^xsd:string ;
-        ns2:denotes <http://omop.org/OMOP/4087703> ;
-        obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/severe/data_standardization> ;
-        cmeo:has_value "snomed:24484000"^^xsd:string .
-
     <http://purl.bioontology.org/ontology/SNOMEDCT/250908004> rdfs:label "left ventricular ejection fraction"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/4108582> ;
         cmeo:has_value "snomed:250908004"^^xsd:string .
-
-    <http://purl.bioontology.org/ontology/SNOMEDCT/255604002> a cmeo:code ;
-        rdfs:label "mild"^^xsd:string ;
-        ns2:denotes <http://omop.org/OMOP/4116992> ;
-        obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/mild/data_standardization> ;
-        cmeo:has_value "snomed:255604002"^^xsd:string .
 
     <http://purl.bioontology.org/ontology/SNOMEDCT/372567009> rdfs:label "metformin"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/4159323> ;
@@ -1071,12 +1048,6 @@
         ns2:denotes <http://omop.org/OMOP/40479589> ;
         cmeo:has_value "snomed:441541008"^^xsd:string .
 
-    <http://purl.bioontology.org/ontology/SNOMEDCT/446221000> a cmeo:code ;
-        rdfs:label "heart failure with normal ejection fraction"^^xsd:string ;
-        ns2:denotes <http://omop.org/OMOP/40486933> ;
-        obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/lvef_cat/categorical_value_specification/heart_failure_with_preserved_ejection_fraction/data_standardization> ;
-        cmeo:has_value "snomed:446221000"^^xsd:string .
-
     <http://purl.bioontology.org/ontology/SNOMEDCT/471858004> rdfs:label "valvular cardiomyopathy"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/43020654> ;
         cmeo:has_value "snomed:471858004"^^xsd:string .
@@ -1089,19 +1060,9 @@
         ns2:denotes <http://omop.org/OMOP/315361> ;
         cmeo:has_value "snomed:62744007"^^xsd:string .
 
-    <http://purl.bioontology.org/ontology/SNOMEDCT/703272007> a cmeo:code ;
-        rdfs:label "heart failure with reduced ejection fraction"^^xsd:string ;
-        ns2:denotes <http://omop.org/OMOP/45766164> ;
-        obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/lvef_cat/categorical_value_specification/heart_failure_with_reduced_ejection_fraction/data_standardization> ;
-        cmeo:has_value "snomed:703272007"^^xsd:string .
-
     <http://purl.bioontology.org/ontology/SNOMEDCT/709044004> rdfs:label "chronic kidney disease"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/46271022> ;
         cmeo:has_value "snomed:709044004"^^xsd:string .
-
-    <http://purl.bioontology.org/ontology/SNOMEDCT/73211009> rdfs:label "diabetes mellitus"^^xsd:string ;
-        ns2:denotes <http://omop.org/OMOP/201820> ;
-        cmeo:has_value "snomed:73211009"^^xsd:string .
 
     <http://purl.bioontology.org/ontology/SNOMEDCT/74964007> rdfs:label "other"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/9177> ;
@@ -1114,12 +1075,6 @@
     <http://purl.bioontology.org/ontology/SNOMEDCT/767002> rdfs:label "white blood cell count"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/4298431> ;
         cmeo:has_value "snomed:767002"^^xsd:string .
-
-    <http://purl.bioontology.org/ontology/SNOMEDCT/788950000> a cmeo:code ;
-        rdfs:label "heart failure with mid range ejection fraction"^^xsd:string ;
-        ns2:denotes <http://omop.org/OMOP/37311948> ;
-        obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/lvef_cat/categorical_value_specification/heart_failure_with_mildly_reduced_ejection_fraction/data_standardization> ;
-        cmeo:has_value "snomed:788950000"^^xsd:string .
 
     <http://purl.bioontology.org/ontology/SNOMEDCT/840580004> rdfs:label "peripheral arterial disease"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/3654996> ;
@@ -1440,9 +1395,9 @@
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/adddiuretics_dd/visit/visit_date/data_standardization> ;
         cmeo:has_value "visit date"^^xsd:string .
 
-    <https://w3id.org/CMEO/aachenhf/age/category/measurement> a cmeo:category ;
+    <https://w3id.org/CMEO/aachenhf/age/category/person> a cmeo:category ;
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/age/categorization_process> ;
-        cmeo:has_value "measurement"^^xsd:string .
+        cmeo:has_value "person"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/age/code_set> a rdf:Seq,
             cmeo:code ;
@@ -1804,7 +1759,7 @@
     <https://w3id.org/CMEO/aachenhf/arni/code_set> a rdf:Seq,
             cmeo:code ;
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/arni/data_standardization> ;
-        rdf:_1 <https://w3id.org/CMEO/graph/aachenhf/1656339> .
+        rdf:_1 <http://purl.bioontology.org/ontology/RXNORM/1656339> .
 
     <https://w3id.org/CMEO/aachenhf/arni/data_acquisition_process> a cmeo:data_acquisition_process ;
         obi:has_specified_output <https://w3id.org/CMEO/aachenhf/arni/data_set> .
@@ -1854,7 +1809,7 @@
     <https://w3id.org/CMEO/aachenhf/arni_dd/code_set> a rdf:Seq,
             cmeo:code ;
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/arni_dd/data_standardization> ;
-        rdf:_1 <https://w3id.org/CMEO/graph/aachenhf/1656339> ;
+        rdf:_1 <http://purl.bioontology.org/ontology/RXNORM/1656339> ;
         rdf:_2 <http://purl.bioontology.org/ontology/SNOMEDCT/260911001> .
 
     <https://w3id.org/CMEO/aachenhf/arni_dd/data_acquisition_process> a cmeo:data_acquisition_process ;
@@ -2624,9 +2579,9 @@
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/cysc/visit/visit_date/data_standardization> ;
         cmeo:has_value "visit date"^^xsd:string .
 
-    <https://w3id.org/CMEO/aachenhf/date/category/visit_occurence> a cmeo:category ;
+    <https://w3id.org/CMEO/aachenhf/date/category/visit_occurrence> a cmeo:category ;
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/date/categorization_process> ;
-        cmeo:has_value "visit_occurence"^^xsd:string .
+        cmeo:has_value "visit_occurrence"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/date/code_set> a rdf:Seq,
             cmeo:code ;
@@ -3114,7 +3069,7 @@
     <https://w3id.org/CMEO/aachenhf/diabetes/code_set> a rdf:Seq,
             cmeo:code ;
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/diabetes/data_standardization> ;
-        rdf:_1 <http://purl.bioontology.org/ontology/SNOMEDCT/73211009> .
+        rdf:_1 <http://purl.bioontology.org/ontology/SNOMEDCT/161445009> .
 
     <https://w3id.org/CMEO/aachenhf/diabetes/data_acquisition_process> a cmeo:data_acquisition_process ;
         obi:has_specified_output <https://w3id.org/CMEO/aachenhf/diabetes/data_set> .
@@ -7104,9 +7059,9 @@
         ns1:is_part_of <https://w3id.org/CMEO/aachenhf/nyha/bar_chart> ;
         cmeo:has_value "Text(0, 0.0, '0') - Text(0, 100.0, '100') - Text(0, 200.0, '200') - Text(0, 300.0, '300') - Text(0, 400.0, '400') - Text(0, 500.0, '500') - Text(0, 600.0, '600') - Text(0, 700.0, '700')"^^xsd:string .
 
-    <https://w3id.org/CMEO/aachenhf/nyha/category/observation> a cmeo:category ;
+    <https://w3id.org/CMEO/aachenhf/nyha/category/measurement> a cmeo:category ;
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/nyha/categorization_process> ;
-        cmeo:has_value "observation"^^xsd:string .
+        cmeo:has_value "measurement"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/nyha/chi_square_test_value> a stato:chi_square_test_statistic ;
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/nyha/data_set/chi_square_test> ;
@@ -7156,9 +7111,9 @@
         ns1:is_part_of <https://w3id.org/CMEO/aachenhf/orthopnea/bar_chart> ;
         cmeo:has_value "Text(0, 0.0, '0') - Text(0, 100.0, '100') - Text(0, 200.0, '200') - Text(0, 300.0, '300') - Text(0, 400.0, '400') - Text(0, 500.0, '500') - Text(0, 600.0, '600') - Text(0, 700.0, '700') - Text(0, 800.0, '800') - Text(0, 900.0, '900')"^^xsd:string .
 
-    <https://w3id.org/CMEO/aachenhf/orthopnea/category/observation> a cmeo:category ;
+    <https://w3id.org/CMEO/aachenhf/orthopnea/category/measurement> a cmeo:category ;
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/orthopnea/categorization_process> ;
-        cmeo:has_value "observation"^^xsd:string .
+        cmeo:has_value "measurement"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/orthopnea/chi_square_test_value> a stato:chi_square_test_statistic ;
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/orthopnea/data_set/chi_square_test> ;
@@ -7880,9 +7835,9 @@
         ns1:is_part_of <https://w3id.org/CMEO/aachenhf/smoker/bar_chart> ;
         cmeo:has_value "Text(0, 0.0, '0') - Text(0, 100.0, '100') - Text(0, 200.0, '200') - Text(0, 300.0, '300') - Text(0, 400.0, '400') - Text(0, 500.0, '500') - Text(0, 600.0, '600') - Text(0, 700.0, '700')"^^xsd:string .
 
-    <https://w3id.org/CMEO/aachenhf/smoker/category/observation> a cmeo:category ;
+    <https://w3id.org/CMEO/aachenhf/smoker/category/measurement> a cmeo:category ;
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/smoker/categorization_process> ;
-        cmeo:has_value "observation"^^xsd:string .
+        cmeo:has_value "measurement"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/smoker/chi_square_test_value> a stato:chi_square_test_statistic ;
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/smoker/data_set/chi_square_test> ;
@@ -8910,9 +8865,34 @@
         ns2:denotes <http://omop.org/OMOP/21601823> ;
         cmeo:has_value "atc:c09ca"^^xsd:string .
 
+    <http://purl.bioontology.org/ontology/RXNORM/1656339> rdfs:label "sacubitril/valsartan"^^xsd:string ;
+        ns2:denotes <http://omop.org/OMOP/778939> ;
+        cmeo:has_value "rxnorm:1656339"^^xsd:string .
+
+    <http://purl.bioontology.org/ontology/SNOMEDCT/1255665007> a cmeo:code ;
+        rdfs:label "moderate"^^xsd:string ;
+        ns2:denotes <http://omop.org/OMOP/37165778> ;
+        obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/moderate/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/moderate/data_standardization> ;
+        cmeo:has_value "snomed:1255665007"^^xsd:string .
+
     <http://purl.bioontology.org/ontology/SNOMEDCT/162465004> rdfs:label "symptom severity"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/4037113> ;
         cmeo:has_value "snomed:162465004"^^xsd:string .
+
+    <http://purl.bioontology.org/ontology/SNOMEDCT/24484000> a cmeo:code ;
+        rdfs:label "severe"^^xsd:string ;
+        ns2:denotes <http://omop.org/OMOP/4087703> ;
+        obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/severe/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/severe/data_standardization> ;
+        cmeo:has_value "snomed:24484000"^^xsd:string .
+
+    <http://purl.bioontology.org/ontology/SNOMEDCT/255604002> a cmeo:code ;
+        rdfs:label "mild"^^xsd:string ;
+        ns2:denotes <http://omop.org/OMOP/4116992> ;
+        obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/mild/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/mild/data_standardization> ;
+        cmeo:has_value "snomed:255604002"^^xsd:string .
 
     <http://purl.bioontology.org/ontology/SNOMEDCT/419620001> rdfs:label "death"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/4306655> ;
@@ -9067,7 +9047,7 @@
 
     <https://w3id.org/CMEO/aachenhf/age/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/age> ;
-        obi:has_specified_output <https://w3id.org/CMEO/aachenhf/age/category/measurement> .
+        obi:has_specified_output <https://w3id.org/CMEO/aachenhf/age/category/person> .
 
     <https://w3id.org/CMEO/aachenhf/age/continuous_variable> a obi:continuous_variable ;
         ns2:denotes <https://w3id.org/CMEO/aachenhf/age> ;
@@ -9313,21 +9293,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/atrialfibrillation/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/atrialfibrillation> ;
-        cmeo:has_value "0"^^xsd:string .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/atrialfibrillation/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/atrialfibrillation/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/atrialfibrillation/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/atrialfibrillation/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/atrialfibrillation> ;
-        cmeo:has_value "1"^^xsd:string .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/atrialfibrillation/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/atrialfibrillation/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/atrialfibrillation/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/atrialfibrillation> ;
@@ -9500,21 +9480,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/ckd/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/ckd> ;
-        cmeo:has_value "0"^^xsd:string .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/ckd/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/ckd/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/ckd/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/ckd/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/ckd> ;
-        cmeo:has_value "1"^^xsd:string .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/ckd/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/ckd/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/ckd/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/ckd> ;
@@ -9616,7 +9596,7 @@
 
     <https://w3id.org/CMEO/aachenhf/date/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/date> ;
-        obi:has_specified_output <https://w3id.org/CMEO/aachenhf/date/category/visit_occurence> .
+        obi:has_specified_output <https://w3id.org/CMEO/aachenhf/date/category/visit_occurrence> .
 
     <https://w3id.org/CMEO/aachenhf/date/data_set> a ns2:data_set ;
         ns2:is_about <https://w3id.org/CMEO/aachenhf/date/qualitative_variable> ;
@@ -9717,21 +9697,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/dcm.hf/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/dcm.hf> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/dcm.hf/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/dcm.hf/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/dcm.hf/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/dcm.hf/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/dcm.hf> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/dcm.hf/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/dcm.hf/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/dcm.hf/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/dcm.hf> ;
@@ -9765,21 +9745,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/death/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/death> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/death/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/death/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/death/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/death/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/death> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/death/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/death/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/death/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/death> ;
@@ -9842,21 +9822,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/diabetes/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/diabetes> ;
-        cmeo:has_value "0"^^xsd:string .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/diabetes/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/diabetes/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/diabetes/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/diabetes/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/diabetes> ;
-        cmeo:has_value "1"^^xsd:string .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/diabetes/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/diabetes/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/diabetes/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/diabetes> ;
@@ -10057,21 +10037,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/ep_hosp_hf/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/ep_hosp_hf> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/ep_hosp_hf/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/ep_hosp_hf/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/ep_hosp_hf/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/ep_hosp_hf/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/ep_hosp_hf> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/ep_hosp_hf/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/ep_hosp_hf/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/ep_hosp_hf/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/ep_hosp_hf> ;
@@ -10101,7 +10081,7 @@
         rdfs:label "mild"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/mild/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/fatigue> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "mild"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/mild/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/mild> ;
@@ -10111,7 +10091,7 @@
         rdfs:label "moderate"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/moderate/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/fatigue> ;
-        cmeo:has_value 2 .
+        cmeo:has_value "moderate"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/moderate/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/moderate> ;
@@ -10121,7 +10101,7 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/fatigue> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/no> ;
@@ -10131,7 +10111,7 @@
         rdfs:label "severe"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/severe/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/fatigue> ;
-        cmeo:has_value 3 .
+        cmeo:has_value "severe"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/severe/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/severe> ;
@@ -10597,21 +10577,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/historycopd/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/historycopd> ;
-        cmeo:has_value "0"^^xsd:string .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/historycopd/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/historycopd/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/historycopd/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/historycopd/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/historycopd> ;
-        cmeo:has_value "1"^^xsd:string .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/historycopd/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/historycopd/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/historycopd/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/historycopd> ;
@@ -10637,30 +10617,6 @@
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/historycopd/visit/visit_date> ;
         obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/76427-4> .
 
-    <https://w3id.org/CMEO/aachenhf/historyofcabg/binary_class_variable> a obi:binary_class_variable ;
-        ns2:denotes <https://w3id.org/CMEO/aachenhf/historyofcabg> ;
-        cmeo:has_value "binary_class_variable"^^xsd:string .
-
-    <https://w3id.org/CMEO/aachenhf/historyofcabg/categorical_value_specification/no> a obi:categorical_value_specification ;
-        rdfs:label "no"^^xsd:string ;
-        obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/historyofcabg/categorical_value_specification/no/data_standardization> ;
-        obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/historyofcabg> ;
-        cmeo:has_value "0"^^xsd:string .
-
-    <https://w3id.org/CMEO/aachenhf/historyofcabg/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
-        obi:has_specified_input <https://w3id.org/CMEO/aachenhf/historyofcabg/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
-
-    <https://w3id.org/CMEO/aachenhf/historyofcabg/categorical_value_specification/yes> a obi:categorical_value_specification ;
-        rdfs:label "yes"^^xsd:string ;
-        obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/historyofcabg/categorical_value_specification/yes/data_standardization> ;
-        obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/historyofcabg> ;
-        cmeo:has_value "1"^^xsd:string .
-
-    <https://w3id.org/CMEO/aachenhf/historyofcabg/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
-        obi:has_specified_input <https://w3id.org/CMEO/aachenhf/historyofcabg/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
-
     <https://w3id.org/CMEO/aachenhf/historyofcabg/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/historyofcabg> ;
         obi:has_specified_output <https://w3id.org/CMEO/aachenhf/historyofcabg/category/condition_era> .
@@ -10681,6 +10637,10 @@
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/historyofcabg/data_set> ;
         obi:has_specified_output <https://w3id.org/CMEO/aachenhf/historyofcabg/statistic> .
 
+    <https://w3id.org/CMEO/aachenhf/historyofcabg/multi_class_variable> a obi:multi_class_variable ;
+        ns2:denotes <https://w3id.org/CMEO/aachenhf/historyofcabg> ;
+        cmeo:has_value "multi_class_variable"^^xsd:string .
+
     <https://w3id.org/CMEO/aachenhf/historyofcabg/visit/visit_date/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/historyofcabg/visit/visit_date> ;
         obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/76427-4> .
@@ -10693,21 +10653,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/historyofmyocardialinfarction/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/historyofmyocardialinfarction> ;
-        cmeo:has_value "0"^^xsd:string .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/historyofmyocardialinfarction/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/historyofmyocardialinfarction/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/historyofmyocardialinfarction/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/historyofmyocardialinfarction/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/historyofmyocardialinfarction> ;
-        cmeo:has_value "1"^^xsd:string .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/historyofmyocardialinfarction/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/historyofmyocardialinfarction/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/historyofmyocardialinfarction/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/historyofmyocardialinfarction> ;
@@ -10741,21 +10701,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/historyofpci/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/historyofpci> ;
-        cmeo:has_value "0"^^xsd:string .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/historyofpci/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/historyofpci/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/historyofpci/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/historyofpci/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/historyofpci> ;
-        cmeo:has_value "1"^^xsd:string .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/historyofpci/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/historyofpci/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/historyofpci/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/historyofpci> ;
@@ -10789,21 +10749,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/historyofstroke/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/historyofstroke> ;
-        cmeo:has_value "0"^^xsd:string .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/historyofstroke/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/historyofstroke/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/historyofstroke/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/historyofstroke/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/historyofstroke> ;
-        cmeo:has_value "1"^^xsd:string .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/historyofstroke/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/historyofstroke/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/historyofstroke/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/historyofstroke> ;
@@ -10911,21 +10871,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/hypercholesterolemia/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/hypercholesterolemia> ;
-        cmeo:has_value "0"^^xsd:string .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/hypercholesterolemia/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/hypercholesterolemia/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/hypercholesterolemia/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/hypercholesterolemia/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/hypercholesterolemia> ;
-        cmeo:has_value "1"^^xsd:string .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/hypercholesterolemia/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/hypercholesterolemia/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/hypercholesterolemia/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/hypercholesterolemia> ;
@@ -10959,21 +10919,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/hypertension/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/hypertension> ;
-        cmeo:has_value "0"^^xsd:string .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/hypertension/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/hypertension/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/hypertension/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/hypertension/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/hypertension> ;
-        cmeo:has_value "1"^^xsd:string .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/hypertension/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/hypertension/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/hypertension/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/hypertension> ;
@@ -11007,21 +10967,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/icm.hf/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/icm.hf> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/icm.hf/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/icm.hf/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/icm.hf/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/icm.hf/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/icm.hf> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/icm.hf/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/icm.hf/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/icm.hf/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/icm.hf> ;
@@ -11340,36 +11300,6 @@
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/lvef/visit/visit_date> ;
         obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/76427-4> .
 
-    <https://w3id.org/CMEO/aachenhf/lvef_cat/categorical_value_specification/heart_failure_with_mildly_reduced_ejection_fraction> a obi:categorical_value_specification ;
-        rdfs:label "heart failure with mildly reduced ejection fraction"^^xsd:string ;
-        obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/lvef_cat/categorical_value_specification/heart_failure_with_mildly_reduced_ejection_fraction/data_standardization> ;
-        obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/lvef_cat> ;
-        cmeo:has_value "hfmref"^^xsd:string .
-
-    <https://w3id.org/CMEO/aachenhf/lvef_cat/categorical_value_specification/heart_failure_with_mildly_reduced_ejection_fraction/data_standardization> a cmeo:data_standardization ;
-        obi:has_specified_input <https://w3id.org/CMEO/aachenhf/lvef_cat/categorical_value_specification/heart_failure_with_mildly_reduced_ejection_fraction> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/SNOMEDCT/788950000> .
-
-    <https://w3id.org/CMEO/aachenhf/lvef_cat/categorical_value_specification/heart_failure_with_preserved_ejection_fraction> a obi:categorical_value_specification ;
-        rdfs:label "heart failure with preserved ejection fraction"^^xsd:string ;
-        obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/lvef_cat/categorical_value_specification/heart_failure_with_preserved_ejection_fraction/data_standardization> ;
-        obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/lvef_cat> ;
-        cmeo:has_value "hfpef"^^xsd:string .
-
-    <https://w3id.org/CMEO/aachenhf/lvef_cat/categorical_value_specification/heart_failure_with_preserved_ejection_fraction/data_standardization> a cmeo:data_standardization ;
-        obi:has_specified_input <https://w3id.org/CMEO/aachenhf/lvef_cat/categorical_value_specification/heart_failure_with_preserved_ejection_fraction> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/SNOMEDCT/446221000> .
-
-    <https://w3id.org/CMEO/aachenhf/lvef_cat/categorical_value_specification/heart_failure_with_reduced_ejection_fraction> a obi:categorical_value_specification ;
-        rdfs:label "heart failure with reduced ejection fraction"^^xsd:string ;
-        obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/lvef_cat/categorical_value_specification/heart_failure_with_reduced_ejection_fraction/data_standardization> ;
-        obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/lvef_cat> ;
-        cmeo:has_value "hfref"^^xsd:string .
-
-    <https://w3id.org/CMEO/aachenhf/lvef_cat/categorical_value_specification/heart_failure_with_reduced_ejection_fraction/data_standardization> a cmeo:data_standardization ;
-        obi:has_specified_input <https://w3id.org/CMEO/aachenhf/lvef_cat/categorical_value_specification/heart_failure_with_reduced_ejection_fraction> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/SNOMEDCT/703272007> .
-
     <https://w3id.org/CMEO/aachenhf/lvef_cat/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/lvef_cat> ;
         obi:has_specified_output <https://w3id.org/CMEO/aachenhf/lvef_cat/category/condition_era> .
@@ -11443,21 +11373,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/metformin/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/metformin> ;
-        cmeo:has_value "0"^^xsd:string .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/metformin/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/metformin/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/metformin/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/metformin/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/metformin> ;
-        cmeo:has_value "1"^^xsd:string .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/metformin/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/metformin/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/metformin/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/metformin> ;
@@ -11655,7 +11585,7 @@
         rdfs:label "class i"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/nyha/categorical_value_specification/class_i/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/nyha> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "class i"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/nyha/categorical_value_specification/class_i/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/nyha/categorical_value_specification/class_i> ;
@@ -11665,7 +11595,7 @@
         rdfs:label "class ii"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/nyha/categorical_value_specification/class_ii/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/nyha> ;
-        cmeo:has_value 2 .
+        cmeo:has_value "class ii"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/nyha/categorical_value_specification/class_ii/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/nyha/categorical_value_specification/class_ii> ;
@@ -11675,7 +11605,7 @@
         rdfs:label "class iii"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/nyha/categorical_value_specification/class_iii/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/nyha> ;
-        cmeo:has_value 3 .
+        cmeo:has_value "class iii"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/nyha/categorical_value_specification/class_iii/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/nyha/categorical_value_specification/class_iii> ;
@@ -11685,7 +11615,7 @@
         rdfs:label "class iv"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/nyha/categorical_value_specification/class_iv/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/nyha> ;
-        cmeo:has_value 4 .
+        cmeo:has_value "class iv"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/nyha/categorical_value_specification/class_iv/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/nyha/categorical_value_specification/class_iv> ;
@@ -11693,7 +11623,7 @@
 
     <https://w3id.org/CMEO/aachenhf/nyha/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/nyha> ;
-        obi:has_specified_output <https://w3id.org/CMEO/aachenhf/nyha/category/observation> .
+        obi:has_specified_output <https://w3id.org/CMEO/aachenhf/nyha/category/measurement> .
 
     <https://w3id.org/CMEO/aachenhf/nyha/data_set/chi_square_test> a obi:chi_square_test ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/nyha/data_set> ;
@@ -11719,13 +11649,49 @@
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/nyha/visit/visit_date> ;
         obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/76427-4> .
 
+    <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/mild> a obi:categorical_value_specification ;
+        rdfs:label "mild"^^xsd:string ;
+        obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/mild/data_standardization> ;
+        obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/orthopnea> ;
+        cmeo:has_value "mild"^^xsd:string .
+
+    <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/mild/data_standardization> a cmeo:data_standardization ;
+        obi:has_specified_input <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/mild> ;
+        obi:has_specified_output <http://purl.bioontology.org/ontology/SNOMEDCT/255604002> .
+
+    <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/moderate> a obi:categorical_value_specification ;
+        rdfs:label "moderate"^^xsd:string ;
+        obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/moderate/data_standardization> ;
+        obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/orthopnea> ;
+        cmeo:has_value "moderate"^^xsd:string .
+
+    <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/moderate/data_standardization> a cmeo:data_standardization ;
+        obi:has_specified_input <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/moderate> ;
+        obi:has_specified_output <http://purl.bioontology.org/ontology/SNOMEDCT/1255665007> .
+
+    <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/no> a obi:categorical_value_specification ;
+        rdfs:label "no"^^xsd:string ;
+        obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/no/data_standardization> ;
+        obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/orthopnea> ;
+        cmeo:has_value "no"^^xsd:string .
+
+    <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
+        obi:has_specified_input <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/no> ;
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+
+    <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/severe> a obi:categorical_value_specification ;
+        rdfs:label "severe"^^xsd:string ;
+        obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/severe/data_standardization> ;
+        obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/orthopnea> ;
+        cmeo:has_value "severe"^^xsd:string .
+
+    <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/severe/data_standardization> a cmeo:data_standardization ;
+        obi:has_specified_input <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/severe> ;
+        obi:has_specified_output <http://purl.bioontology.org/ontology/SNOMEDCT/24484000> .
+
     <https://w3id.org/CMEO/aachenhf/orthopnea/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/orthopnea> ;
-        obi:has_specified_output <https://w3id.org/CMEO/aachenhf/orthopnea/category/observation> .
-
-    <https://w3id.org/CMEO/aachenhf/orthopnea/continuous_variable> a obi:continuous_variable ;
-        ns2:denotes <https://w3id.org/CMEO/aachenhf/orthopnea> ;
-        cmeo:has_value "continuous_variable"^^xsd:string .
+        obi:has_specified_output <https://w3id.org/CMEO/aachenhf/orthopnea/category/measurement> .
 
     <https://w3id.org/CMEO/aachenhf/orthopnea/data_set/chi_square_test> a obi:chi_square_test ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/orthopnea/data_set> ;
@@ -11743,6 +11709,10 @@
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/orthopnea/data_set> ;
         obi:has_specified_output <https://w3id.org/CMEO/aachenhf/orthopnea/statistic> .
 
+    <https://w3id.org/CMEO/aachenhf/orthopnea/multi_class_variable> a obi:multi_class_variable ;
+        ns2:denotes <https://w3id.org/CMEO/aachenhf/orthopnea> ;
+        cmeo:has_value "multi_class_variable"^^xsd:string .
+
     <https://w3id.org/CMEO/aachenhf/orthopnea/visit/visit_date/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/orthopnea/visit/visit_date> ;
         obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/76427-4> .
@@ -11755,21 +11725,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/others.hf/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/others.hf> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/others.hf/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/others.hf/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/others.hf/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/others.hf/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/others.hf> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/others.hf/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/others.hf/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/others.hf/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/others.hf> ;
@@ -11803,21 +11773,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/pacemakericd/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/pacemakericd> ;
-        cmeo:has_value "0"^^xsd:string .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/pacemakericd/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/pacemakericd/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/pacemakericd/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/pacemakericd/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/pacemakericd> ;
-        cmeo:has_value "1"^^xsd:string .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/pacemakericd/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/pacemakericd/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/pacemakericd/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/pacemakericd> ;
@@ -11880,21 +11850,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/peripheralarterydisease/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/peripheralarterydisease> ;
-        cmeo:has_value "0"^^xsd:string .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/peripheralarterydisease/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/peripheralarterydisease/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/peripheralarterydisease/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/peripheralarterydisease/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/peripheralarterydisease> ;
-        cmeo:has_value "1"^^xsd:string .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/peripheralarterydisease/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/peripheralarterydisease/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/peripheralarterydisease/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/peripheralarterydisease> ;
@@ -12039,7 +12009,7 @@
         rdfs:label "female"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/sex/categorical_value_specification/female/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/sex> ;
-        cmeo:has_value "1"^^xsd:string .
+        cmeo:has_value "female"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/sex/categorical_value_specification/female/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/sex/categorical_value_specification/female> ;
@@ -12049,7 +12019,7 @@
         rdfs:label "male"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/sex/categorical_value_specification/male/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/sex> ;
-        cmeo:has_value "0"^^xsd:string .
+        cmeo:has_value "male"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/sex/categorical_value_specification/male/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/sex/categorical_value_specification/male> ;
@@ -12183,7 +12153,7 @@
         rdfs:label "current smoker"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/smoker/categorical_value_specification/current_smoker/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/smoker> ;
-        cmeo:has_value 2 .
+        cmeo:has_value "current smoker"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/smoker/categorical_value_specification/current_smoker/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/smoker/categorical_value_specification/current_smoker> ;
@@ -12193,7 +12163,7 @@
         rdfs:label "former"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/smoker/categorical_value_specification/former/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/smoker> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "former"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/smoker/categorical_value_specification/former/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/smoker/categorical_value_specification/former> ;
@@ -12203,15 +12173,15 @@
         rdfs:label "never"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/smoker/categorical_value_specification/never/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/smoker> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "never"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/smoker/categorical_value_specification/never/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/smoker/categorical_value_specification/never> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/%20la18978-9> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la18978-9> .
 
     <https://w3id.org/CMEO/aachenhf/smoker/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/smoker> ;
-        obi:has_specified_output <https://w3id.org/CMEO/aachenhf/smoker/category/observation> .
+        obi:has_specified_output <https://w3id.org/CMEO/aachenhf/smoker/category/measurement> .
 
     <https://w3id.org/CMEO/aachenhf/smoker/data_set/chi_square_test> a obi:chi_square_test ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/smoker/data_set> ;
@@ -12282,21 +12252,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/tcm.hf/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/tcm.hf> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/tcm.hf/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/tcm.hf/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/tcm.hf/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/tcm.hf/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/tcm.hf> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/tcm.hf/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/tcm.hf/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/tcm.hf/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/tcm.hf> ;
@@ -12462,21 +12432,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/vcm.hf/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/vcm.hf> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/vcm.hf/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/vcm.hf/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/aachenhf/vcm.hf/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/vcm.hf/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/aachenhf/vcm.hf> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/vcm.hf/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/vcm.hf/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/aachenhf/vcm.hf/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/vcm.hf> ;
@@ -12641,10 +12611,6 @@
     <https://w3id.org/CMEO/aachenhf/x6.min.gehtest/visit/visit_date/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/aachenhf/x6.min.gehtest/visit/visit_date> ;
         obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/76427-4> .
-
-    <https://w3id.org/CMEO/graph/aachenhf/1656339> rdfs:label "sacubitril/valsartan"^^xsd:string ;
-        ns2:denotes <http://omop.org/OMOP/778939> ;
-        cmeo:has_value "rx:1656339"^^xsd:string .
 
     <http://purl.bioontology.org/ontology/ATC/a10bk> rdfs:label "sodium-glucose co-transporter 2 (sglt2) inhibitors"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/1123627> ;
@@ -13087,7 +13053,7 @@
         cmeo:has_value "https://explorer.icare4cvd.eu/api/variable-graph/AachenHF/historyofcabg"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/historyofcabg/data_set> a ns2:data_set ;
-        ns2:is_about <https://w3id.org/CMEO/aachenhf/historyofcabg/binary_class_variable> ;
+        ns2:is_about <https://w3id.org/CMEO/aachenhf/historyofcabg/multi_class_variable> ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/historyofcabg/data_set/chi_square_test>,
             <https://w3id.org/CMEO/aachenhf/historyofcabg/exploratory_data_analysis> ;
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/historyofcabg/data_acquisition_process> .
@@ -13315,7 +13281,7 @@
         cmeo:has_value "https://explorer.icare4cvd.eu/api/variable-graph/AachenHF/orthopnea"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/orthopnea/data_set> a ns2:data_set ;
-        ns2:is_about <https://w3id.org/CMEO/aachenhf/orthopnea/continuous_variable> ;
+        ns2:is_about <https://w3id.org/CMEO/aachenhf/orthopnea/multi_class_variable> ;
         obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/orthopnea/data_set/chi_square_test>,
             <https://w3id.org/CMEO/aachenhf/orthopnea/exploratory_data_analysis> ;
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/orthopnea/data_acquisition_process> .
@@ -14060,6 +14026,15 @@
             <https://w3id.org/CMEO/aachenhf/historycopd/statistic/number_of_missing_values>,
             <https://w3id.org/CMEO/aachenhf/historycopd/statistic/number_of_unique_values> .
 
+    <https://w3id.org/CMEO/aachenhf/historyofcabg> a cmeo:data_element ;
+        rdfs:label "history of coronary artery bypass graft surgery"^^xsd:string ;
+        ns2:is_denoted_by <https://w3id.org/CMEO/aachenhf/historyofcabg/multi_class_variable> ;
+        obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/historyofcabg/categorization_process>,
+            <https://w3id.org/CMEO/aachenhf/historyofcabg/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/historyofcabg/data_visualization_process> ;
+        ns1:is_part_of <https://w3id.org/CMEO/aachenhf/study_design_variable_specification> ;
+        dc:identifier "historyofcabg"^^xsd:string .
+
     <https://w3id.org/CMEO/aachenhf/historyofcabg/statistic> a stato:statistic ;
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/historyofcabg/exploratory_data_analysis> ;
         ns1:has_part <https://w3id.org/CMEO/aachenhf/historyofcabg/statistic/count_>,
@@ -14221,6 +14196,15 @@
         ns1:is_part_of <https://w3id.org/CMEO/aachenhf/study_design_variable_specification> ;
         dc:identifier "lvef"^^xsd:string .
 
+    <https://w3id.org/CMEO/aachenhf/lvef_cat> a cmeo:data_element ;
+        rdfs:label "heart failure type base on ejection fraction"^^xsd:string ;
+        ns2:is_denoted_by <https://w3id.org/CMEO/aachenhf/lvef_cat/multi_class_variable> ;
+        obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/lvef_cat/categorization_process>,
+            <https://w3id.org/CMEO/aachenhf/lvef_cat/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/lvef_cat/data_visualization_process> ;
+        ns1:is_part_of <https://w3id.org/CMEO/aachenhf/study_design_variable_specification> ;
+        dc:identifier "lvef_cat"^^xsd:string .
+
     <https://w3id.org/CMEO/aachenhf/lvef_cat/statistic> a stato:statistic ;
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/lvef_cat/exploratory_data_analysis> ;
         ns1:has_part <https://w3id.org/CMEO/aachenhf/lvef_cat/statistic/count_>,
@@ -14310,15 +14294,6 @@
             <https://w3id.org/CMEO/aachenhf/nyha/statistic/mode>,
             <https://w3id.org/CMEO/aachenhf/nyha/statistic/number_of_missing_values>,
             <https://w3id.org/CMEO/aachenhf/nyha/statistic/number_of_unique_values> .
-
-    <https://w3id.org/CMEO/aachenhf/orthopnea> a cmeo:data_element ;
-        rdfs:label "orthopnea symptom severity"^^xsd:string ;
-        ns2:is_denoted_by <https://w3id.org/CMEO/aachenhf/orthopnea/continuous_variable> ;
-        obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/orthopnea/categorization_process>,
-            <https://w3id.org/CMEO/aachenhf/orthopnea/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/orthopnea/data_visualization_process> ;
-        ns1:is_part_of <https://w3id.org/CMEO/aachenhf/study_design_variable_specification> ;
-        dc:identifier "orthopnea"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/orthopnea/statistic> a stato:statistic ;
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/orthopnea/exploratory_data_analysis> ;
@@ -14643,17 +14618,6 @@
         ns1:is_part_of <https://w3id.org/CMEO/aachenhf/study_design_variable_specification> ;
         dc:identifier "historycopd"^^xsd:string .
 
-    <https://w3id.org/CMEO/aachenhf/historyofcabg> a cmeo:data_element ;
-        rdfs:label "history of coronary artery bypass graft surgery"^^xsd:string ;
-        ns2:is_denoted_by <https://w3id.org/CMEO/aachenhf/historyofcabg/binary_class_variable> ;
-        obi:has_value_specification <https://w3id.org/CMEO/aachenhf/historyofcabg/categorical_value_specification/no>,
-            <https://w3id.org/CMEO/aachenhf/historyofcabg/categorical_value_specification/yes> ;
-        obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/historyofcabg/categorization_process>,
-            <https://w3id.org/CMEO/aachenhf/historyofcabg/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/historyofcabg/data_visualization_process> ;
-        ns1:is_part_of <https://w3id.org/CMEO/aachenhf/study_design_variable_specification> ;
-        dc:identifier "historyofcabg"^^xsd:string .
-
     <https://w3id.org/CMEO/aachenhf/historyofmyocardialinfarction> a cmeo:data_element ;
         rdfs:label "history of myocardial infarction"^^xsd:string ;
         ns2:is_denoted_by <https://w3id.org/CMEO/aachenhf/historyofmyocardialinfarction/binary_class_variable> ;
@@ -14815,18 +14779,6 @@
             <https://w3id.org/CMEO/aachenhf/sglt2_dd/measurement_unit_label/data_standardization> ;
         cmeo:has_value "ucum:mg"^^xsd:string .
 
-    <https://w3id.org/CMEO/aachenhf/lvef_cat> a cmeo:data_element ;
-        rdfs:label "heart failure type base on ejection fraction"^^xsd:string ;
-        ns2:is_denoted_by <https://w3id.org/CMEO/aachenhf/lvef_cat/multi_class_variable> ;
-        obi:has_value_specification <https://w3id.org/CMEO/aachenhf/lvef_cat/categorical_value_specification/heart_failure_with_mildly_reduced_ejection_fraction>,
-            <https://w3id.org/CMEO/aachenhf/lvef_cat/categorical_value_specification/heart_failure_with_preserved_ejection_fraction>,
-            <https://w3id.org/CMEO/aachenhf/lvef_cat/categorical_value_specification/heart_failure_with_reduced_ejection_fraction> ;
-        obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/lvef_cat/categorization_process>,
-            <https://w3id.org/CMEO/aachenhf/lvef_cat/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/lvef_cat/data_visualization_process> ;
-        ns1:is_part_of <https://w3id.org/CMEO/aachenhf/study_design_variable_specification> ;
-        dc:identifier "lvef_cat"^^xsd:string .
-
     <https://w3id.org/CMEO/aachenhf/smoker> a cmeo:data_element ;
         rdfs:label "smoking status"^^xsd:string ;
         ns2:is_denoted_by <https://w3id.org/CMEO/aachenhf/smoker/multi_class_variable> ;
@@ -14888,6 +14840,19 @@
             <https://w3id.org/CMEO/aachenhf/nyha/data_visualization_process> ;
         ns1:is_part_of <https://w3id.org/CMEO/aachenhf/study_design_variable_specification> ;
         dc:identifier "nyha"^^xsd:string .
+
+    <https://w3id.org/CMEO/aachenhf/orthopnea> a cmeo:data_element ;
+        rdfs:label "orthopnea symptom severity"^^xsd:string ;
+        ns2:is_denoted_by <https://w3id.org/CMEO/aachenhf/orthopnea/multi_class_variable> ;
+        obi:has_value_specification <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/mild>,
+            <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/moderate>,
+            <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/no>,
+            <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/severe> ;
+        obi:is_specified_input_of <https://w3id.org/CMEO/aachenhf/orthopnea/categorization_process>,
+            <https://w3id.org/CMEO/aachenhf/orthopnea/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/orthopnea/data_visualization_process> ;
+        ns1:is_part_of <https://w3id.org/CMEO/aachenhf/study_design_variable_specification> ;
+        dc:identifier "orthopnea"^^xsd:string .
 
     <https://w3id.org/CMEO/aachenhf/ace_dd/statistic> a stato:statistic ;
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/ace_dd/exploratory_data_analysis> ;
@@ -15937,40 +15902,13 @@
     <http://purl.bioontology.org/ontology/LNC/la33-6> a cmeo:code ;
         rdfs:label "yes"^^xsd:string ;
         ns2:denotes <http://omop.org/OMOP/45877994> ;
-        obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/atrialfibrillation/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/ckd/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/dcm.hf/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/death/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/diabetes/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/ep_hosp_hf/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/historycopd/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/historyofcabg/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/historyofmyocardialinfarction/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/historyofpci/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/historyofstroke/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/hypercholesterolemia/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/hypertension/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/icm.hf/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/metformin/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/others.hf/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/pacemakericd/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/peripheralarterydisease/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/tcm.hf/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/vcm.hf/categorical_value_specification/no/data_standardization> ;
-        cmeo:has_value "loinc:la33-6"^^xsd:string .
-
-    <http://purl.bioontology.org/ontology/LNC/la32-8> a cmeo:code ;
-        rdfs:label "no"^^xsd:string ;
-        ns2:denotes <http://omop.org/OMOP/45878245> ;
         obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/atrialfibrillation/categorical_value_specification/yes/data_standardization>,
             <https://w3id.org/CMEO/aachenhf/ckd/categorical_value_specification/yes/data_standardization>,
             <https://w3id.org/CMEO/aachenhf/dcm.hf/categorical_value_specification/yes/data_standardization>,
             <https://w3id.org/CMEO/aachenhf/death/categorical_value_specification/yes/data_standardization>,
             <https://w3id.org/CMEO/aachenhf/diabetes/categorical_value_specification/yes/data_standardization>,
             <https://w3id.org/CMEO/aachenhf/ep_hosp_hf/categorical_value_specification/yes/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/no/data_standardization>,
             <https://w3id.org/CMEO/aachenhf/historycopd/categorical_value_specification/yes/data_standardization>,
-            <https://w3id.org/CMEO/aachenhf/historyofcabg/categorical_value_specification/yes/data_standardization>,
             <https://w3id.org/CMEO/aachenhf/historyofmyocardialinfarction/categorical_value_specification/yes/data_standardization>,
             <https://w3id.org/CMEO/aachenhf/historyofpci/categorical_value_specification/yes/data_standardization>,
             <https://w3id.org/CMEO/aachenhf/historyofstroke/categorical_value_specification/yes/data_standardization>,
@@ -15983,6 +15921,32 @@
             <https://w3id.org/CMEO/aachenhf/peripheralarterydisease/categorical_value_specification/yes/data_standardization>,
             <https://w3id.org/CMEO/aachenhf/tcm.hf/categorical_value_specification/yes/data_standardization>,
             <https://w3id.org/CMEO/aachenhf/vcm.hf/categorical_value_specification/yes/data_standardization> ;
+        cmeo:has_value "loinc:la33-6"^^xsd:string .
+
+    <http://purl.bioontology.org/ontology/LNC/la32-8> a cmeo:code ;
+        rdfs:label "no"^^xsd:string ;
+        ns2:denotes <http://omop.org/OMOP/45878245> ;
+        obi:is_specified_output_of <https://w3id.org/CMEO/aachenhf/atrialfibrillation/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/ckd/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/dcm.hf/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/death/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/diabetes/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/ep_hosp_hf/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/fatigue/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/historycopd/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/historyofmyocardialinfarction/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/historyofpci/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/historyofstroke/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/hypercholesterolemia/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/hypertension/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/icm.hf/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/metformin/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/orthopnea/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/others.hf/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/pacemakericd/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/peripheralarterydisease/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/tcm.hf/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/aachenhf/vcm.hf/categorical_value_specification/no/data_standardization> ;
         cmeo:has_value "loinc:la32-8"^^xsd:string .
 
     <http://purl.bioontology.org/ontology/LNC/76427-4> a cmeo:code ;

@@ -7,6 +7,7 @@ import pandas as pd
 # import chardet
 from .config import settings
 import json
+import re
 # import os
 from .ontology_model import  Concept
 from .study_kg import update_metadata_graph
@@ -104,12 +105,30 @@ def process_variables_metadata_file(file_path:str, study_metadata_graph_file_pat
                 code=row['variable concept code'] if pd.notna(row['variable concept code']) else None,
                 omop_id=safe_int(row['variable omop id']) if pd.notna(row['variable omop id']) else None,
             )]
-            base_concept.extend([Concept(
-                    standard_label=row['additional context concept name'].split("|")[i] if pd.notna(row['additional context concept name']) else None,
-                    code=row['additional context concept code'].split("|")[i] if pd.notna(row['additional context concept code']) else None,
-                    omop_id=safe_int(str(row['additional context omop id']).split("|")[i]) if pd.notna(row['additional context omop id']) else None,
-                ) for i in range(len(row['additional context concept name'].split("|")))]) if pd.notna(row['additional context concept name']) else []
-
+            # base_concept.extend([Concept(
+            #         standard_label=row['additional context concept name'].split("|")[i] if pd.notna(row['additional context concept name']) else None,
+            #         code=row['additional context concept code'].split("|")[i] if pd.notna(row['additional context concept code']) else None,
+            #         omop_id=safe_int(str(row['additional context omop id']).split("|")[i]) if pd.notna(row['additional context omop id']) else None,
+            #     ) for i in range(len(row['additional context concept name'].split("|")))]) if pd.notna(row['additional context concept name']) else []
+            
+            
+            if (pd.notna(row['additional context concept name']) and 
+            pd.notna(row['additional context concept code']) and 
+            pd.notna(row['additional context omop id'])):
+                try:
+                    count1 = len(str(row['additional context concept name']).split("|"))
+                    count2 = len(str(row['additional context concept code']).split("|"))
+                    count3 = len(str(row['additional context omop id']).split("|"))
+                    if count1 == count2 == count3:
+                        base_concept.extend([Concept(
+                        standard_label=str(row['additional context concept name']).split("|")[i] if pd.notna(row['additional context concept name']) else None,
+                        code=str(row['additional context concept code']).split("|")[i] if pd.notna(row['additional context concept code']) else None,
+                        omop_id=safe_int(row['additional context omop id'].split("|")[i]) if pd.notna(row['additional context omop id']) else None,
+                    ) for i in range(count1)])
+                    else:
+                        print(f"Row number {var_name} of {cohort_name} has an unequal number of additional context concept names/codes/omop ids.")
+                except:
+                    print(f"Row number {var_name} of {cohort_name} does not have a valid string in additional context concept names/codes/omop ids.")
             # g=add_solo_concept_info(g, var_uri, base_concept, cohort_graph)
             # g = add_concept_info(g, var_uri, base_concept, cohort_graph)
             g = add_data_type(g, var_uri, row['vartype'], cohort_graph)
@@ -710,26 +729,48 @@ def add_histogram_visualization(g: Graph, var_uri: URIRef, cohort_uri: URIRef, c
 
 
 def add_temporal_context(g: Graph, var_uri: URIRef, cohort_uri: URIRef, row: pd.Series) -> Graph:
-    visit_not_null = pd.notna(row['visits']) and row['visits']
-    if visit_not_null:
-        visit_labels = normalize_text(row['visits'])
-        visit_uri = get_temporal_context_uri(var_uri, visit_labels)
-        g.add((visit_uri, RDF.type, OntologyNamespaces.CMEO.value.visit_measurement_datum, cohort_uri))
-        g.add((visit_uri, OntologyNamespaces.IAO.value.is_about, var_uri, cohort_uri))
-        g.add((visit_uri, OntologyNamespaces.CMEO.value.has_value, Literal(row['visits'], datatype=XSD.string), cohort_uri))
+    if "visits" in row:
+        visit_not_null = pd.notna(row['visits']) and row['visits']
+        if visit_not_null:
+            visit_labels = normalize_text(row['visits'])
+            visit_uri = get_temporal_context_uri(var_uri, visit_labels)
+            g.add((visit_uri, RDF.type, OntologyNamespaces.CMEO.value.visit_measurement_datum, cohort_uri))
+            g.add((visit_uri, OntologyNamespaces.IAO.value.is_about, var_uri, cohort_uri))
+            g.add((visit_uri, OntologyNamespaces.CMEO.value.has_value, Literal(row['visits'], datatype=XSD.string), cohort_uri))
 
-        
-        if pd.notna(row['visit concept name']) and normalize_text(row['visit concept name']):
-            concepts = Concept(
-                standard_label=row['visit concept name'] if pd.notna(row['visit concept name']) else None,
-                code=row['visit concept code'] if pd.notna(row['visit concept code']) else None,
-                omop_id=safe_int(row['visit omop id']) if pd.notna(row['visit omop id']) else None,
-            )
-            add_solo_concept_info(g, visit_uri, concepts, cohort_uri)
-          
-            return g
-         
+            
+            if pd.notna(row['visit concept name']) and normalize_text(row['visit concept name']):
+                concepts = Concept(
+                    standard_label=row['visit concept name'] if pd.notna(row['visit concept name']) else None,
+                    code=row['visit concept code'] if pd.notna(row['visit concept code']) else None,
+                    omop_id=safe_int(row['visit omop id']) if pd.notna(row['visit omop id']) else None,
+                )
+                add_solo_concept_info(g, visit_uri, concepts, cohort_uri)
+            
+                return g
+        return g
     return g
+
+
+def parse_categorical_string(categorical_str: str) -> list:
+    """
+    Parses a categorical string like '1=No|2=Yes' or '1="mmol|l"|2="g|dl"' into a list of values.
+    Supports both quoted and unquoted values.
+    """
+    if not categorical_str or not isinstance(categorical_str, str):
+        return []
+
+    # Match key=value pairs, allowing for optional quotes around values
+    pattern = r'\d+\s*=\s*"[^"]*"|\d+\s*=\s*[^|]+'
+    matches = re.findall(pattern, categorical_str)
+
+    # Extract the values
+    values = []
+    for match in matches:
+        value = re.sub(r'^\d+\s*=\s*', '', match).strip().strip('"')
+        values.append(value)
+
+    return values
 
 
 def add_categories_to_graph(g: Graph, var_uri: URIRef, cohort_uri: URIRef, row: pd.Series) -> Graph:
@@ -741,7 +782,8 @@ def add_categories_to_graph(g: Graph, var_uri: URIRef, cohort_uri: URIRef, row: 
         # if row['categorical'] == '' or row['categorical'] == 'nan' or row['categorical'] == None:
         #     print("No categorical information found")
         #     return g
-        categories =row['categorical'].split("|")
+        categories = parse_categorical_string(row['categorical'])
+        print(f"categories: {categories}")
         updated_categories = []
         
         # Parse categories as value=defined_value pairs
@@ -759,10 +801,11 @@ def add_categories_to_graph(g: Graph, var_uri: URIRef, cohort_uri: URIRef, row: 
         # Handle additional columns for labels, codes, and OMOP IDs, with empty fallback
         labels = row['categorical value concept name'].split("|") if pd.notna(row['categorical value concept name']) and row['categorical value concept name'] else [None] * len(categories)
         codes = row['categorical value concept code'].split("|") if pd.notna(row['categorical value concept code']) and row['categorical value concept code'] else [None] * len(categories)
-        omop_ids = row['categorical value omop id'].split("|") if pd.notna(row['categorical value omop id']) and row['categorical value omop id'] else [None] * len(categories)
+        omop_ids = str(row['categorical value omop id']).split("|") if pd.notna(row['categorical value omop id']) and str(row['categorical value omop id']) else [None] * len(categories)
         
         # Add each category to the graph
         for i, (value, defined_value) in enumerate(updated_categories):
+            data_type_value = "str" if isinstance(value, str) else "int" if isinstance(value, int) else "float" if isinstance(value, float) else "datetime" if isinstance(value, pd.Timestamp) else None
             # n_value = normalize_text(value)
             n_defined_value = normalize_text(defined_value)  
             # if value is None or value == 'nan' or value == '':
@@ -772,15 +815,15 @@ def add_categories_to_graph(g: Graph, var_uri: URIRef, cohort_uri: URIRef, row: 
             g.add((var_uri, OntologyNamespaces.OBI.value.has_value_specification, permissible_uri, cohort_uri))
             g.add((permissible_uri, OntologyNamespaces.OBI.value.is_value_specification_of, var_uri, cohort_uri))
             g.add((permissible_uri, RDFS.label, Literal(defined_value, datatype=XSD.string), cohort_uri))
-            if datatype == 'str':
+            if data_type_value == 'str':
                 g.add((permissible_uri, OntologyNamespaces.CMEO.value.has_value, Literal(value, datatype=XSD.string), cohort_uri))
-            elif datatype == 'int':
+            elif data_type_value == 'int':
                 if value is None:  print(f"value: {value} defined_value: {defined_value}") 
 
                 g.add((permissible_uri, OntologyNamespaces.CMEO.value.has_value, Literal(value, datatype=XSD.integer), cohort_uri))
-            elif datatype == 'float':
+            elif data_type_value == 'float':
                 g.add((permissible_uri, OntologyNamespaces.CMEO.value.has_value, Literal(value, datatype=XSD.decimal), cohort_uri))
-            elif datatype == 'datetime':
+            elif data_type_value == 'datetime':
                 g.add((permissible_uri, OntologyNamespaces.CMEO.value.has_value, Literal(value, datatype=XSD.dateTime), cohort_uri))
 
 
@@ -845,6 +888,8 @@ def add_measurement_unit(g:Graph, var_uri:URIRef, cohort_uri: URIRef,row: pd.Ser
         # g.add((var_uri, OntologyNamespaces.RO.value.has_part, unit_uri,cohort_uri))
 
     return g
+
+
 
 def get_category_uri(var_uri: URIRef, category_value: str) -> URIRef:
     """Generates a unique and URI-safe URI for each category based on the variable URI and category value."""
@@ -1063,6 +1108,9 @@ def add_solo_concept_info(g: Graph, linked_uri: URIRef, concept: Concept, cohort
     
     # print(f"omop_id: {omop_id} for {linked_uri}")
     return g
+
+
+
 
 def create_code_uri(code:str, cohort_uri: URIRef) -> URIRef:
     code_only = code.split(":")[-1]

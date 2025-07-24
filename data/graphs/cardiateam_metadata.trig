@@ -470,9 +470,6 @@
     <http://omop.org/OMOP/40764999> a cmeo:omop_id ;
         cmeo:has_value 40764999 .
 
-    <http://omop.org/OMOP/40766651> a cmeo:omop_id ;
-        cmeo:has_value 40766651 .
-
     <http://omop.org/OMOP/40766819> a cmeo:omop_id ;
         cmeo:has_value 40766819 .
 
@@ -747,10 +744,6 @@
         ns1:denotes <http://omop.org/OMOP/40764999> ;
         cmeo:has_value "loinc:62238-1"^^xsd:string .
 
-    <http://purl.bioontology.org/ontology/LNC/63931-0> rdfs:label "date of diagnosis"^^xsd:string ;
-        ns1:denotes <http://omop.org/OMOP/40766651> ;
-        cmeo:has_value "loinc:63931-0"^^xsd:string .
-
     <http://purl.bioontology.org/ontology/LNC/71875-9> rdfs:label "hemoglobin a1c/hemoglobin.total [pure mass fraction] in blood"^^xsd:string ;
         ns1:denotes <http://omop.org/OMOP/42869630> ;
         cmeo:has_value "loinc:71875-9"^^xsd:string .
@@ -996,9 +989,9 @@
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/a/visit/baseline/data_standardization> ;
         cmeo:has_value "baseline"^^xsd:string .
 
-    <https://w3id.org/CMEO/cardiateam/aceis_arbs/category/condition_occurence> a cmeo:category ;
+    <https://w3id.org/CMEO/cardiateam/aceis_arbs/category/condition_occurrence> a cmeo:category ;
         obi:is_specified_output_of <https://w3id.org/CMEO/cardiateam/aceis_arbs/categorization_process> ;
-        cmeo:has_value "condition_occurence"^^xsd:string .
+        cmeo:has_value "condition_occurrence"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/aceis_arbs/code_set> a rdf:Seq,
             cmeo:code ;
@@ -1101,9 +1094,9 @@
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/albumin_to_creatinine_ratio/visit/baseline/data_standardization> ;
         cmeo:has_value "baseline"^^xsd:string .
 
-    <https://w3id.org/CMEO/cardiateam/alcohol_consumption/category/condition_occurence> a cmeo:category ;
+    <https://w3id.org/CMEO/cardiateam/alcohol_consumption/category/condition_occurrence> a cmeo:category ;
         obi:is_specified_output_of <https://w3id.org/CMEO/cardiateam/alcohol_consumption/categorization_process> ;
-        cmeo:has_value "condition_occurence"^^xsd:string .
+        cmeo:has_value "condition_occurrence"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/alcohol_consumption/code_set> a rdf:Seq,
             cmeo:code ;
@@ -1461,9 +1454,9 @@
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/diastolic_blood_pressure/visit/baseline/data_standardization> ;
         cmeo:has_value "baseline"^^xsd:string .
 
-    <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/category/condition_occurence> a cmeo:category ;
+    <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/category/condition_occurrence> a cmeo:category ;
         obi:is_specified_output_of <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorization_process> ;
-        cmeo:has_value "condition_occurence"^^xsd:string .
+        cmeo:has_value "condition_occurrence"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/code_set> a rdf:Seq,
             cmeo:code ;
@@ -1818,9 +1811,9 @@
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/haematocrit/visit/baseline/data_standardization> ;
         cmeo:has_value "baseline"^^xsd:string .
 
-    <https://w3id.org/CMEO/cardiateam/height/category/condition_occurence> a cmeo:category ;
+    <https://w3id.org/CMEO/cardiateam/height/category/condition_occurrence> a cmeo:category ;
         obi:is_specified_output_of <https://w3id.org/CMEO/cardiateam/height/categorization_process> ;
-        cmeo:has_value "condition_occurence"^^xsd:string .
+        cmeo:has_value "condition_occurrence"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/height/code_set> a rdf:Seq,
             cmeo:code ;
@@ -1860,9 +1853,9 @@
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/hemoglobin/visit/baseline/data_standardization> ;
         cmeo:has_value "baseline"^^xsd:string .
 
-    <https://w3id.org/CMEO/cardiateam/hfpef/category/condition_occurence> a cmeo:category ;
+    <https://w3id.org/CMEO/cardiateam/hfpef/category/condition_occurrence> a cmeo:category ;
         obi:is_specified_output_of <https://w3id.org/CMEO/cardiateam/hfpef/categorization_process> ;
-        cmeo:has_value "condition_occurence"^^xsd:string .
+        cmeo:has_value "condition_occurrence"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/hfpef/code_set> a rdf:Seq,
             cmeo:code ;
@@ -1923,9 +1916,9 @@
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/hstnt/visit/baseline/data_standardization> ;
         cmeo:has_value "baseline"^^xsd:string .
 
-    <https://w3id.org/CMEO/cardiateam/htn/category/condition_occurence> a cmeo:category ;
+    <https://w3id.org/CMEO/cardiateam/htn/category/condition_occurrence> a cmeo:category ;
         obi:is_specified_output_of <https://w3id.org/CMEO/cardiateam/htn/categorization_process> ;
-        cmeo:has_value "condition_occurence"^^xsd:string .
+        cmeo:has_value "condition_occurrence"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/htn/code_set> a rdf:Seq,
             cmeo:code ;
@@ -2091,9 +2084,9 @@
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/nt-probnp/visit/baseline/data_standardization> ;
         cmeo:has_value "baseline"^^xsd:string .
 
-    <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors/category/condition_occurence> a cmeo:category ;
+    <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors/category/condition_occurrence> a cmeo:category ;
         obi:is_specified_output_of <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors/categorization_process> ;
-        cmeo:has_value "condition_occurence"^^xsd:string .
+        cmeo:has_value "condition_occurrence"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors/code_set> a rdf:Seq,
             cmeo:code ;
@@ -2280,9 +2273,9 @@
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/sglt-2_inhibitors/visit/baseline/data_standardization> ;
         cmeo:has_value "baseline"^^xsd:string .
 
-    <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history/category/condition_occurence> a cmeo:category ;
+    <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history/category/condition_occurrence> a cmeo:category ;
         obi:is_specified_output_of <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history/categorization_process> ;
-        cmeo:has_value "condition_occurence"^^xsd:string .
+        cmeo:has_value "condition_occurrence"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history/code_set> a rdf:Seq,
             cmeo:code ;
@@ -2385,9 +2378,9 @@
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/sysstolic_blood_pressure/visit/baseline/data_standardization> ;
         cmeo:has_value "baseline"^^xsd:string .
 
-    <https://w3id.org/CMEO/cardiateam/t2dm/category/condition_occurence> a cmeo:category ;
+    <https://w3id.org/CMEO/cardiateam/t2dm/category/condition_occurrence> a cmeo:category ;
         obi:is_specified_output_of <https://w3id.org/CMEO/cardiateam/t2dm/categorization_process> ;
-        cmeo:has_value "condition_occurence"^^xsd:string .
+        cmeo:has_value "condition_occurrence"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/t2dm/code_set> a rdf:Seq,
             cmeo:code ;
@@ -2451,15 +2444,14 @@
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/triglycerides/visit/baseline/data_standardization> ;
         cmeo:has_value "baseline"^^xsd:string .
 
-    <https://w3id.org/CMEO/cardiateam/type_2_diabetes_diagnosis_-_year/category/condition_occurence> a cmeo:category ;
+    <https://w3id.org/CMEO/cardiateam/type_2_diabetes_diagnosis_-_year/category/condition_occurrence> a cmeo:category ;
         obi:is_specified_output_of <https://w3id.org/CMEO/cardiateam/type_2_diabetes_diagnosis_-_year/categorization_process> ;
-        cmeo:has_value "condition_occurence"^^xsd:string .
+        cmeo:has_value "condition_occurrence"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/type_2_diabetes_diagnosis_-_year/code_set> a rdf:Seq,
             cmeo:code ;
         obi:is_specified_output_of <https://w3id.org/CMEO/cardiateam/type_2_diabetes_diagnosis_-_year/data_standardization> ;
-        rdf:_1 <http://purl.bioontology.org/ontology/SNOMEDCT/44054006> ;
-        rdf:_2 <http://purl.bioontology.org/ontology/LNC/63931-0> .
+        rdf:_1 <http://purl.bioontology.org/ontology/SNOMEDCT/44054006> .
 
     <https://w3id.org/CMEO/cardiateam/type_2_diabetes_diagnosis_-_year/data_acquisition_process> a cmeo:data_acquisition_process ;
         obi:has_specified_output <https://w3id.org/CMEO/cardiateam/type_2_diabetes_diagnosis_-_year/data_set> .
@@ -2638,25 +2630,25 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/aceis_arbs/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/aceis_arbs> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/aceis_arbs/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/aceis_arbs/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/aceis_arbs/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/aceis_arbs/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/aceis_arbs> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/aceis_arbs/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/aceis_arbs/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/aceis_arbs/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/aceis_arbs> ;
-        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/aceis_arbs/category/condition_occurence> .
+        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/aceis_arbs/category/condition_occurrence> .
 
     <https://w3id.org/CMEO/cardiateam/aceis_arbs/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/aceis_arbs> ;
@@ -2760,7 +2752,7 @@
 
     <https://w3id.org/CMEO/cardiateam/alcohol_consumption/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/alcohol_consumption> ;
-        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/alcohol_consumption/category/condition_occurence> .
+        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/alcohol_consumption/category/condition_occurrence> .
 
     <https://w3id.org/CMEO/cardiateam/alcohol_consumption/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/alcohol_consumption> ;
@@ -2778,21 +2770,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/aldosterone_receptor_antagonists/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/aldosterone_receptor_antagonists> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/aldosterone_receptor_antagonists/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/aldosterone_receptor_antagonists/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/aldosterone_receptor_antagonists/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/aldosterone_receptor_antagonists/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/aldosterone_receptor_antagonists> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/aldosterone_receptor_antagonists/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/aldosterone_receptor_antagonists/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/aldosterone_receptor_antagonists/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/aldosterone_receptor_antagonists> ;
@@ -2814,21 +2806,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/alpha-glucosidase_inhibitors/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/alpha-glucosidase_inhibitors> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/alpha-glucosidase_inhibitors/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/alpha-glucosidase_inhibitors/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/alpha-glucosidase_inhibitors/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/alpha-glucosidase_inhibitors/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/alpha-glucosidase_inhibitors> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/alpha-glucosidase_inhibitors/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/alpha-glucosidase_inhibitors/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/alpha-glucosidase_inhibitors/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/alpha-glucosidase_inhibitors> ;
@@ -2874,21 +2866,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/basal-bolus_insulin/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/basal-bolus_insulin> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/basal-bolus_insulin/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/basal-bolus_insulin/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/basal-bolus_insulin/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/basal-bolus_insulin/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/basal-bolus_insulin> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/basal-bolus_insulin/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/basal-bolus_insulin/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/basal-bolus_insulin/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/basal-bolus_insulin> ;
@@ -2910,21 +2902,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/basal_insulin/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/basal_insulin> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/basal_insulin/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/basal_insulin/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/basal_insulin/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/basal_insulin/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/basal_insulin> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/basal_insulin/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/basal_insulin/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/basal_insulin/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/basal_insulin> ;
@@ -2946,21 +2938,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/beta-blockers/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/beta-blockers> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/beta-blockers/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/beta-blockers/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/beta-blockers/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/beta-blockers/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/beta-blockers> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/beta-blockers/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/beta-blockers/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/beta-blockers/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/beta-blockers> ;
@@ -2982,21 +2974,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/cholesterol_absorption_inhibitors/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/cholesterol_absorption_inhibitors> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/cholesterol_absorption_inhibitors/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/cholesterol_absorption_inhibitors/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/cholesterol_absorption_inhibitors/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/cholesterol_absorption_inhibitors/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/cholesterol_absorption_inhibitors> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/cholesterol_absorption_inhibitors/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/cholesterol_absorption_inhibitors/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/cholesterol_absorption_inhibitors/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/cholesterol_absorption_inhibitors> ;
@@ -3034,21 +3026,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/copd/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/copd> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/copd/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/copd/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/copd/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/copd/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/copd> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/copd/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/copd/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/copd/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/copd> ;
@@ -3142,21 +3134,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/ddp-4_inhibitors/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/ddp-4_inhibitors> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/ddp-4_inhibitors/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/ddp-4_inhibitors/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/ddp-4_inhibitors/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/ddp-4_inhibitors/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/ddp-4_inhibitors> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/ddp-4_inhibitors/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/ddp-4_inhibitors/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/ddp-4_inhibitors/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/ddp-4_inhibitors> ;
@@ -3178,21 +3170,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/diabetic_feet_-_history/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/diabetic_feet_-_history> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/diabetic_feet_-_history/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/diabetic_feet_-_history/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/diabetic_feet_-_history/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/diabetic_feet_-_history/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/diabetic_feet_-_history> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/diabetic_feet_-_history/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/diabetic_feet_-_history/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/diabetic_feet_-_history/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/diabetic_feet_-_history> ;
@@ -3214,21 +3206,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/diabetic_neuropathy/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/diabetic_neuropathy> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/diabetic_neuropathy/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/diabetic_neuropathy/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/diabetic_neuropathy/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/diabetic_neuropathy/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/diabetic_neuropathy> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/diabetic_neuropathy/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/diabetic_neuropathy/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/diabetic_neuropathy/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/diabetic_neuropathy> ;
@@ -3270,7 +3262,7 @@
         rdfs:label "asymptomatic/no structural heart failure"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorical_value_specification/asymptomatic_no_structural_heart_failure/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "asymptomatic/no structural heart failure"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorical_value_specification/asymptomatic_no_structural_heart_failure/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorical_value_specification/asymptomatic_no_structural_heart_failure> ;
@@ -3280,7 +3272,7 @@
         rdfs:label "i"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorical_value_specification/i/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "i"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorical_value_specification/i/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorical_value_specification/i> ;
@@ -3290,7 +3282,7 @@
         rdfs:label "ii"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorical_value_specification/ii/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529> ;
-        cmeo:has_value 2 .
+        cmeo:has_value "ii"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorical_value_specification/ii/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorical_value_specification/ii> ;
@@ -3300,7 +3292,7 @@
         rdfs:label "iii"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorical_value_specification/iii/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529> ;
-        cmeo:has_value 3 .
+        cmeo:has_value "iii"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorical_value_specification/iii/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorical_value_specification/iii> ;
@@ -3310,7 +3302,7 @@
         rdfs:label "iv"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorical_value_specification/iv/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529> ;
-        cmeo:has_value 4 .
+        cmeo:has_value "iv"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorical_value_specification/iv/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorical_value_specification/iv> ;
@@ -3318,7 +3310,7 @@
 
     <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529> ;
-        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/category/condition_occurence> .
+        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/category/condition_occurrence> .
 
     <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529> ;
@@ -3524,21 +3516,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/fibrates/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/fibrates> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/fibrates/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/fibrates/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/fibrates/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/fibrates/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/fibrates> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/fibrates/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/fibrates/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/fibrates/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/fibrates> ;
@@ -3624,21 +3616,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/glinides/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/glinides> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/glinides/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/glinides/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/glinides/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/glinides/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/glinides> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/glinides/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/glinides/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/glinides/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/glinides> ;
@@ -3660,21 +3652,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/glitazones/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/glitazones> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/glitazones/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/glitazones/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/glitazones/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/glitazones/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/glitazones> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/glitazones/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/glitazones/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/glitazones/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/glitazones> ;
@@ -3696,21 +3688,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/glp-1_receptor_agonists/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/glp-1_receptor_agonists> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/glp-1_receptor_agonists/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/glp-1_receptor_agonists/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/glp-1_receptor_agonists/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/glp-1_receptor_agonists/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/glp-1_receptor_agonists> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/glp-1_receptor_agonists/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/glp-1_receptor_agonists/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/glp-1_receptor_agonists/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/glp-1_receptor_agonists> ;
@@ -3750,7 +3742,7 @@
 
     <https://w3id.org/CMEO/cardiateam/height/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/height> ;
-        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/height/category/condition_occurence> .
+        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/height/category/condition_occurrence> .
 
     <https://w3id.org/CMEO/cardiateam/height/continuous_variable> a obi:continuous_variable ;
         ns1:denotes <https://w3id.org/CMEO/cardiateam/height> ;
@@ -3804,25 +3796,25 @@
         rdfs:label "hfpef"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/hfpef/categorical_value_specification/hfpef/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/hfpef> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "hfpef"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/hfpef/categorical_value_specification/hfpef/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/hfpef/categorical_value_specification/hfpef> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/hfpef/categorical_value_specification/no_hfpef> a obi:categorical_value_specification ;
         rdfs:label "no hfpef"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/hfpef/categorical_value_specification/no_hfpef/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/hfpef> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no hfpef"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/hfpef/categorical_value_specification/no_hfpef/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/hfpef/categorical_value_specification/no_hfpef> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/hfpef/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/hfpef> ;
-        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/hfpef/category/condition_occurence> .
+        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/hfpef/category/condition_occurrence> .
 
     <https://w3id.org/CMEO/cardiateam/hfpef/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/hfpef> ;
@@ -3888,25 +3880,25 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/htn/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/htn> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/htn/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/htn/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/htn/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/htn/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/htn> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/htn/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/htn/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/htn/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/htn> ;
-        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/htn/category/condition_occurence> .
+        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/htn/category/condition_occurrence> .
 
     <https://w3id.org/CMEO/cardiateam/htn/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/htn> ;
@@ -3924,21 +3916,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/insulin_pump/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/insulin_pump> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/insulin_pump/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/insulin_pump/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/insulin_pump/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/insulin_pump/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/insulin_pump> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/insulin_pump/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/insulin_pump/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/insulin_pump/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/insulin_pump> ;
@@ -3984,21 +3976,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/loop_diuretics/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/loop_diuretics> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/loop_diuretics/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/loop_diuretics/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/loop_diuretics/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/loop_diuretics/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/loop_diuretics> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/loop_diuretics/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/loop_diuretics/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/loop_diuretics/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/loop_diuretics> ;
@@ -4044,21 +4036,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/metformin/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/metformin> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/metformin/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/metformin/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/metformin/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/metformin/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/metformin> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/metformin/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/metformin/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/metformin/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/metformin> ;
@@ -4080,21 +4072,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/microalbuminuria/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/microalbuminuria> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/microalbuminuria/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/microalbuminuria/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/microalbuminuria/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/microalbuminuria/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/microalbuminuria> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/microalbuminuria/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/microalbuminuria/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/microalbuminuria/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/microalbuminuria> ;
@@ -4140,25 +4132,25 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors> ;
-        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors/category/condition_occurence> .
+        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors/category/condition_occurrence> .
 
     <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors> ;
@@ -4176,21 +4168,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/other_dm_treatments/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/other_dm_treatments> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/other_dm_treatments/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/other_dm_treatments/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/other_dm_treatments/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/other_dm_treatments/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/other_dm_treatments> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/other_dm_treatments/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/other_dm_treatments/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/other_dm_treatments/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/other_dm_treatments> ;
@@ -4212,21 +4204,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/other_lipid-lowering_agents/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/other_lipid-lowering_agents> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/other_lipid-lowering_agents/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/other_lipid-lowering_agents/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/other_lipid-lowering_agents/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/other_lipid-lowering_agents/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/other_lipid-lowering_agents> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/other_lipid-lowering_agents/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/other_lipid-lowering_agents/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/other_lipid-lowering_agents/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/other_lipid-lowering_agents> ;
@@ -4272,21 +4264,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/potassium_sparing_diuretics/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/potassium_sparing_diuretics> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/potassium_sparing_diuretics/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/potassium_sparing_diuretics/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/potassium_sparing_diuretics/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/potassium_sparing_diuretics/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/potassium_sparing_diuretics> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/potassium_sparing_diuretics/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/potassium_sparing_diuretics/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/potassium_sparing_diuretics/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/potassium_sparing_diuretics> ;
@@ -4332,21 +4324,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/retinopathy/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/retinopathy> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/retinopathy/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/retinopathy/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/retinopathy/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/retinopathy/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/retinopathy> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/retinopathy/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/retinopathy/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/retinopathy/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/retinopathy> ;
@@ -4368,7 +4360,7 @@
         rdfs:label "female"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/sex/categorical_value_specification/female/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/sex> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "female"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/sex/categorical_value_specification/female/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/sex/categorical_value_specification/female> ;
@@ -4378,7 +4370,7 @@
         rdfs:label "male"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/sex/categorical_value_specification/male/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/sex> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "male"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/sex/categorical_value_specification/male/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/sex/categorical_value_specification/male> ;
@@ -4404,21 +4396,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/sglt-2_inhibitors/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/sglt-2_inhibitors> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/sglt-2_inhibitors/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/sglt-2_inhibitors/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/sglt-2_inhibitors/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/sglt-2_inhibitors/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/sglt-2_inhibitors> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/sglt-2_inhibitors/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/sglt-2_inhibitors/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/sglt-2_inhibitors/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/sglt-2_inhibitors> ;
@@ -4440,25 +4432,25 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history> ;
-        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history/category/condition_occurence> .
+        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history/category/condition_occurrence> .
 
     <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history> ;
@@ -4492,21 +4484,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/statins/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/statins> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/statins/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/statins/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/statins/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/statins/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/statins> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/statins/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/statins/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/statins/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/statins> ;
@@ -4528,21 +4520,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/sulfonamides/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/sulfonamides> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/sulfonamides/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/sulfonamides/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/sulfonamides/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/sulfonamides/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/sulfonamides> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/sulfonamides/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/sulfonamides/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/sulfonamides/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/sulfonamides> ;
@@ -4588,25 +4580,25 @@
         rdfs:label "no t2dm"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/t2dm/categorical_value_specification/no_t2dm/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/t2dm> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no t2dm"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/t2dm/categorical_value_specification/no_t2dm/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/t2dm/categorical_value_specification/no_t2dm> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/t2dm/categorical_value_specification/t2dm> a obi:categorical_value_specification ;
         rdfs:label "t2dm"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/t2dm/categorical_value_specification/t2dm/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/t2dm> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "t2dm"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/t2dm/categorical_value_specification/t2dm/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/t2dm/categorical_value_specification/t2dm> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/t2dm/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/t2dm> ;
-        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/t2dm/category/condition_occurence> .
+        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/t2dm/category/condition_occurrence> .
 
     <https://w3id.org/CMEO/cardiateam/t2dm/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/t2dm> ;
@@ -4624,21 +4616,21 @@
         rdfs:label "no"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/thiazides/categorical_value_specification/no/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/thiazides> ;
-        cmeo:has_value 0 .
+        cmeo:has_value "no"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/thiazides/categorical_value_specification/no/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/thiazides/categorical_value_specification/no> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
 
     <https://w3id.org/CMEO/cardiateam/thiazides/categorical_value_specification/yes> a obi:categorical_value_specification ;
         rdfs:label "yes"^^xsd:string ;
         obi:is_specified_input_of <https://w3id.org/CMEO/cardiateam/thiazides/categorical_value_specification/yes/data_standardization> ;
         obi:is_value_specification_of <https://w3id.org/CMEO/cardiateam/thiazides> ;
-        cmeo:has_value 1 .
+        cmeo:has_value "yes"^^xsd:string .
 
     <https://w3id.org/CMEO/cardiateam/thiazides/categorical_value_specification/yes/data_standardization> a cmeo:data_standardization ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/thiazides/categorical_value_specification/yes> ;
-        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la32-8> .
+        obi:has_specified_output <http://purl.bioontology.org/ontology/LNC/la33-6> .
 
     <https://w3id.org/CMEO/cardiateam/thiazides/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/thiazides> ;
@@ -4670,7 +4662,7 @@
 
     <https://w3id.org/CMEO/cardiateam/type_2_diabetes_diagnosis_-_year/categorization_process> a cmeo:categorization_process ;
         obi:has_specified_input <https://w3id.org/CMEO/cardiateam/type_2_diabetes_diagnosis_-_year> ;
-        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/type_2_diabetes_diagnosis_-_year/category/condition_occurence> .
+        obi:has_specified_output <https://w3id.org/CMEO/cardiateam/type_2_diabetes_diagnosis_-_year/category/condition_occurrence> .
 
     <https://w3id.org/CMEO/cardiateam/type_2_diabetes_diagnosis_-_year/continuous_variable> a obi:continuous_variable ;
         ns1:denotes <https://w3id.org/CMEO/cardiateam/type_2_diabetes_diagnosis_-_year> ;
@@ -5546,43 +5538,6 @@
     <http://purl.bioontology.org/ontology/LNC/la33-6> a cmeo:code ;
         rdfs:label "yes"^^xsd:string ;
         ns1:denotes <http://omop.org/OMOP/45877994> ;
-        obi:is_specified_output_of <https://w3id.org/CMEO/cardiateam/aceis_arbs/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/aldosterone_receptor_antagonists/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/alpha-glucosidase_inhibitors/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/basal-bolus_insulin/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/basal_insulin/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/beta-blockers/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/cholesterol_absorption_inhibitors/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/copd/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/ddp-4_inhibitors/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/diabetic_feet_-_history/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/diabetic_neuropathy/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/fibrates/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/glinides/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/glitazones/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/glp-1_receptor_agonists/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/hfpef/categorical_value_specification/no_hfpef/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/htn/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/insulin_pump/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/loop_diuretics/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/metformin/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/microalbuminuria/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/other_dm_treatments/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/other_lipid-lowering_agents/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/potassium_sparing_diuretics/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/retinopathy/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/sglt-2_inhibitors/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/statins/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/sulfonamides/categorical_value_specification/no/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/t2dm/categorical_value_specification/no_t2dm/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/thiazides/categorical_value_specification/no/data_standardization> ;
-        cmeo:has_value "loinc:la33-6"^^xsd:string .
-
-    <http://purl.bioontology.org/ontology/LNC/la32-8> a cmeo:code ;
-        rdfs:label "no"^^xsd:string ;
-        ns1:denotes <http://omop.org/OMOP/45878245> ;
         obi:is_specified_output_of <https://w3id.org/CMEO/cardiateam/aceis_arbs/categorical_value_specification/yes/data_standardization>,
             <https://w3id.org/CMEO/cardiateam/aldosterone_receptor_antagonists/categorical_value_specification/yes/data_standardization>,
             <https://w3id.org/CMEO/cardiateam/alpha-glucosidase_inhibitors/categorical_value_specification/yes/data_standardization>,
@@ -5594,7 +5549,6 @@
             <https://w3id.org/CMEO/cardiateam/ddp-4_inhibitors/categorical_value_specification/yes/data_standardization>,
             <https://w3id.org/CMEO/cardiateam/diabetic_feet_-_history/categorical_value_specification/yes/data_standardization>,
             <https://w3id.org/CMEO/cardiateam/diabetic_neuropathy/categorical_value_specification/yes/data_standardization>,
-            <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorical_value_specification/asymptomatic_no_structural_heart_failure/data_standardization>,
             <https://w3id.org/CMEO/cardiateam/fibrates/categorical_value_specification/yes/data_standardization>,
             <https://w3id.org/CMEO/cardiateam/glinides/categorical_value_specification/yes/data_standardization>,
             <https://w3id.org/CMEO/cardiateam/glitazones/categorical_value_specification/yes/data_standardization>,
@@ -5616,6 +5570,44 @@
             <https://w3id.org/CMEO/cardiateam/sulfonamides/categorical_value_specification/yes/data_standardization>,
             <https://w3id.org/CMEO/cardiateam/t2dm/categorical_value_specification/t2dm/data_standardization>,
             <https://w3id.org/CMEO/cardiateam/thiazides/categorical_value_specification/yes/data_standardization> ;
+        cmeo:has_value "loinc:la33-6"^^xsd:string .
+
+    <http://purl.bioontology.org/ontology/LNC/la32-8> a cmeo:code ;
+        rdfs:label "no"^^xsd:string ;
+        ns1:denotes <http://omop.org/OMOP/45878245> ;
+        obi:is_specified_output_of <https://w3id.org/CMEO/cardiateam/aceis_arbs/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/aldosterone_receptor_antagonists/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/alpha-glucosidase_inhibitors/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/basal-bolus_insulin/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/basal_insulin/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/beta-blockers/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/cholesterol_absorption_inhibitors/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/copd/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/ddp-4_inhibitors/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/diabetic_feet_-_history/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/diabetic_neuropathy/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/dsypnea_%2528nyha%2529/categorical_value_specification/asymptomatic_no_structural_heart_failure/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/fibrates/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/glinides/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/glitazones/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/glp-1_receptor_agonists/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/hfpef/categorical_value_specification/no_hfpef/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/htn/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/insulin_pump/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/loop_diuretics/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/metformin/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/microalbuminuria/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/other_addictive_behaviors/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/other_dm_treatments/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/other_lipid-lowering_agents/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/potassium_sparing_diuretics/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/retinopathy/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/sglt-2_inhibitors/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/sleep_apnea_syndrome_-_history/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/statins/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/sulfonamides/categorical_value_specification/no/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/t2dm/categorical_value_specification/no_t2dm/data_standardization>,
+            <https://w3id.org/CMEO/cardiateam/thiazides/categorical_value_specification/no/data_standardization> ;
         cmeo:has_value "loinc:la32-8"^^xsd:string .
 
     <http://purl.bioontology.org/ontology/LNC/64103-5> a cmeo:code ;

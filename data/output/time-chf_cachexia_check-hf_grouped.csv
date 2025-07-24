@@ -1,0 +1,59 @@
+time-chf,cachexia,check-hf
+hb,b_hgb,
+crpsensitive | hscrp_bl,b_crp,
+age,age,
+weight,weight,gewichtkg
+height,height,lengtecm
+bmi,bmi,bmi
+socialstatus,marital_status,
+patientid,patient_id,patiëntnummer
+gender,gender,geslacht
+nan,nan,
+edema_01 | edemahistory_01,oedema,oedeem
+charlsonscore,cci,
+majorbleedings,oedema,
+ulcer,oedema,
+psychiatrischeerkrankungen,oedema,
+nbnp,b_bnp,bnp
+jugularvein | jugularvein_01,oedema,
+causeofheartfailure,,oorzaakhf_overig
+anemia_01_bl | anémie,,comorbiditeit_anemie
+obstruktiveschlafapnoe,,comorbiditeit_osas
+bldigoxin | digadjbl | dosedigoxinbl,,dosisdigoxine
+bpsyst | bpsyststanding | rvra | rvramean,,bdsyst
+potassium,,kaliummmoll
+vcimax | vcimin,,venacavainferiordiameter
+bpdiast | bpdiaststanding,,bddiast
+creatinine,,creatineumoll
+paod | paod01,,comorbiditeit_vaatlijden
+hyperchol,,comorbiditeit_hypercholesterolemie
+valvhd | valvularyear,,oorzaakhf_kleplijden | oorzaakhf_overigeritmestoornissen
+ant_mi | datemimonth | datemiyear | hist_mi | other_mi,,oorzaakhf_ischemischinfarct | oorzaakhfischemisch
+oak_bl,,antistolling
+diuadjbl,,dosisfrequentiemra
+blspiro | spiroat_bl,,diureticumyn
+bb_at_bl | bbadjbl | blbb | dosebbbl,,sotalol
+ace_at_bl | aceadjbl | blace | doseacebl,,doseringace
+atii_at_bl | atiiadjbl | blatii | doseatiibl,,dosisarb
+statin01 | statin_dose_bl,,statineyn
+egfr_cg_6 | egfr_cg_bl,,egfr | nierfalen_egfr
+afib_bl,,ritme_af
+hf_hosp,,events_op
+nyha_class,,nyha
+aa,,comorbiditeit_vaatlijden
+paht,,vcicollaps
+kidney_disease,,comorbiditeit_nierfalen
+bltora | dosetorabl,,diureticumyn
+ras_at_bl | rasdose_bl,,dosisarb
+nierenerkrankungen,,comorbiditeit_nierfalen
+ef,,efnu
+diabetes,,comorbiditeit_dm1
+blfuro | dosefurobl,,diureticumyn
+cad,,oorzaakhf_kleplijden
+chronischvenöseinsuffizienz,,ischemisch
+dcm,,oorzaakhf_overigeritmestoornissen
+hhd,,oorzaakhf_overigeritmestoornissen
+loop_at_bl | loop_dose_bl,,diureticumyn
+aspirin_bl,,antistolling
+angina01,,oorzaakhf_ischemischinfarct
+dosespirobl | spiroadjbl,,diureticumyn

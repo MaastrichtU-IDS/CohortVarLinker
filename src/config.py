@@ -151,7 +151,7 @@ load_dotenv(".env")
 @dataclass
 class Settings:
 
-    sparql_endpoint: str = field(default_factory=lambda: os.getenv("SPARQL_ENDPOINT", "http://localhost:7878"))
+    sparql_endpoint: str = field(default_factory=lambda: os.getenv("SPARQL_ENDPOINT", "http://localhost:7879"))
 
   
     scope: str = field(default_factory=lambda: os.getenv("SCOPE", "openid email"))

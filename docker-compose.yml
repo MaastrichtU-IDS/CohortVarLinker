@@ -2,7 +2,7 @@ services:
   oxigraph:
     image: oxigraph/oxigraph:latest
     ports:
-      - "7878:7878"
+      - "7879:7879"
     volumes:
       - ./data/oxigraph:/data
-    command: "serve --location /data --bind 0.0.0.0:7878"
+    command: "serve --location /data --bind 0.0.0.0:7879"

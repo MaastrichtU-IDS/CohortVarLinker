@@ -41,7 +41,7 @@ def generate_studies_kg(filepath: str) -> Graph:
         # plan_uri = URIRef(study_uri + "/plan")
         # g.add((plan_uri, RDF.type, OntologyNamespaces.OBI.value.plan, metadata_graph))
         # g.add((study_design_execution_uri, OntologyNamespaces.OBI.value.realizes, plan_uri, metadata_graph))
-      
+
         study_design_value =  row["study design"].lower().strip() if pd.notna(row["study design"]) else None
        
         # print(f"Study design value: {study_design_value}")
