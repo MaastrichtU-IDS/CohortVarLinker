@@ -10,7 +10,7 @@ import os
 import glob
 import time
 from src.variables_kg import process_variables_metadata_file,add_raw_data_graph
-from src.study_kg import generate_studies_kg
+from src.study_kg import generate_studies_kg, add_data_access_spec
 from src.vector_db import generate_studies_embeddings, search_in_db
 from src.utils import (
         get_cohort_mapping_uri,
@@ -23,7 +23,7 @@ from src.utils import (
 
 
 
-from src.fetch import map_source_target
+from src.fetch_v1 import map_source_target
 
 
 
@@ -362,6 +362,7 @@ def combine_all_mappings_to_json(
     mappings = {}
     for target in target_studies:
         csv_file = os.path.join(output_dir, f"{source_study}_{target}_full.csv")
+        print(f"Processing file: {csv_file}")
         if not os.path.exists(csv_file):
             print(f"Skipping {csv_file}, does not exist.")
             continue
@@ -419,106 +420,6 @@ def combine_all_mappings_to_json(
         json.dump(final_json, f, indent=2, ensure_ascii=False)
     print(f"✅ All mappings combined and saved to {json_path}")
 
-# Example usage:
-# combine_all_mappings_to_json("time-chf", ["check-hf", "cachexia"], "data/output", "data/output/time-chf_all_mappings.json")
-
-    
-# def omop_clean(x):
-#         try:
-#             return str(int(float(x)))
-#         except Exception:
-#             return str(x).strip()
-
-
-# def combine_cross_mappings_v2(
-#     source_study,
-#     target_studies,
-#     output_dir,
-#     combined_output_path,
-#     extra_columns=None  # List of extra columns to include (optional)
-# ):
-#     """
-#     Combines individual study cross-mapping files into a single grouped file by OMOP ID,
-#     including details for both source and target variables in the output.
-#     """
-#     if extra_columns is None:
-#         extra_columns = [
-#             "category","mapping_type","source_visit","target_visit",
-#             "source_type","source_unit","source_data_type",
-#             "target_type","target_unit","target_data_type","transformation_rule"
-#         ]
-
-#     omop_id_tracker = {}
-#     mapping_dict = {}
-#     mapping_details = {}
-#     source_details = {}
-
-#     for tstudy in target_studies:
-#         out_path = os.path.join(output_dir, f'{source_study}_{tstudy}_full.csv')
-#         df = pd.read_csv(out_path)
-#         if tstudy not in mapping_dict:
-#             mapping_dict[tstudy] = {}
-#             mapping_details[tstudy] = {}
-#         for _, row in df.iterrows():
-#             src = str(row["source"]).strip()
-#             tgt = str(row["target"]).strip()
-#             somop = str(row["somop_id"]).strip()
-#             tomop = str(row["tomop_id"]).strip()
-#             slabel = str(row.get("slabel", "")).strip()
-#             # Collect mapping info for grouping
-#             if src not in omop_id_tracker:
-#                 omop_id_tracker[src] = (somop, slabel)
-#             mapping_dict[tstudy][src] = (tgt, tomop)
-#             # Target variable details
-#             tdetail_pieces = []
-#             for col in extra_columns:
-#                 val = row.get(col, "")
-#                 if pd.isna(val):
-#                     val = ""
-#                 tdetail_pieces.append(f"{col}={val}")
-#             mapping_details[tstudy][src] = (tgt, ", ".join(tdetail_pieces))
-#             # Source variable details (collected once per unique source var)
-#             if src not in source_details:
-#                 sdetail_pieces = []
-#                 # For each extra column, try "source_{col}" first, fallback to col name
-#                 for col in extra_columns:
-#                     sval = row.get(f"source_{col}", row.get(col, ""))
-#                     if pd.isna(sval):
-#                         sval = ""
-#                     sdetail_pieces.append(f"{col}={sval}")
-#                 source_details[src] = ", ".join(sdetail_pieces)
-
-#     # Group source variables by OMOP ID
-#     omop_to_source_vars = defaultdict(list)
-#     for src_var, (somop_id, slabel) in omop_id_tracker.items():
-#         omop_to_source_vars[somop_id].append(src_var)
-
-#     matched_rows = []
-#     for _, src_vars in omop_to_source_vars.items():
-#         row = {}
-#         # Source study: list source vars with details
-#         row[source_study] = ' | '.join(
-#             f"{src_var}: {source_details.get(src_var, '')}" for src_var in sorted(set(src_vars))
-#         )
-#         # Each target: list mapped target vars with details
-#         for tstudy in target_studies:
-#             tdict = mapping_dict.get(tstudy, {})
-#             tdetail = mapping_details.get(tstudy, {})
-#             targets = []
-#             for src_var in src_vars:
-#                 tgt_pair = tdict.get(src_var)
-#                 if tgt_pair:
-#                     tgt = tgt_pair[0]
-#                     detail_str = tdetail.get(src_var, "")
-#                     targets.append(f"{tgt}: {detail_str}")
-#             row[tstudy] = ' | '.join(targets) if targets else ''
-#         matched_rows.append(row)
-
-#     final_df = pd.DataFrame(matched_rows)
-#     final_df.to_csv(combined_output_path, index=False)
-#     print(f"✅ Combined existing mappings with source and target details saved to: {combined_output_path}")
-    
-    
 def combine_cross_mappings_v3(
     source_study,
     target_studies,
@@ -611,41 +512,74 @@ def combine_cross_mappings_v3(
     
 if __name__ == '__main__':
 
+   
     data_dir = 'data'
     cohort_file_path = f"{data_dir}/cohorts"
-    cohorts_metadata_file = f"{data_dir}/cohort_metadata_sheet.csv"
+    cohorts_metadata_file = f"{data_dir}/studies_metadata.csv"
     start_time = time.time()
-    create_study_metadata_graph(cohorts_metadata_file, recreate=False)
-    create_cohort_specific_metadata_graph(cohort_file_path, recreate=False)
-    vector_db, embedding_model = generate_studies_embeddings(cohort_file_path, "localhost", "studies_metadata", recreate_db=False)
+    create_study_metadata_graph(cohorts_metadata_file, recreate=True)
+    create_cohort_specific_metadata_graph(cohort_file_path, recreate=True)
+    vector_db, embedding_model = generate_studies_embeddings(cohort_file_path, "localhost", "studies_metadata", recreate_db=True)
 
-    source_study = "time-chf"
-    target_studies = ["tim-hf", "gissi-hf"]
+    # source_study = "time-chf"
+    # target_studies = ["cardiateam", "aachenhf", "cachexia", "gissi-hf", "gissi-hf_outcomes", "tim-hf", "ear","bigfoot", "horuz", "sfdt1", "lups"]
+    # target_studies = ["gissi-hf"]
     
-    
-    combined_df = None
+    # combined_df = None
     omop_id_tracker = {}  # Track source_omop_id per variable
     
     mapping_dict = {}  # {target_study: {source_var: (target_var, target_omop_id)}}
 #   The code snippet provided is a Python script that iterates over a list of target studies and
 #   performs the following actions for each target study:
     
-    # create new outputput based on source studies folder in output directory for each time we ran the script
+#     create new outputput based on source studies folder in output directory for each time we ran the script
  
     
-    graph = OmopGraphNX(csv_file_path=settings.concepts_file_path)
-    for tstudy in target_studies:
-        mapping_transformed=map_source_target(source_study_name=source_study, target_study_name=tstudy, 
-                                                embedding_model=embedding_model, vector_db=vector_db, 
-                                                collection_name="studies_metadata",
-                                                graph=graph)
+    # graph = OmopGraphNX(csv_file_path=settings.concepts_file_path)
+    # for tstudy in target_studies:
+    #     mapping_transformed=map_source_target(source_study_name=source_study, target_study_name=tstudy, 
+    #                                             embedding_model=embedding_model, vector_db=vector_db, 
+    #                                             collection_name="studies_metadata",
+    #                                             graph=graph)
 
-        print(mapping_transformed)
+    #     print(mapping_transformed)
         
-        # mapping_transformed = mapping_transformed.drop_duplicates(keep='first') if not mapping_transformed.empty else pd.DataFrame(columns=["source_variable", "target_variable", "source_omop_id", "target_omop_id"])
-        mapping_transformed.to_csv(f'{data_dir}/output/{source_study}_{tstudy}_full.csv', index=False)
+    #     # mapping_transformed = mapping_transformed.drop_duplicates(keep='first') if not mapping_transformed.empty else pd.DataFrame(columns=["source_variable", "target_variable", "source_omop_id", "target_omop_id"])
+    #     mapping_transformed.to_csv(f'{data_dir}/output/{source_study}_{tstudy}_full.csv', index=False)
         
-        
+    # tstudy_str = "_".join(target_studies)
+    # combine_all_mappings_to_json(
+    #     source_study=source_study,
+    #     target_studies=target_studies,
+    #     output_dir=os.path.join(data_dir, "output"),
+    #     json_path=os.path.join(data_dir, "output", f"{source_study}_{tstudy_str}_grouped.json")
+    # )
+    # print(f"Total time taken: {time.time() - start_time:.2f} seconds")
+
+    # add_data_access_spec(study_name="time-chf", data_policy=['disease specific research'], data_modifier=['ethics approval required'], disease_concept_code="snomed:42343007", disease_concept_label="congestive heart failure", disease_concept_omop_id="42343007", study_metadata_graph_file_path=f"{data_dir}/graphs/studies_metadata.trig")
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     #     if tstudy not in mapping_dict:
     #         mapping_dict[tstudy] = {}
     #     for _, row in mapping_transformed.iterrows():
@@ -686,14 +620,7 @@ if __name__ == '__main__':
     # final_df.to_csv(output_path, index=False)
     # print(f"✅ Matched variables (grouped by source OMOP ID) saved to: {output_path}")   
     
-    tstudy_str = "_".join(target_studies)
-    combine_all_mappings_to_json(
-        source_study=source_study,
-        target_studies=target_studies,
-        output_dir=os.path.join(data_dir, "output"),
-        json_path=os.path.join(data_dir, "output", f"{source_study}_{tstudy_str}_grouped.json")
-    )
-    
+   
     # zip all csv files in one folder
     # import zipfile
     # output_dir = os.path.join(data_dir, "output")

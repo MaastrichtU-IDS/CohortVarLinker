@@ -767,8 +767,8 @@ if __name__ == "__main__":
     # print(omop_nx.bfs_bidirectional_reachable(21601665, target_ids=[1338005], max_depth=2))
     # print(omop_nx.bfs_bidirectional_reachable(956874, target_ids=[4186998], max_depth=2))    
     #print(omop_nx.bfs_bidirectional_reachable(21601782, target_ids=[1308216], max_depth=3))
-    print(omop_nx.bfs_bidirectional_reachable(21601554, target_ids=[21601461], max_depth=2))
-    # print(omop_nx.only_upward_or_downward(3028437, target_ids=[3001308], max_depth=1))
+    print(omop_nx.bfs_bidirectional_reachable(3016723, target_ids=[4324383], max_depth=2))
+    print(omop_nx.only_upward_or_downward(3016723, target_ids=[4324383], max_depth=1))
     # print(3000285 in omop_nx.graph)
     
     # find relationships between two nodes
