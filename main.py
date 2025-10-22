@@ -9,7 +9,7 @@ import json
 import os
 import glob
 import time
-from src.variables_kg import process_variables_metadata_file,add_raw_data_graph
+from src.variables_kg import process_variables_metadata_file
 from src.study_kg import generate_studies_kg, add_data_access_spec
 from src.vector_db import generate_studies_embeddings, search_in_db
 from src.utils import (
@@ -514,49 +514,49 @@ if __name__ == '__main__':
 
    
     data_dir = 'data'
-    cohort_file_path = f"{data_dir}/cohorts"
-    cohorts_metadata_file = f"{data_dir}/studies_metadata.csv"
+    cohort_file_path = f"{data_dir}/article_cohorts"
+    cohorts_metadata_file = f"{data_dir}/studies_metadata_v2.csv"
     start_time = time.time()
     create_study_metadata_graph(cohorts_metadata_file, recreate=True)
     create_cohort_specific_metadata_graph(cohort_file_path, recreate=True)
-    vector_db, embedding_model = generate_studies_embeddings(cohort_file_path, "localhost", "studies_metadata", recreate_db=True)
+#     vector_db, embedding_model = generate_studies_embeddings(cohort_file_path, "localhost", "studies_metadata", recreate_db=False)
 
-    # source_study = "time-chf"
-    # target_studies = ["cardiateam", "aachenhf", "cachexia", "gissi-hf", "gissi-hf_outcomes", "tim-hf", "ear","bigfoot", "horuz", "sfdt1", "lups"]
-    # target_studies = ["gissi-hf"]
+#     source_study = "time-chf"
+#     # target_studies = ["cardiateam", "aachenhf", "cachexia", "gissi-hf", "gissi-hf_outcomes", "tim-hf", "ear","bigfoot", "horuz", "sfdt1", "lups"]
+#     target_studies = ["gissi-hf"]
     
-    # combined_df = None
-    omop_id_tracker = {}  # Track source_omop_id per variable
+#     # combined_df = None
+#     omop_id_tracker = {}  # Track source_omop_id per variable
     
-    mapping_dict = {}  # {target_study: {source_var: (target_var, target_omop_id)}}
-#   The code snippet provided is a Python script that iterates over a list of target studies and
-#   performs the following actions for each target study:
+#     mapping_dict = {}  # {target_study: {source_var: (target_var, target_omop_id)}}
+# #   The code snippet provided is a Python script that iterates over a list of target studies and
+# #   performs the following actions for each target study:
     
-#     create new outputput based on source studies folder in output directory for each time we ran the script
+# #     create new outputput based on source studies folder in output directory for each time we ran the script
  
     
-    # graph = OmopGraphNX(csv_file_path=settings.concepts_file_path)
-    # for tstudy in target_studies:
-    #     mapping_transformed=map_source_target(source_study_name=source_study, target_study_name=tstudy, 
-    #                                             embedding_model=embedding_model, vector_db=vector_db, 
-    #                                             collection_name="studies_metadata",
-    #                                             graph=graph)
+#     graph = OmopGraphNX(csv_file_path=settings.concepts_file_path)
+#     for tstudy in target_studies:
+#         mapping_transformed=map_source_target(source_study_name=source_study, target_study_name=tstudy, 
+#                                                 embedding_model=embedding_model, vector_db=vector_db, 
+#                                                 collection_name="studies_metadata",
+#                                                 graph=graph)
 
-    #     print(mapping_transformed)
+#         print(mapping_transformed)
         
-    #     # mapping_transformed = mapping_transformed.drop_duplicates(keep='first') if not mapping_transformed.empty else pd.DataFrame(columns=["source_variable", "target_variable", "source_omop_id", "target_omop_id"])
-    #     mapping_transformed.to_csv(f'{data_dir}/output/{source_study}_{tstudy}_full.csv', index=False)
+#         # mapping_transformed = mapping_transformed.drop_duplicates(keep='first') if not mapping_transformed.empty else pd.DataFrame(columns=["source_variable", "target_variable", "source_omop_id", "target_omop_id"])
+#         mapping_transformed.to_csv(f'{data_dir}/output/{source_study}_{tstudy}_full.csv', index=False)
         
-    # tstudy_str = "_".join(target_studies)
-    # combine_all_mappings_to_json(
-    #     source_study=source_study,
-    #     target_studies=target_studies,
-    #     output_dir=os.path.join(data_dir, "output"),
-    #     json_path=os.path.join(data_dir, "output", f"{source_study}_{tstudy_str}_grouped.json")
-    # )
-    # print(f"Total time taken: {time.time() - start_time:.2f} seconds")
+#     tstudy_str = "_".join(target_studies)
+#     combine_all_mappings_to_json(
+#         source_study=source_study,
+#         target_studies=target_studies,
+#         output_dir=os.path.join(data_dir, "output"),
+#         json_path=os.path.join(data_dir, "output", f"{source_study}_{tstudy_str}_grouped.json")
+#     )
+#     print(f"Total time taken: {time.time() - start_time:.2f} seconds")
 
-    # add_data_access_spec(study_name="time-chf", data_policy=['disease specific research'], data_modifier=['ethics approval required'], disease_concept_code="snomed:42343007", disease_concept_label="congestive heart failure", disease_concept_omop_id="42343007", study_metadata_graph_file_path=f"{data_dir}/graphs/studies_metadata.trig")
+    add_data_access_spec(study_name="time-chf", data_policy=['disease specific research'], data_modifier=['ethics approval required'], disease_concept_code="snomed:42343007", disease_concept_label="congestive heart failure", disease_concept_omop_id="42343007", study_metadata_graph_file_path=f"{data_dir}/graphs/studies_metadata.trig")
     
     
     

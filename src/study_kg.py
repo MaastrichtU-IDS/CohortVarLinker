@@ -71,6 +71,7 @@ def generate_studies_kg(filepath: str) -> Graph:
             protocol_uri = URIRef(study_uri + "/" + study_design_value + "/protocol")
             g.add((protocol_uri, RDF.type, OntologyNamespaces.OBI.value.protocol, metadata_graph))
             g.add((study_design_uri,OntologyNamespaces.RO.value.has_part, protocol_uri, metadata_graph))
+            g.add((protocol_uri,OntologyNamespaces.RO.value.part_of, study_design_uri, metadata_graph))
         else:
               study_design_uri = URIRef(study_uri + "/study_design")
               protocol_uri = URIRef(study_uri + "/protocol") 
@@ -137,10 +138,14 @@ def generate_studies_kg(filepath: str) -> Graph:
                 
                 g.add((contact_uri, RDF.type, OntologyNamespaces.NCBI.value.homo_sapiens,metadata_graph))
                 g.add((organization_uri, OntologyNamespaces.OBI.value.has_member, contact_uri,metadata_graph))
+                g.add((contact_uri, OntologyNamespaces.OBI.value.member_of, organization_uri,metadata_graph))
+
                 g.add((contact_uri, OntologyNamespaces.CMEO.value.has_value, Literal(row["study contact person"], datatype=XSD.string),metadata_graph))
                 
                 g.add((study_contact_person_role_uri, RDF.type, OntologyNamespaces.CMEO.value.study_contact_person_role,metadata_graph))
                 g.add((contact_uri, OntologyNamespaces.RO.value.has_role, study_contact_person_role_uri,metadata_graph))
+                g.add((study_contact_person_role_uri, OntologyNamespaces.RO.value.role_of, contact_uri,metadata_graph))
+
                 g.add((study_contact_person_role_uri, OntologyNamespaces.CMEO.value.has_value, Literal(row["study contact person"], datatype=XSD.string),metadata_graph))
 
                 if pd.notna(row["study contact person email address"]):
@@ -152,12 +157,13 @@ def generate_studies_kg(filepath: str) -> Graph:
             if pd.notna(row["administrator"]):
                 administrator_person_uri = URIRef(study_uri + "/" + normalize_text(row["administrator"]))
                 g.add((administrator_person_uri, RDF.type, OntologyNamespaces.NCBI.value.homo_sapiens,metadata_graph))
-                g.add((organization_uri, OntologyNamespaces.OBI.value.has_member, contact_uri,metadata_graph))
+                g.add((contact_uri, OntologyNamespaces.OBI.value.member_of, organization_uri,metadata_graph))
             
                 g.add((administrator_person_uri, OntologyNamespaces.CMEO.value.has_value, Literal(row["administrator"], datatype=XSD.string),metadata_graph))
                 administrator_role_uri =  URIRef(study_uri + "/administrator_role")
                 g.add((administrator_role_uri, RDF.type, OntologyNamespaces.CMEO.value.administrator_role,metadata_graph))
                 g.add((administrator_person_uri, OntologyNamespaces.RO.value.has_role, administrator_role_uri,metadata_graph))
+                g.add((administrator_role_uri, OntologyNamespaces.RO.value.role_of, administrator_person_uri,metadata_graph))
                 g.add((administrator_role_uri, OntologyNamespaces.CMEO.value.has_value,  Literal(row["administrator"], datatype=XSD.string),metadata_graph))
             
                 if pd.notna(row["administrator email address"]):
@@ -196,15 +202,20 @@ def generate_studies_kg(filepath: str) -> Graph:
     print(f"Graph size: {len(g)}")
     return g
 
+
 def add_study_timing(g: Graph, row: pd.Series, study_design_execution_uri: URIRef, study_uri: URIRef, metadata_graph: URIRef) -> None:
 
-
+        if pd.notna(row["duration of observation"]):
+            duration = row["duration of observation"].lower().strip()
+            duration_uri = URIRef(study_design_execution_uri + "/duration_of_observation")
+            g.add((duration_uri, RDF.type, OntologyNamespaces.CMEO.value.duration_of_observation, metadata_graph))
+            g.add((duration_uri, OntologyNamespaces.IAO.value.is_about, study_design_execution_uri, metadata_graph))
+            g.add((duration_uri, OntologyNamespaces.CMEO.value.has_value, Literal(duration, datatype=XSD.string), metadata_graph))
+            
         if pd.notna(row["start date"]):
             start_time_tuple = day_month_year(row["start date"])
             print(f"Start time tuple: {start_time_tuple}")
-            start_date_uri = URIRef(# The code `study_design_execution_uri` is not valid Python code
-            # as it contains invalid characters (`#`, `
-            study_design_execution_uri+ "/start_time")
+            start_date_uri = URIRef(study_design_execution_uri+ "/start_time")
             g.add((start_date_uri, RDF.type, OntologyNamespaces.CMEO.value.start_time,metadata_graph))
             g.add((study_design_execution_uri, OntologyNamespaces.IAO.value.has_time_stamp,start_date_uri ,metadata_graph))
             # if start_time_tuple:
@@ -481,7 +492,7 @@ def update_metadata_graph(endpoint_url, cohort_uri, variable_uris, metadata_grap
     
     # Construct SPARQL `INSERT DATA` query
     inserts = "\n".join([f"<{study_variable_design_specification_uri}> <http://purl.obolibrary.org/obo/ro.owl/has_part> <{var}> ." for var in variable_uris])
-
+    # inserts = "\n".join([f"<{var}> <http://purl.obolibrary.org/obo/ro.owl/part_of> <{study_variable_design_specification_uri}> ." for var in variable_uris])
     query = f"""
         INSERT DATA {{
             GRAPH <{graph_uri}> {{

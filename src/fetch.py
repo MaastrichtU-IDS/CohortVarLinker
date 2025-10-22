@@ -9,7 +9,143 @@ from typing import List, Dict, Any
 # from .embed import ModelEmbedding
 
 
-from .utils import apply_rules, export_hierarchy_to_excel, compare_with_fuzz
+from .utils import apply_rules, export_hierarchy_to_excel
+
+
+"""
+    
+PREFIX icare: <https://w3id.org/icare4cvd/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT DISTINCT ?cohortId ?cohortInstitution ?cohortEmail ?study_type ?study_participants ?study_duration ?study_ongoing ?study_population ?study_objective ?primary_outcome_spec ?secondary_outcome_spec ?morbidity ?study_start ?study_end ?male_percentage ?female_percentage ?administrator ?administrator_email ?study_contact_person ?study_contact_person_email ?references ?population_location ?language ?data_collection_frequency ?interventions ?sex_inclusion ?health_status_inclusion ?clinically_relevant_exposure_inclusion ?age_group_inclusion ?bmi_range_inclusion ?ethnicity_inclusion ?family_status_inclusion ?hospital_patient_inclusion ?use_of_medication_inclusion ?health_status_exclusion ?bmi_range_exclusion ?limited_life_expectancy_exclusion ?need_for_surgery_exclusion ?surgical_procedure_history_exclusion ?clinically_relevant_exposure_exclusion
+    ?variable ?varName ?varLabel ?varType ?index ?count ?na ?max ?min ?units ?formula ?definition
+    ?omopDomain ?conceptId ?conceptCode ?conceptName ?omopId ?mappedId ?mappedLabel ?visits ?categoryValue ?categoryLabel ?categoryConceptId ?categoryMappedId ?categoryMappedLabel
+WHERE {
+    GRAPH ?cohortMetadataGraph {
+        ?cohort a icare:Cohort ;
+            dc:identifier ?cohortId ;
+            icare:institution ?cohortInstitution .
+        OPTIONAL { ?cohort icare:cohortType ?cohortType . }
+        OPTIONAL { ?cohort icare:email ?cohortEmail . }
+        OPTIONAL { ?cohort icare:studyType ?study_type . }
+        OPTIONAL { ?cohort icare:studyParticipants ?study_participants . }
+        OPTIONAL { ?cohort icare:studyDuration ?study_duration . }
+        OPTIONAL { ?cohort icare:studyOngoing ?study_ongoing . }
+        OPTIONAL { ?cohort icare:studyPopulation ?study_population . }
+        OPTIONAL { ?cohort icare:studyObjective ?study_objective . }
+        OPTIONAL { ?cohort icare:primaryOutcomeSpec ?primary_outcome_spec . }
+        OPTIONAL { ?cohort icare:secondaryOutcomeSpec ?secondary_outcome_spec . }
+        OPTIONAL { ?cohort icare:morbidity ?morbidity . }
+        OPTIONAL { ?cohort icare:studyStart ?study_start . }
+        OPTIONAL { ?cohort icare:studyEnd ?study_end . }
+        OPTIONAL { ?cohort icare:malePercentage ?male_percentage . }
+        OPTIONAL { ?cohort icare:femalePercentage ?female_percentage . }
+        
+        # Contact information fields
+        OPTIONAL { ?cohort icare:administrator ?administrator . }
+        OPTIONAL { ?cohort icare:administratorEmail ?administrator_email . }
+        OPTIONAL { ?cohort dc:creator ?study_contact_person . }
+        OPTIONAL { ?cohort icare:email ?study_contact_person_email . }
+        OPTIONAL { ?cohort icare:references ?references . }
+        
+        # Additional metadata fields
+        OPTIONAL { ?cohort icare:populationLocation ?population_location . }
+        OPTIONAL { ?cohort icare:language ?language . }
+        OPTIONAL { ?cohort icare:dataCollectionFrequency ?data_collection_frequency . }
+        OPTIONAL { ?cohort icare:interventions ?interventions . }
+        
+        # Inclusion criteria fields
+        OPTIONAL { ?cohort icare:sexInclusion ?sex_inclusion . }
+        OPTIONAL { ?cohort icare:healthStatusInclusion ?health_status_inclusion . }
+        OPTIONAL { ?cohort icare:clinicallyRelevantExposureInclusion ?clinically_relevant_exposure_inclusion . }
+        OPTIONAL { ?cohort icare:ageGroupInclusion ?age_group_inclusion . }
+        OPTIONAL { ?cohort icare:bmiRangeInclusion ?bmi_range_inclusion . }
+        OPTIONAL { ?cohort icare:ethnicityInclusion ?ethnicity_inclusion . }
+        OPTIONAL { ?cohort icare:familyStatusInclusion ?family_status_inclusion . }
+        OPTIONAL { ?cohort icare:hospitalPatientInclusion ?hospital_patient_inclusion . }
+        OPTIONAL { ?cohort icare:useOfMedicationInclusion ?use_of_medication_inclusion . }
+        
+        # Exclusion criteria fields
+        OPTIONAL { ?cohort icare:healthStatusExclusion ?health_status_exclusion . }
+        OPTIONAL { ?cohort icare:bmiRangeExclusion ?bmi_range_exclusion . }
+        OPTIONAL { ?cohort icare:limitedLifeExpectancyExclusion ?limited_life_expectancy_exclusion . }
+        OPTIONAL { ?cohort icare:needForSurgeryExclusion ?need_for_surgery_exclusion . }
+        OPTIONAL { ?cohort icare:surgicalProcedureHistoryExclusion ?surgical_procedure_history_exclusion . }
+        OPTIONAL { ?cohort icare:clinicallyRelevantExposureExclusion ?clinically_relevant_exposure_exclusion . }
+    }
+
+    OPTIONAL {
+        # Bind the cohortVarGraph to be the same as the cohort URI
+        BIND(?cohort AS ?cohortVarGraph)
+        GRAPH ?cohortVarGraph {
+            ?cohort icare:hasVariable ?variable .
+            ?variable a icare:Variable ;
+                dc:identifier ?varName ;
+                rdfs:label ?varLabel ;
+                icare:varType ?varType ;
+                icare:index ?index .
+            OPTIONAL { ?variable icare:count ?count }
+            OPTIONAL { ?variable icare:na ?na }
+            OPTIONAL { ?variable icare:max ?max }
+            OPTIONAL { ?variable icare:min ?min }
+            OPTIONAL { ?variable icare:units ?units }
+            OPTIONAL { ?variable icare:formula ?formula }
+            OPTIONAL { ?variable icare:definition ?definition }
+            OPTIONAL { ?variable icare:conceptId ?conceptId }
+            OPTIONAL { ?variable icare:conceptCode ?conceptCode }
+            OPTIONAL { ?variable icare:conceptName ?conceptName }
+            OPTIONAL { ?variable icare:omopId ?omopId }
+            OPTIONAL { ?variable icare:domain ?omopDomain }
+            OPTIONAL { ?variable icare:visits ?visits }
+            OPTIONAL {
+                ?variable icare:categories ?category.
+                ?category rdfs:label ?categoryLabel ;
+                    rdf:value ?categoryValue .
+                OPTIONAL { ?category icare:conceptId ?categoryConceptId }
+            }
+        }
+    }
+
+    OPTIONAL {
+        GRAPH ?cohortMappingsGraph {
+            OPTIONAL {
+                ?variable icare:mappedId ?mappedId .
+                OPTIONAL { ?mappedId rdfs:label ?mappedLabel }
+            }
+            OPTIONAL {
+                ?category icare:mappedId ?categoryMappedId .
+                OPTIONAL { ?categoryMappedId rdfs:label ?categoryMappedLabel }
+            }
+            # OPTIONAL { ?cohort icare:previewEnabled ?airlock . }
+        }
+    }
+} ORDER BY ?cohort ?index
+    """
+DERIVED_VARIABLES_LIST= [
+    
+     {
+                    "name": "BMI-derived",
+                    "omop_id": 3038553,           
+                    "code": "loinc:39156-5",
+                    "label": "Body mass index (BMI) [Ratio]",
+                    "unit": "kg/m2",
+                    "required_omops": [3016723, 3025315],
+                    "category": "measurement"
+                },
+                {
+                    "name": "eGFR_CG-derived",
+                    "omop_id": 37169169,          
+                    "code": "snomed:1556501000000100",
+                    "label": "Estimated creatinine clearance calculated using actual body weight Cockcroft-Gault formula",
+                    "unit": "ml/min",
+                    "required_omops": [3016723, 3022304, 46235213],
+                    "category": "measurement"
+                }
+]
+
 def fetch_common_ids():
     sparql = SPARQLWrapper(settings.query_endpoint)
     query = f"""
@@ -510,27 +646,6 @@ def map_category_to_omop(category: str) -> str:
     return category_mapping.get(category, "Unknown Category")
     # if domain is "family history",""
 
-def fetch_category_specific_data_elements(catgeory:str):
-    omop_domain = map_category_to_omop(catgeory)
-
-    # from all studies return data elements that have domain specific values
-    """
-
-
-    
-    
-    """
-
-# # http://localhost:7200/repositories/icare4cvd/rdf-graphs
-
-
-    
-# def check_visit_string(visit_string, visit_constraint: bool = True):
-#     # print(f"visit_string: {visit_string}, visit_constraint: {visit_constraint}")
-#     if not visit_constraint and (visit_string is None or not visit_string.startswith("baseline") or not visit_string.startswith("follow") or visit_string == ""):
-#      return "baseline time"
-#     else:
-#         return visit_string
     
 def build_element_list(role, elements, visits, omop_id, code_id, code_label, domain):
     return [
@@ -742,9 +857,9 @@ def map_source_target(source_study_name:str , target_study_name:str, vector_db, 
         omop_domain = str(result['val']['value']).strip().lower()
         # print(f"{omop_id} == source visit: {source_data_elements_visit}")
         # print(f"{omop_id} == target visit: {target_data_elements_visit}")
-        assert len(target_data_elements) == len(target_data_elements_visit), (
-                f"Visit column Length mismatch with variable labels: {len(target_data_elements)} != {len(target_data_elements_visit)}"
-            )
+        # assert len(target_data_elements) == len(target_data_elements_visit), (
+        #         f"Visit column Length mismatch with variable labels: {len(target_data_elements)} != {len(target_data_elements_visit)}"
+        #     )
 
         if len(source_data_elements) > 0 and len(target_data_elements) > 0:
             final_dict += get_exact_matches(
@@ -809,12 +924,23 @@ def map_source_target(source_study_name:str , target_study_name:str, vector_db, 
         empty_df = pd.DataFrame(columns=[f"{source_study_name}_variable", f"{target_study_name}_variable", "somop_id", "tomop_id", "scode", "slabel", "tcode", "tlabel", "category", "mapping type", "source_visit", "target_visit"])
         return empty_df
     single_source = {"source":source_elements, "target":target_elements, "mapped": final_dict}
-    bmi_row  =  extend_with_dervied_variables(single_source, standard_derived_variable=("loinc:39156-5", "Body mass index (bmi) [ratio]", 3038553), parameters_omop_ids=[3036277, 3025315], variable_name="bmi")
-    egfr_row = extend_with_dervied_variables(single_source, standard_derived_variable=("snomed:1556501000000100", "Estimated creatinine clearance calculated using actual body weight Cockcroft-Gault formula", 37169169), parameters_omop_ids=[3016723,3022304,46235213], variable_name="egfr")
-    print(f"bmi row: {bmi_row}")
-    print(f"egfr_row row: {egfr_row}")
-    final_dict.append(bmi_row)
-    final_dict.append(egfr_row)
+    
+    for derived in DERIVED_VARIABLES_LIST:
+        derived_row = extend_with_derived_variables(
+            single_source=single_source,
+            standard_derived_variable=(derived["code"], derived["label"], derived["omop_id"]),
+            parameters_omop_ids=derived["required_omops"],
+            variable_name=derived["name"],
+            category=derived["category"],
+        )
+        if derived_row:
+            final_dict.append(derived_row)
+    # bmi_row  =  extend_with_derived_variables(single_source, standard_derived_variable=("loinc:39156-5", "Body mass index (bmi) [ratio]", 3038553), parameters_omop_ids=[3036277, 3025315], variable_name="bmi")
+    # egfr_row = extend_with_derived_variables(single_source, standard_derived_variable=("snomed:1556501000000100", "Estimated creatinine clearance calculated using actual body weight Cockcroft-Gault formula", 37169169), parameters_omop_ids=[3016723,3022304,46235213], variable_name="egfr")
+    # print(f"bmi row: {bmi_row}")
+    # print(f"egfr_row row: {egfr_row}")
+    # final_dict.append(bmi_row)
+    # final_dict.append(egfr_row)
     final_dict_new =  _cross_domain_matches(source_elements, target_elements)
     # print(f"final_dict_new: {len(final_dict_new)}")
     final_dict.extend(final_dict_new)
@@ -1149,9 +1275,9 @@ def _cross_domain_matches(
                     })
     return final
 
-def extend_with_dervied_variables(single_source: List[Dict], 
+def extend_with_derived_variables(single_source: List[Dict], 
                                   standard_derived_variable: tuple, 
-                                  parameters_omop_ids: List[str], variable_name:str) -> Dict:
+                                  parameters_omop_ids: List[str], variable_name:str, category:str) -> Dict:
     """
    
      To create derived variables, we need to check if the source and target studies have the necessary parameters
@@ -1248,6 +1374,10 @@ def extend_with_dervied_variables(single_source: List[Dict],
         "mapping type": mapping_type,
         "source_visit": "baseline time",
         "target_visit": "baseline time",
+        "category": category,
+        "transformation_rule": {
+            "description": f"Derived variable {variable_name} using variable columns  {parameters_omop_ids} from original dataset. Consider the timeline of the longitudinal data when using this variable.",
+        }
     }
 
     return new_row
@@ -1447,6 +1577,7 @@ def find_hierarchy_of_variables(study_name:str) -> List[Dict]:
     PREFIX obi:  <http://purl.obolibrary.org/obo/obi.owl/>
     PREFIX cmeo: <https://w3id.org/CMEO/>
     PREFIX bfo:  <http://purl.obolibrary.org/obo/bfo.owl/>
+    PREFIX iao: <http://purl.obolibrary.org/obo/iao.owl/> 
 
     SELECT ?var_nameA 
            ?omop_id 
@@ -1464,7 +1595,7 @@ def find_hierarchy_of_variables(study_name:str) -> List[Dict]:
                      obi:has_specified_output ?codeB .
         
         ?codeB rdf:_1 ?primary_code_literal .
-        ?primary_code_literal obi:denotes ?omop_id_uri ;
+        ?primary_code_literal iao:denotes ?omop_id_uri ;
                               cmeo:has_value ?code_value ;
                               rdfs:label ?code_label .
         ?omop_id_uri rdf:type cmeo:omop_id ;
@@ -1499,8 +1630,8 @@ def find_hierarchy_of_variables(study_name:str) -> List[Dict]:
     for concept_id in omop_ids:
         omop_ids_ = omop_ids.copy()
         omop_ids_.remove(concept_id)
-        up = omop_nx.bfs_upward_with_equivalences(concept_id, omop_ids_, max_depth=10)
-        down = omop_nx.bfs_downward_with_equivalences(concept_id, omop_ids_, max_depth=10)
+        up = omop_nx.bfs_upward_with_equivalences(concept_id, omop_ids_, max_depth=12)
+        down = omop_nx.bfs_downward_with_equivalences(concept_id, omop_ids_, max_depth=12)
         sibling_data_list = omop_nx.find_sibling_targets(concept_id, omop_ids_, max_depth=1)
         # print(f"sibling_data_list: {sibling_data_list}")    
         # siblings is the list with dictionary where  each dict has ({"sibling":tid, "parent":parents})
@@ -1557,14 +1688,196 @@ def find_hierarchy_of_variables(study_name:str) -> List[Dict]:
         cid = int(item['omop_id'])
         label_map[cid] = f"{item['code_label']} (var={item['variable_name']})"
 
+    for concept_id in hierarchy:
+        if concept_id not in label_map:
+            # Try to get concept name from omop_nx.graph
+            node_data = omop_nx.graph.nodes.get(concept_id, {})
+            concept_name = node_data.get('concept_name', None)
+            # Fallback: show OMOP ID if name is not found
+            if concept_name:
+                label_map[concept_id] = f"{concept_name.title()} (OMOP {concept_id})"
+            else:
+                label_map[concept_id] = f"OMOP {concept_id}"
     # Optional: print the hierarchy in a tree-like format
     print("\n--- Hierarchy (Tree View) ---")
     print(f"length of hierarchy: {len(hierarchy)}")
     _print_tree(hierarchy, label_map)
-    export_hierarchy_to_excel(hierarchy=hierarchy, label_map=label_map, output_file=f"/Users/komalgilani/Desktop/cmh/data/output/{study_name}_var_hierarchy.xlsx")
+    export_hierarchy_to_excel(hierarchy=hierarchy, label_map=label_map, output_file=f"/Users/komalgilani/Documents/GitHub/CohortVarLinker/data/output/{study_name}_var_hierarchy.xlsx")
     # Return data_dict or the hierarchy, depending on your needs
     return data_dict
 
+
+
+
+
+def find_hierarchy_of_variables_v2(study_name: str) -> List[Dict]:
+    """
+    Query the CMEO triplestore for data elements, build a hierarchy of OMOP concepts,
+    and perform recursive merging: concepts that share an immediate parent are grouped
+    together under that parent.  The merging continues until no more merges are possible.
+
+    Parameters
+    ----------
+    study_name : str
+        The CMEO study graph name (suffix of the graph URI).
+
+    Returns
+    -------
+    List[Dict]
+        A list of dictionaries with variable_name, omop_id, and code_label for the variables
+        in the study.  The function also writes an Excel file with the final hierarchy.
+    """
+    # Step 1: Query the triplestore to get variable_name, omop_id, code_label
+    query = f"""
+    PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+    PREFIX dc:   <http://purl.org/dc/elements/1.1/>
+    PREFIX obi:  <http://purl.obolibrary.org/obo/obi.owl/>
+    PREFIX cmeo: <https://w3id.org/CMEO/>
+    PREFIX bfo:  <http://purl.obolibrary.org/obo/bfo.owl/>
+    PREFIX iao:  <http://purl.obolibrary.org/obo/iao.owl/> 
+
+    SELECT ?var_nameA 
+           ?omop_id 
+           ?code_label 
+    WHERE {{
+      GRAPH <https://w3id.org/CMEO/graph/{study_name}> {{
+        ?dataElementA rdf:type cmeo:data_element ;
+                      dc:identifier ?var_nameA ;
+                      obi:is_specified_input_of ?catProcessA, ?stdProcessA .
+
+        ?catProcessA rdf:type cmeo:categorization_process ;
+                     obi:has_specified_output ?cat_outputA .
+
+        ?stdProcessA rdf:type cmeo:data_standardization ;
+                     obi:has_specified_output ?codeB .
+        
+        ?codeB rdf:_1 ?primary_code_literal .
+        ?primary_code_literal iao:denotes ?omop_id_uri ;
+                              cmeo:has_value ?code_value ;
+                              rdfs:label ?code_label .
+        ?omop_id_uri rdf:type cmeo:omop_id ;
+                     cmeo:has_value ?omop_id .
+      }}
+    }}
+    """
+    sparql = SPARQLWrapper(settings.query_endpoint)
+    sparql.setQuery(query)
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+
+    # Collect the variable information
+    data_dict = []
+    for result in results["results"]["bindings"]:
+        data_dict.append({
+            'variable_name': result['var_nameA']['value'],
+            'omop_id': result['omop_id']['value'],
+            'code_label': result['code_label']['value']
+        })
+
+    # Step 2: Build OMOP concept graph
+    from .omop_graph import OmopGraphNX
+    omop_nx = OmopGraphNX(csv_file_path=settings.concepts_file_path)
+
+    # Step 3: Initialize clusters – each OMOP ID begins in its own cluster
+    omop_ids = [int(item["omop_id"]) for item in data_dict]
+    clusters: Dict[int, set] = {cid: {cid} for cid in omop_ids}
+    hierarchy = {}  # maps each node to its parent(s) and children
+
+    # Step 4: Recursively merge clusters until no further merges occur
+    while True:
+        # Find clusters that share the same immediate parent
+        parent_to_clusters: Dict[int, set] = {}
+        for cluster_id in clusters:
+            # get_all_parents with depth=1 returns only immediate parents
+            parents = omop_nx.get_all_parents(cluster_id, max_depth=1)
+            for p in parents:
+                parent_to_clusters.setdefault(p, set()).add(cluster_id)
+
+        # Keep only those parents whose clusters include >= 2 members (i.e. merges)
+        parent_to_clusters = {p: cset for p, cset in parent_to_clusters.items()
+                              if len(cset) >= 2}
+
+        # If nothing to merge, stop
+        if not parent_to_clusters:
+            break
+
+        # Otherwise, build new clusters for these parents and record hierarchy edges
+        new_clusters: Dict[int, set] = {}
+        merged_children: set = set()
+
+        for parent_id, child_cluster_ids in parent_to_clusters.items():
+            # Combine original OMOP IDs from each child cluster into this new cluster
+            combined_children: set = set()
+            for cid in child_cluster_ids:
+                combined_children.update(clusters[cid])
+                merged_children.add(cid)
+
+            # Register this parent in the hierarchy (edges: parent_id → child_cluster_id)
+            hierarchy.setdefault(parent_id, {"parents": set(), "children": set()})
+            for cid in child_cluster_ids:
+                hierarchy.setdefault(cid, {"parents": set(), "children": set()})
+                hierarchy[parent_id]["children"].add(cid)
+                hierarchy[cid]["parents"].add(parent_id)
+
+            # Add the merged cluster to new_clusters
+            # Note that if parent_id already had its own cluster earlier, we are overwriting it now,
+            # but preserving its full set of original children (if any existed).
+            if parent_id in new_clusters:
+                new_clusters[parent_id].update(combined_children)
+            else:
+                new_clusters[parent_id] = combined_children
+
+        # Retain clusters that were not merged in this iteration
+        for cid, child_nodes in clusters.items():
+            if cid not in merged_children:
+                new_clusters.setdefault(cid, set()).update(child_nodes)
+
+        # Update cluster mapping for the next iteration
+        clusters = new_clusters
+
+    # Step 5: Build a label lookup for all OMOP IDs and parent nodes
+    label_map: Dict[int, str] = {}
+    # Add labels for original variables
+    for item in data_dict:
+        cid = int(item['omop_id'])
+        label_map[cid] = f"{item['code_label']} (var={item['variable_name']})"
+    # Add labels for additional (inferred) parent concept IDs
+    for cid in clusters.keys() | hierarchy.keys():
+        if cid not in label_map:
+            node_data = omop_nx.graph.nodes.get(cid, {})
+            concept_name = node_data.get('concept_name')
+            label_map[cid] = f"{concept_name.title()} (OMOP {cid})" if concept_name \
+                             else f"OMOP {cid}"
+
+    # Step 6: Prepare the final output and export to Excel
+    # Each cluster is represented by a parent_id and a list of its leaf (original) OMOP IDs as children
+    rows = []
+    for parent_id, child_nodes in clusters.items():
+        # Skip parents with no children (i.e. original leaf nodes)
+        if not child_nodes:
+            continue
+        parent_label = label_map.get(parent_id)
+        # Each child_nodes element is an OMOP ID from original data_dict
+        child_ids_list = sorted(child_nodes)
+        child_labels_list = [label_map[cid] for cid in child_ids_list]
+        # Only include groupings with at least one child beyond itself
+        if parent_id not in child_nodes:
+            rows.append({
+                "parent_id": parent_id,
+                "parent_label": parent_label,
+                "child_id": child_ids_list,
+                "child_label": child_labels_list
+            })
+
+    df = pd.DataFrame(rows)
+    output_path = f"/Users/komalgilani/Documents/GitHub/CohortVarLinker/data/output/{study_name}_var_hierarchy.xlsx"
+    df.to_excel(output_path, index=False)
+
+    # Optionally print for inspection (small hierarchies)
+    print(f"[INFO] Hierarchy exported to {output_path}")
+    return data_dict
 
 def _print_tree(hierarchy: dict, label_map: dict):
     """
