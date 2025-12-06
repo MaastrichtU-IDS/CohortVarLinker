@@ -55,10 +55,14 @@ def read_all_excel_files_in_directory(directory_path, expected_columns=None):
 
 df = read_all_excel_files_in_directory("/Users/komalgilani/Documents/GitHub/CohortVarLinker/data/cohorts")  # Replace with the path to your directory
 df.columns = df.columns.str.lower()  # Convert column names to lowercase
-
 print(df.columns.tolist())  # Print the first few rows of the DataFrame for debugging
 # Function to construct the JSON output
-
+if 'variablelabel' not in df.columns:
+    # replace it  with variable label
+    df = df.rename(columns={"variable label": "variablelabel"})
+if 'variablename' not in df.columns:
+    #replace with variable name
+    df = df.rename(columns={"variable name": "variablename"})
 def convert_row_to_json(row):
     base_entity = row["variable concept name"]
     additional_entities = []
@@ -190,9 +194,10 @@ def json_data_for_db(df):
 
             # 3. Visit info
             if pd.notna(row.get("visits")) and pd.notna(row.get("visit concept code")):
+                print(f"Processing visit info: {row['visits']} for variable: {row['variablename']}")
                 entry = {
                     "variable_label": row.get("visits", "").strip().lower(),
-                    "code": row.get("visit concept code", "").strip().lower(),
+                    "code": str(row.get("visit concept code", "")).strip().lower(),
                     "standard_label": row.get("visit concept name", "").strip().lower(),
                     "omop_id": int(row.get("visit omop id")) if pd.notna(row.get("visit omop id")) and str(row.get("visit omop id")) else None
                 }

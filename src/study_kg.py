@@ -27,7 +27,7 @@ def generate_studies_kg(filepath: str) -> Graph:
     :return: An rdflib.Graph object with the cohort data
     """
     try:
-        df = pd.read_csv(filepath, encoding="utf-8")
+        df = pd.read_excel(filepath,sheet_name='Descriptions')
         # df = df.apply(lambda col: col.map(lambda x: x.lower() if isinstance(x, str) else x))
         df.columns = df.columns.str.lower()
     except UnicodeDecodeError:
@@ -253,14 +253,17 @@ def add_study_timing(g: Graph, row: pd.Series, study_design_execution_uri: URIRe
 
 def part_of_study(g: Graph, row: pd.Series, study_uri: URIRef, study_design_value: str, metadata_graph: URIRef) -> None:
     if "part of study" in row and pd.notna(row["part of study"]):
-        print(f"Part of study: {row['part of study']}")
-
-        parent_study_str = f"{normalize_text(row['part of study'])}/{study_design_value}"
-        parent_study_uri = URIRef((OntologyNamespaces.CMEO.value + parent_study_str))
-
-       
-        g.add((study_uri, OntologyNamespaces.RO.value.part_of, parent_study_uri, metadata_graph))
-        g.add((parent_study_uri, OntologyNamespaces.RO.value.has_part, study_uri, metadata_graph))
+        
+        multiple_parent_studies = row["part of study"].lower().split(";") if pd.notna(row["part of study"]) else []
+        for parent_study in multiple_parent_studies:
+            print(f"Part of study: {parent_study}")
+            parent_study_str = normalize_text(parent_study)
+            parent_study_uri = URIRef(((OntologyNamespaces.CMEO.value + parent_study_str + "/" + study_design_value)))
+            print(f"Parent study URI: {parent_study_uri}")
+            # parent_study_uri = URIRef((OntologyNamespaces.CMEO.value + parent_study_str))
+            if parent_study_uri:
+                g.add((study_uri, OntologyNamespaces.OBI.value.member_of, parent_study_uri, metadata_graph))
+                g.add((parent_study_uri, OntologyNamespaces.OBI.value.has_member, study_uri, metadata_graph))
     return g
 
 def add_intervention_comparator(g: Graph, row: pd.Series, study_uri: URIRef, protocol_uri: URIRef, metadata_graph: URIRef) -> None:
@@ -455,25 +458,27 @@ def add_outcome_specification(g: Graph, row: pd.Series, study_uri: URIRef, proto
     g.add((outcome_specification_uri, RDFS.label, Literal("outcome specification", datatype=XSD.string), metadata_graph))
     
     
-    if row["primary outcome specification"]:
-            pendpoint_values= row["primary outcome specification"].lower().split(';') if pd.notna(row["primary outcome specification"]) else ""
-            for pendpoint_value in pendpoint_values:
-                pendpoint_value = pendpoint_value.strip()
-                primary_outcome_uri = URIRef(study_uri + "/primary_outcome_specification")
-                g.add((primary_outcome_uri, RDFS.label, Literal("primary outcome specification", datatype=XSD.string), metadata_graph))
-                g.add((primary_outcome_uri, RDF.type, OntologyNamespaces.CMEO.value.primary_outcome_specification,metadata_graph))
-                g.add((outcome_specification_uri, OntologyNamespaces.RO.value.has_part, primary_outcome_uri,metadata_graph))
-                g.add((primary_outcome_uri, OntologyNamespaces.CMEO.value.has_value, Literal(pendpoint_value, datatype=XSD.string),metadata_graph))
+    if pd.notna(row["primary outcome specification"]):
+            pendpoint_values= row["primary outcome specification"].lower()
+            # .split(';') if pd.notna(row["primary outcome specification"]) else ""
+            # for pendpoint_value in pendpoint_values:
+            # pendpoint_value = pendpoint_value.strip()
+            primary_outcome_uri = URIRef(study_uri + "/primary_outcome_specification")
+            g.add((primary_outcome_uri, RDFS.label, Literal("primary outcome specification", datatype=XSD.string), metadata_graph))
+            g.add((primary_outcome_uri, RDF.type, OntologyNamespaces.CMEO.value.primary_outcome_specification,metadata_graph))
+            g.add((outcome_specification_uri, OntologyNamespaces.RO.value.has_part, primary_outcome_uri,metadata_graph))
+            g.add((primary_outcome_uri, OntologyNamespaces.CMEO.value.has_value, Literal(pendpoint_values, datatype=XSD.string),metadata_graph))
 
-    if row["secondary outcome specification"]:
-            secendpoint_values= row["secondary outcome specification"].lower().split(";") if pd.notna(row["secondary outcome specification"]) else ""
-            for secendpoint_value in secendpoint_values:
-                secendpoint_value = secendpoint_value.strip()
-                secondary_outcome_uri = URIRef(study_uri + "/secondary_outcome_specification")
-                g.add((secondary_outcome_uri, RDF.type, OntologyNamespaces.CMEO.value.secondary_outcome_specification,metadata_graph))
-                g.add((primary_outcome_uri, RDFS.label, Literal("secondary outcome specification", datatype=XSD.string), metadata_graph))
-                g.add((outcome_specification_uri, OntologyNamespaces.RO.value.has_part, secondary_outcome_uri,metadata_graph))
-                g.add((secondary_outcome_uri, OntologyNamespaces.CMEO.value.has_value, Literal(secendpoint_value, datatype=XSD.string),metadata_graph))
+    if pd.notna(row["secondary outcome specification"]):
+            secendpoint_values= row["secondary outcome specification"].lower()
+            # .split(";") if pd.notna(row["secondary outcome specification"]) else ""
+            # for secendpoint_value in secendpoint_values:
+            # secendpoint_value = secendpoint_value.strip()
+            secondary_outcome_uri = URIRef(study_uri + "/secondary_outcome_specification")
+            g.add((secondary_outcome_uri, RDF.type, OntologyNamespaces.CMEO.value.secondary_outcome_specification,metadata_graph))
+            g.add((primary_outcome_uri, RDFS.label, Literal("secondary outcome specification", datatype=XSD.string), metadata_graph))
+            g.add((outcome_specification_uri, OntologyNamespaces.RO.value.has_part, secondary_outcome_uri,metadata_graph))
+            g.add((secondary_outcome_uri, OntologyNamespaces.CMEO.value.has_value, Literal(secendpoint_values, datatype=XSD.string),metadata_graph))
     return g
 
 

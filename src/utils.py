@@ -48,6 +48,7 @@ class OntologyNamespaces(Enum):
     ICD9 = Namespace("http://purl.bioontology.org/ontology/ICD9CM/")
     DUO = Namespace("http://purl.obolibrary.org/obo/duo.owl/")
     NCBI = Namespace("http://purl.bioontology.org/ontology/NCBITAXON/")
+    SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
     # UCUM = Namespace("http://purl.bioontology.org/ontology/UCUM/")
     # RXNORM = Namespace("http://purl.bioontology.org/ontology/RXNORM/")
 
@@ -714,6 +715,49 @@ def apply_rules(domain, src_info, tgt_info):
 
     return {"description": "No specific transformation rule available."}, "Not Applicable"
 
+
+def get_member_studies(study_name: str) -> URIRef | None:
+    query = f"""PREFIX dc:   <http://purl.org/dc/elements/1.1/>
+                    PREFIX obi:  <http://purl.obolibrary.org/obo/obi.owl/>
+                    PREFIX ro:   <http://purl.obolibrary.org/obo/ro.owl/>
+                    PREFIX iao:  <http://purl.obolibrary.org/obo/iao.owl/>
+
+                    SELECT DISTINCT ?related_study
+                    WHERE {{
+                    GRAPH <https://w3id.org/CMEO/graph/studies_metadata> {{
+                        # anchor the index study
+                        ?study_design  dc:identifier ?study_name.
+                        VALUES (?study_name) {{ ("{study_name}") }} 
+                    # membership in BOTH directions
+                        {{
+                        ?study_design obi:has_member ?related_study .
+                        }} UNION {{
+                        ?related_study obi:has_member ?study_design .
+                        }} UNION {{
+                        ?study_design obi:member_of ?related_study .
+                        }} UNION {{
+                        ?related_study obi:member_of ?study_design .
+                        }}
+                        # ensure the target is a study and not the same as the anchor
+                        FILTER(?related_study != ?study_design)
+                    }}
+                    }}
+            """
+            
+    query_endpoint = SPARQLWrapper(settings.query_endpoint)
+    query_endpoint.setReturnFormat(JSON)
+    query_endpoint.setQuery(query)
+    results = query_endpoint.query().convert()
+    studies_uris = []
+    if results["results"]["bindings"]:
+        for result in results["results"]["bindings"]:
+            related_study_uri = result["related_study"]["value"].split("/")[-2]
+            studies_uris.append(related_study_uri)
+            
+    return studies_uris
+    
+    
+    
 
 # def apply_rules(domain, src_info, tgt_info):
 #     def parse_categories(cat_str):

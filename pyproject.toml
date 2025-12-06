@@ -54,6 +54,9 @@ requires-python = ">=3.10,<3.12"
 thefuzz = "^0.22.1"
 pint = "^0.24.4"
 qdrant-client = "^1.14.2"
+pyreadr = "^0.5.3"
+bdi-kit = "^0.8.0"
+sentence-transformers = "^5.1.2"
 
 
 

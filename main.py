@@ -17,13 +17,14 @@ from src.utils import (
         delete_existing_triples,
         publish_graph_to_endpoint,
         OntologyNamespaces,
+        get_member_studies
     
     )
 
 
 
 
-from src.fetch_v1 import map_source_target
+from src.fetch_v2 import map_source_target
 
 
 
@@ -116,25 +117,25 @@ def create_cohort_specific_metadata_graph(dir_path, recreate=False):
     else:
         print("Recreate flag is set to False. Skipping processing of cohort metadata.")
 
-def create_pld_graph(file_path, cohort_name, output_dir=None, recreate=False) -> None:
-    if recreate:
-        start_time = time.time()
-        g=add_raw_data_graph(file_path, cohort_name)
-        if len(g) > 0:
-            g.serialize(f"{output_dir}/{cohort_name}_pld.trig", format="trig")
-            # delete_existing_triples(f"{settings.sparql_endpoint}/rdf-graphs/{cohort_name}_pld")
-            # res=publish_graph_to_endpoint(g,graph_uri=f"{cohort_name}_pld")
+# def create_pld_graph(file_path, cohort_name, output_dir=None, recreate=False) -> None:
+#     if recreate:
+#         start_time = time.time()
+#         g=add_raw_data_graph(file_path, cohort_name)
+#         if len(g) > 0:
+#             g.serialize(f"{output_dir}/{cohort_name}_pld.trig", format="trig")
+#             # delete_existing_triples(f"{settings.sparql_endpoint}/rdf-graphs/{cohort_name}_pld")
+#             # res=publish_graph_to_endpoint(g,graph_uri=f"{cohort_name}_pld")
             
-            delete_existing_triples(f"{get_cohort_mapping_uri(cohort_name)}_pld")
-            res=publish_graph_to_endpoint(g)
+#             delete_existing_triples(f"{get_cohort_mapping_uri(cohort_name)}_pld")
+#             res=publish_graph_to_endpoint(g)
 
-            print(f"Graph published to endpoint: {res} for cohort: graph/{cohort_name}_pld")
-            end_time = time.time()
-            print(f"Time taken to process PLD: graph/{cohort_name}_pld is: {end_time - start_time}")
-        else:
-            print("No data found in the file")
-    else:
-        print("Recreate flag is set to False. Skipping processing of PLD data.")
+#             print(f"Graph published to endpoint: {res} for cohort: graph/{cohort_name}_pld")
+#             end_time = time.time()
+#             print(f"Time taken to process PLD: graph/{cohort_name}_pld is: {end_time - start_time}")
+#         else:
+#             print("No data found in the file")
+#     else:
+#         print("Recreate flag is set to False. Skipping processing of PLD data.")
 
 
 def check_if_data_exists(endpoint_url):
@@ -356,12 +357,13 @@ def combine_cross_mappings(
     
 
 def combine_all_mappings_to_json(
-    source_study, target_studies, output_dir, json_path
+    source_study, target_studies, output_dir, json_path, model_name=None
 ):
     # Dict: {source_var: [mapping_dicts]}
     mappings = {}
     for target in target_studies:
-        csv_file = os.path.join(output_dir, f"{source_study}_{target}_full.csv")
+        suffix = f"_{model_name}" if model_name else ""
+        csv_file = os.path.join(output_dir, f"{source_study}_{target}{suffix}_full.csv")
         print(f"Processing file: {csv_file}")
         if not os.path.exists(csv_file):
             print(f"Skipping {csv_file}, does not exist.")
@@ -505,58 +507,95 @@ def combine_cross_mappings_v3(
                     targets.append(f"{tgt}: {detail_str}")
             row[tstudy] = ' | '.join(targets) if targets else ''
         matched_rows.append(row)
-
+    
     final_df = pd.DataFrame(matched_rows)
     final_df.to_csv(combined_output_path, index=False)
     print(f"✅ Combined existing mappings with source and target details saved to: {combined_output_path}")
-    
+
+
+
+#sapbert embedding doesnot return self-reported body weight match in interval study
 if __name__ == '__main__':
 
-   
     data_dir = 'data'
-    cohort_file_path = f"{data_dir}/article_cohorts"
-    cohorts_metadata_file = f"{data_dir}/studies_metadata_v2.csv"
+    cohort_file_path = f"{data_dir}/cohorts"
+    cohorts_metadata_file = f"{data_dir}/studies_metadata-2.xlsx"
     start_time = time.time()
-    create_study_metadata_graph(cohorts_metadata_file, recreate=True)
-    create_cohort_specific_metadata_graph(cohort_file_path, recreate=True)
-#     vector_db, embedding_model = generate_studies_embeddings(cohort_file_path, "localhost", "studies_metadata", recreate_db=False)
+    model_name = "biolord"
+    select_relevant_studies = True
+    embedding_mode = "concept-only" # "local" or "hybrid" or "concept-only"
+    create_study_metadata_graph(cohorts_metadata_file, recreate=False)
+    create_cohort_specific_metadata_graph(cohort_file_path, recreate=False)
+    vector_db, embedding_model = generate_studies_embeddings(cohort_file_path, "localhost", f"studies_metadata_{model_name}_{embedding_mode}", model_name=model_name, recreate_db=False)
+    
+    # min_score_list = [0.5,0.6,0.65,0.7, 0.75, 0.8, 0.85, 0.9]
+    # for min_score in min_score_list:
+    #     # print(f"********** Results from {model_name} for min_score in  = {min_score} **********")
+    #     results=search_in_db(
+    #                         vectordb=vector_db,
+    #                         embedding_model=embedding_model,
+    #                         query_text='body weight',
+    #                         target_study='interval',
+    #                         limit=5,
+    #                         # omop_domain=['measurement','observation'],
+    #                         min_score=min_score,
+    #                         collection_name=f"studies_metadata_{model_name}",
+    #                     )
+    #     print(f"Results: {results} for min_score = {min_score} in {model_name}")
+    # results=search_in_db(
+    #                     vectordb=vector_db,
+    #                     embedding_model=embedding_model,
+    #                     query_text='self reported body weight',
+    #                     target_study='gissi-hf',
+    #                     limit=5,
+    #                     # omop_domain=['measurement','observation'],
+    #                     min_score=0.8,
+    #                     collection_name="studies_metadata_sapbert",
+    #                 )
+    # print(results)
+    source_study = "time-chf"
+    # target_studies = ["cardiateam", "aachen-hf", "cachexia", "gissi-hf", "gissi-hf_outcomes", "tim-hf", "ear","bigfoot", "horuz", "sfdt1", "lups"]
+    target_studies = ["gissi-hf","aachen-hf"] 
 
-#     source_study = "time-chf"
-#     # target_studies = ["cardiateam", "aachenhf", "cachexia", "gissi-hf", "gissi-hf_outcomes", "tim-hf", "ear","bigfoot", "horuz", "sfdt1", "lups"]
-#     target_studies = ["gissi-hf"]
     
-#     # combined_df = None
-#     omop_id_tracker = {}  # Track source_omop_id per variable
-    
-#     mapping_dict = {}  # {target_study: {source_var: (target_var, target_omop_id)}}
-# #   The code snippet provided is a Python script that iterates over a list of target studies and
-# #   performs the following actions for each target study:
-    
-# #     create new outputput based on source studies folder in output directory for each time we ran the script
- 
-    
-#     graph = OmopGraphNX(csv_file_path=settings.concepts_file_path)
-#     for tstudy in target_studies:
-#         mapping_transformed=map_source_target(source_study_name=source_study, target_study_name=tstudy, 
-#                                                 embedding_model=embedding_model, vector_db=vector_db, 
-#                                                 collection_name="studies_metadata",
-#                                                 graph=graph)
+    # target_studies = ['interval']
+    new_studies= []
+    if select_relevant_studies:
+        for tstudy in target_studies:
+            member_studies = get_member_studies(tstudy)
+            print(f"Member studies for {tstudy}: {member_studies}")
+            new_studies.extend(member_studies)
+        target_studies.extend(new_studies)
 
-#         print(mapping_transformed)
+    print(f"Final target studies: {target_studies}")
+    omop_id_tracker = {}  # Track source_omop_id per variable
+    
+    mapping_dict = {}  # {target_study: {source_var: (target_var, target_omop_id)}}
+
+    
+    graph = OmopGraphNX(csv_file_path=settings.concepts_file_path)
+    for tstudy in target_studies:
+        mapping_transformed=map_source_target(source_study_name=source_study, target_study_name=tstudy, 
+                                                embedding_model=embedding_model, vector_db=vector_db, 
+                                                collection_name=f"studies_metadata_{model_name}_{mapping_mode}",
+                                                graph=graph)
+
+        print(mapping_transformed)
         
-#         # mapping_transformed = mapping_transformed.drop_duplicates(keep='first') if not mapping_transformed.empty else pd.DataFrame(columns=["source_variable", "target_variable", "source_omop_id", "target_omop_id"])
-#         mapping_transformed.to_csv(f'{data_dir}/output/{source_study}_{tstudy}_full.csv', index=False)
+        # mapping_transformed = mapping_transformed.drop_duplicates(keep='first') if not mapping_transformed.empty else pd.DataFrame(columns=["source_variable", "target_variable", "source_omop_id", "target_omop_id"])
+        mapping_transformed.to_csv(f'{data_dir}/output/cross_mapping/{source_study}_{tstudy}_{model_name}_{mapping_mode}_full.csv', index=False)
         
-#     tstudy_str = "_".join(target_studies)
-#     combine_all_mappings_to_json(
-#         source_study=source_study,
-#         target_studies=target_studies,
-#         output_dir=os.path.join(data_dir, "output"),
-#         json_path=os.path.join(data_dir, "output", f"{source_study}_{tstudy_str}_grouped.json")
-#     )
-#     print(f"Total time taken: {time.time() - start_time:.2f} seconds")
+    tstudy_str = "_".join(target_studies)
+    combine_all_mappings_to_json(
+        source_study=source_study,
+        target_studies=target_studies,
+        output_dir="/Users/komalgilani/Documents/GitHub/CohortVarLinker/data/output/cross_mapping",
+        json_path=os.path.join("/Users/komalgilani/Documents/GitHub/CohortVarLinker/data/output/cross_mapping", f"{source_study}_{tstudy_str}_{model_name}_{mapping_mode}.json")
+        ,model_name=f"{model_name}_{mapping_mode}"
+    )
+    print(f"Total time taken: {time.time() - start_time:.2f} seconds")
 
-    add_data_access_spec(study_name="time-chf", data_policy=['disease specific research'], data_modifier=['ethics approval required'], disease_concept_code="snomed:42343007", disease_concept_label="congestive heart failure", disease_concept_omop_id="42343007", study_metadata_graph_file_path=f"{data_dir}/graphs/studies_metadata.trig")
+    #add_data_access_spec(study_name="time-chf", data_policy=['disease specific research'], data_modifier=['ethics approval required'], disease_concept_code="snomed:42343007", disease_concept_label="congestive heart failure", disease_concept_omop_id="42343007", study_metadata_graph_file_path=f"{data_dir}/graphs/studies_metadata.trig")
     
     
     

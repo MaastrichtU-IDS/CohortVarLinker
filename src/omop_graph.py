@@ -3,7 +3,7 @@ import networkx as nx
 import pandas as pd
 import pickle
 import os
-from typing import List,Set
+from typing import List,Set,Tuple
 
 from collections import deque
 
@@ -56,10 +56,18 @@ class OmopGraphNX:
         eq_relationships = {
             'rxnorm - atc pr lat': 'atc - rxnorm pr lat',
             'atc - rxnorm pr lat': 'rxnorm - atc pr lat',
+            'atc - rxnorm': 'rxnorm - atc',
+            'rxnorm - atc': 'atc - rxnorm',
+            'snomed - rxnorm eq': 'rxnorm - snomed eq',
+            'rxnorm - snomed eq': 'snomed - rxnorm eq',
             'mapped from': 'maps to',
             'maps to': 'mapped from',
             'component of': 'has component',
             'has component': 'component of',
+            # 'cpt4 - loinc eq': 'loinc - cpt4 eq',
+            # 'loinc - cpt4 eq': 'cpt4 - loinc eq',
+            # 'cpt4 - snomed eq': 'snomed - cpt4 eq',
+            # 'snomed - cpt4 eq': 'cpt4 - snomed eq',
             # 'atc - snomed eq': 'snomed - atc eq',
             # 'snomed - atc eq': 'atc - snomed eq',
         }
@@ -81,6 +89,8 @@ class OmopGraphNX:
             rel_id = (row['relationship_id']).strip().lower() if pd.notna(row['relationship_id']) else ""
             vocab1 = (row['concept_1_vocabulary']).strip().lower() if pd.notna(row['concept_1_vocabulary']) else ""
             vocab2 = (row['concept_2_vocabulary']).strip().lower() if pd.notna(row['concept_2_vocabulary']) else ""
+            concept_code1 = (row['concept_code_1']).strip().lower() if pd.notna(row['concept_code_1']) else ""
+            concept_code2 = (row['concept_code_2']).strip().lower() if pd.notna(row['concept_code_2']) else ""
             domain1 = (row['concept_1_domain']).strip().lower() if pd.notna(row['concept_1_domain']) else ""
             domain2 = (row['concept_2_domain']).strip().lower() if pd.notna(row['concept_2_domain']) else ""
             concept_class1 = (row['concept_1_concept_class']).strip().lower() if pd.notna(row['concept_1_concept_class']) else ""
@@ -101,14 +111,17 @@ class OmopGraphNX:
             self.graph.add_node(c1,
                     concept_id=c1,
                     concept_name=concept_1_name,
+                    concept_code=concept_code1,
                     domain=domain1,
                     vocabulary=vocab1,
+                    
                     concept_class=concept_class1
                 )
 
             self.graph.add_node(c2,
                     concept_id=c2,
                     concept_name=concept_2_name,
+                    concept_code=concept_code2,
                     domain=domain2,
                     vocabulary=vocab2,
                     concept_class=concept_class2
@@ -381,7 +394,7 @@ class OmopGraphNX:
         
         return found_children
 
-    def bfs_bidirectional_reachable(self, start, target_ids, max_depth=3):
+    def bfs_bidirectional_reachable(self, start, target_ids, max_depth=3, domain='drug'):
         """
         Enhanced BFS that traverses both directions and uses equivalence relationships to reach targets.
         """
@@ -467,9 +480,41 @@ class OmopGraphNX:
         
         # only return target_ids that are reachable
         reachable_target_ids = reachable_target_ids.intersection(target_ids)
+        
+        
+        if start in self.graph and domain == 'drug':
+            filtered = set()
+            for tid in reachable_target_ids:
+                if self._is_valid_drug_graph_match(start, tid):
+                    filtered.add(tid)
+            reachable_target_ids = filtered
+
+        # return list(reachable_target_ids)
         return list(reachable_target_ids)  # Remove the start node if present
 
-    
+    def concept_exists(self, concept_id: int, concept_code:str, vocabulary:List[str]) -> Tuple[bool, str]:
+        """
+        Check if a concept_id exists in the graph.
+        """
+        # given the concept code and vocabulary check if it exists in the graph
+        vocabulary = [v.lower() for v in vocabulary]
+        concept_code = concept_code.lower()
+        # print(f"value of concept_id is {concept_id}, concept_code is {concept_code} and vocabulary is {vocabulary}")
+        if concept_id in self.graph:
+            node_data = self.graph.nodes[concept_id]
+            # print(f"node data is {node_data}")
+            node_vocab = node_data.get("vocabulary", "").strip().lower()
+            node_concept_code = node_data.get("concept_code", "").strip().lower()
+          
+            if node_vocab == '' and node_concept_code == '': 
+                return False, "not found"
+            elif node_vocab in vocabulary and node_concept_code == concept_code:
+                return True, "correct"
+            else:
+                return False, "incorrect"
+
+        return False, "not found"
+        
 
     def all_below_atc_4th(self, node1: int, node2: int, common_parent: int) -> bool:
         """
@@ -721,6 +766,71 @@ class OmopGraphNX:
             return True, path
         except nx.NetworkXNoPath:
             return False, []
+        
+        
+    def _is_valid_drug_graph_match(self, start: int, target: int) -> bool:
+        """
+        Extra guardrail for drug-domain concepts.
+
+        - For ATC–ATC: only allow if same ATC level (same concept_class) and
+          not a very broad level (1st–3rd).
+        - For ATC–RxNorm: only allow if they are directly equivalent via an 'eq' edge.
+        - For other domains / vocabularies: keep old behaviour (return True).
+        """
+        if start not in self.graph or target not in self.graph:
+            return False
+
+        s = self.graph.nodes[start]
+        t = self.graph.nodes[target]
+
+        domain1 = (s.get("domain") or "").lower()
+        domain2 = (t.get("domain") or "").lower()
+        vocab1 = (s.get("vocabulary") or "").lower()
+        vocab2 = (t.get("vocabulary") or "").lower()
+        cc1 = (s.get("concept_class") or "").lower()
+        cc2 = (t.get("concept_class") or "").lower()
+
+        # Only constrain when both are drug-domain concepts.
+        if  "drug" not in domain1 or "drug" not in domain2:
+            return True
+
+        # ---------- ATC–ATC ----------
+        if vocab1 == "atc" and vocab2 == "atc":
+            print(f"cc1 is {cc1} and cc2 is {cc2}")
+            broad_levels = {"atc 1st", "atc 2nd", "atc 3rd"}
+            # Don't match very broad ATC levels at all.
+            if cc1 in broad_levels or cc2 in broad_levels:
+                return False
+
+            # Only allow same ATC level (no parent–child matches).
+            if cc1 != cc2:
+                return False
+
+            # At this point: both ATC, same (non-broad) level.
+            return True
+
+        # ---------- ATC–RxNorm (cross-vocabulary) ----------
+        elif (vocab1 == "atc" and vocab2 == "rxnorm") or (vocab1 == "rxnorm" and vocab2 == "atc"):
+            print(f"checking ATC–RxNorm match between {start} and {target} and eq notes are {self.get_equivalent_nodes(start, max_depth=1)} and {self.get_equivalent_nodes(target, max_depth=1)}")
+        #     # Only accept if they are directly equivalent according to 'eq' relations.
+        #     eqs_start = self.get_equivalent_nodes(start, max_depth=2)
+        #     if target in eqs_start:
+                
+        #          return True
+        #     # Also try the reverse direction just in case.
+        #     eqs_target = self.get_equivalent_nodes(target, max_depth=2)
+        #     if start in eqs_target:
+        #         return True
+        #     return False
+
+        # # ---------- Same non-ATC vocabulary (e.g. RxNorm–RxNorm) ----------
+        # if vocab1 == vocab2:
+        #     return True
+
+        # Everything else (mixed vocabularies with drugs): be conservative.
+            return True
+        return False
+
 # # Example usage
 
 # def print_downward_path(graph, start, target, max_depth=5):
@@ -735,7 +845,7 @@ class OmopGraphNX:
 #         except Exception as e:
 #             print(f"Error in path tracing: {e}")
 if __name__ == "__main__":
-    csv_path = "/Users/komalgilani/Desktop/cmh/data/concept_relationship.csv"
+    csv_path = "/Users/komalgilani/Documents/GitHub/CohortVarLinker/data/concept_relationship_enriched.csv"
     
     omop_nx = OmopGraphNX(csv_path)
     omop_nx.build_graph()
@@ -767,9 +877,11 @@ if __name__ == "__main__":
     # print(omop_nx.bfs_bidirectional_reachable(21601665, target_ids=[1338005], max_depth=2))
     # print(omop_nx.bfs_bidirectional_reachable(956874, target_ids=[4186998], max_depth=2))    
     #print(omop_nx.bfs_bidirectional_reachable(21601782, target_ids=[1308216], max_depth=3))
-    print(omop_nx.bfs_bidirectional_reachable(3016723, target_ids=[4324383], max_depth=2))
+    
+    print(omop_nx.bfs_bidirectional_reachable(956874, target_ids=[21601517], max_depth=2))
     print(omop_nx.only_upward_or_downward(3016723, target_ids=[4324383], max_depth=1))
     # print(3000285 in omop_nx.graph)
+    print(omop_nx.concept_exists(1340348, "OMOP5166003", "omop"))
     
     # find relationships between two nodes
     # print(omop_nx.bfs_path(3020491, [4156660], max_depth=1))

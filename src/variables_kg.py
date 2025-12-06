@@ -9,6 +9,7 @@ from .config import settings
 import json
 import re
 # import os
+from .validate_cde import validate_dictionary
 from .ontology_model import  Concept
 from .study_kg import update_metadata_graph
 from .utils import (
@@ -69,6 +70,8 @@ def categorization_process(g: Graph, variable_uri: URIRef, category: str, cohort
 def process_variables_metadata_file(file_path:str, study_metadata_graph_file_path:str, cohort_name:str,eda_file_path:str) -> tuple[Graph, str]:
 
         print(f"Processing metadata file: {file_path}")
+        file_path_dir = file_path.rsplit('/', 1)[0]
+
         data = load_dictionary(file_path)
         if data is None or data.empty:
             return None, None   
@@ -410,13 +413,13 @@ def add_device_senors_for_variable(g: Graph, var_uri:URIRef, data_set_uri: URIRe
             g.add((sensor_uri, OntologyNamespaces.CMEO.value.has_value, Literal(sensor_value, datatype=XSD.string), cohort_uri))
             g.add((device_uri, OntologyNamespaces.RO.value.has_part, sensor_uri, cohort_uri))
             g.add((sensor_uri, OntologyNamespaces.RO.value.is_part_of, device_uri, cohort_uri))
-        if 'wearer location' in row_info and pd.notna(row_info['wearer location']):
-            wearer_location_value = row_info['wearer location'].strip().lower().replace(' ', '_')
-            wearer_location_uri = URIRef(OntologyNamespaces.CMEO.value + f"body_region/{wearer_location_value}")
-            g.add((sensor_uri, OntologyNamespaces.RO.value.is_located_in, wearer_location_uri, cohort_uri))
-            g.add((wearer_location_uri, RDF.type, OntologyNamespaces.CMEO.value.body_region, cohort_uri))
-            g.add((data_collection_process_uri, OntologyNamespaces.RO.value.occurs_in, wearer_location_uri, cohort_uri))
-            g.add((wearer_location_uri, OntologyNamespaces.CMEO.value.has_value, Literal(wearer_location_value, datatype=XSD.string), cohort_uri))
+            if 'wearer location' in row_info and pd.notna(row_info['wearer location']):
+                wearer_location_value = row_info['wearer location'].strip().lower().replace(' ', '_')
+                wearer_location_uri = URIRef(OntologyNamespaces.CMEO.value + f"body_region/{wearer_location_value}")
+                g.add((sensor_uri, OntologyNamespaces.RO.value.is_located_in, wearer_location_uri, cohort_uri))
+                g.add((wearer_location_uri, RDF.type, OntologyNamespaces.CMEO.value.body_region, cohort_uri))
+                g.add((data_collection_process_uri, OntologyNamespaces.RO.value.occurs_in, wearer_location_uri, cohort_uri))
+                g.add((wearer_location_uri, OntologyNamespaces.CMEO.value.has_value, Literal(wearer_location_value, datatype=XSD.string), cohort_uri))
 
     return g
 
@@ -797,7 +800,8 @@ def add_temporal_context(g: Graph, var_uri: URIRef, cohort_uri: URIRef, row: pd.
                     code=row['visit concept code'] if pd.notna(row['visit concept code']) else None,
                     omop_id=safe_int(row['visit omop id']) if pd.notna(row['visit omop id']) else None,
                 )
-                add_solo_concept_info(g, visit_uri, concepts, cohort_uri)
+                
+                g= add_solo_concept_info(g, visit_uri, concepts, cohort_uri)
             
                 return g
         return g
@@ -1089,6 +1093,7 @@ def add_composite_concepts_info(g: Graph, linked_uri: URIRef, concepts: list[Con
     # g.add((code_set_uri, RDF.type, RDF.Seq, cohort_uri))
     g.add((data_standardization_uri, OntologyNamespaces.OBI.value.has_specified_output, code_set_uri,cohort_uri))
     g.add((code_set_uri, OntologyNamespaces.OBI.value.is_specified_output_of, data_standardization_uri,cohort_uri))
+    g.add((linked_uri, OntologyNamespaces.SKOS.value.closeMatch, code_set_uri, cohort_uri)) # for composite concepts we use closeMatch instead of exactMatch as they are not exactly defined by the code set in other vocabularies but our interpretation of them
     # print(linked_uri)
     for i, concept in enumerate(concepts):
         # print(concept)
@@ -1111,11 +1116,9 @@ def add_composite_concepts_info(g: Graph, linked_uri: URIRef, concepts: list[Con
 
         g.add((code_set_uri, OntologyNamespaces.RO.value.has_part, code_uri,cohort_uri))
         g.add((code_uri, OntologyNamespaces.RO.value.is_part_of, code_set_uri,cohort_uri))
-        g.add((code_set_uri, RDF[f"_{i}"], code_uri, cohort_uri))
+        g.add((code_set_uri, RDF[f"_{i+1}"], code_uri, cohort_uri))
     # print(f"omop_id: {omop_id} for {linked_uri}")
     return g
-
-
 
 def add_solo_concept_info(g: Graph, linked_uri: URIRef, concept: Concept, cohort_uri: URIRef) -> Graph:
 
@@ -1153,6 +1156,7 @@ def add_solo_concept_info(g: Graph, linked_uri: URIRef, concept: Concept, cohort
     g.add((code_uri, OntologyNamespaces.OBI.value.is_specified_output_of, data_standardization_uri,cohort_uri))
     g.add((data_standardization_uri, OntologyNamespaces.OBI.value.has_specified_output, code_uri,cohort_uri))
     g.add((code_uri, RDFS.label, Literal(label, datatype=XSD.string),cohort_uri))
+    g.add((linked_uri, OntologyNamespaces.SKOS.value.exactMatch, code_uri, cohort_uri))
     # standard_label_uri = get_standard_label_uri(linked_uri, label)
     # g.add((standard_label_uri, RDF.type, OntologyNamespaces.CMEO.value.standard_label,cohort_uri))
     # g.add((code_uri, OntologyNamespaces.OBI.value.is_denoted_by, standard_label_uri,cohort_uri))

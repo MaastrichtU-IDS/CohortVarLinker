@@ -175,3 +175,9 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+/data/cohorts
+/data
+graph_nx.pkl.zip
+src/fetch_v1.py
+/data/oxigraph
+/src
