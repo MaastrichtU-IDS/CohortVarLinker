@@ -180,3 +180,4 @@ cython_debug/
 src/fetch_v1.py
 /data/oxigraph
 
+other.zip
