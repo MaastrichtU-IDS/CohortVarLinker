@@ -1,18 +1,18 @@
 import pandas as pd
 # import cProfile
 # import pstats
-from src.omop_graph import OmopGraphNX
-from src.config import settings
+from experiment.omop_graph import OmopGraphNX
+from experiment.config import settings
 from SPARQLWrapper import SPARQLWrapper, JSON
 from collections import defaultdict
 import json
 import os
 import glob
 import time
-from src.variables_kg import process_variables_metadata_file
-from src.study_kg import generate_studies_kg, add_data_access_spec
-from src.vector_db import generate_studies_embeddings, search_in_db
-from src.utils import (
+from experiment.variables_kg import process_variables_metadata_file
+from experiment.study_kg import generate_studies_kg, add_data_access_spec
+from experiment.vector_db import generate_studies_embeddings, search_in_db
+from experiment.utils import (
         get_cohort_mapping_uri,
         delete_existing_triples,
         publish_graph_to_endpoint,
@@ -20,11 +20,9 @@ from src.utils import (
         get_member_studies
     
     )
+from experiment.modes import MappingType, EmbeddingType 
 
-
-
-
-from src.fetch_v2 import map_source_target
+from experiment.fetch_v2 import map_source_target
 
 
 
@@ -109,7 +107,7 @@ def create_cohort_specific_metadata_graph(dir_path, recreate=False):
                         end_time = time.time()
                         print(f"Time taken to process cohort: {cohort_folder} is: {end_time - start_time}")
                     else:
-                        print(f"Error processing metadata file for cohort: {cohort_folder}")
+                        print(f"Error processing metadata file for cohort: {cohort_folder}. There might be data validation errors in the file.")
                 
             else:
                 print(f"Skipping non-directory file: {cohort_folder}")
@@ -512,53 +510,25 @@ def combine_cross_mappings_v3(
     final_df.to_csv(combined_output_path, index=False)
     print(f"✅ Combined existing mappings with source and target details saved to: {combined_output_path}")
 
-
-
-#sapbert embedding doesnot return self-reported body weight match in interval study
 if __name__ == '__main__':
 
     data_dir = 'data'
     cohort_file_path = f"{data_dir}/cohorts"
     cohorts_metadata_file = f"{data_dir}/studies_metadata-2.xlsx"
     start_time = time.time()
-    model_name = "biolord"
+    model_name = "sapbert"
     select_relevant_studies = True
-    embedding_mode = "concept-only" # "local" or "hybrid" or "concept-only"
+    embedding_mode = EmbeddingType.EC.value  # embedding_concepts
+    mapping_mode = MappingType.OEC.value # ontology + embedding_concepts
     create_study_metadata_graph(cohorts_metadata_file, recreate=False)
     create_cohort_specific_metadata_graph(cohort_file_path, recreate=False)
-    vector_db, embedding_model = generate_studies_embeddings(cohort_file_path, "localhost", f"studies_metadata_{model_name}_{embedding_mode}", model_name=model_name, recreate_db=False)
-    
-    # min_score_list = [0.5,0.6,0.65,0.7, 0.75, 0.8, 0.85, 0.9]
-    # for min_score in min_score_list:
-    #     # print(f"********** Results from {model_name} for min_score in  = {min_score} **********")
-    #     results=search_in_db(
-    #                         vectordb=vector_db,
-    #                         embedding_model=embedding_model,
-    #                         query_text='body weight',
-    #                         target_study='interval',
-    #                         limit=5,
-    #                         # omop_domain=['measurement','observation'],
-    #                         min_score=min_score,
-    #                         collection_name=f"studies_metadata_{model_name}",
-    #                     )
-    #     print(f"Results: {results} for min_score = {min_score} in {model_name}")
-    # results=search_in_db(
-    #                     vectordb=vector_db,
-    #                     embedding_model=embedding_model,
-    #                     query_text='self reported body weight',
-    #                     target_study='gissi-hf',
-    #                     limit=5,
-    #                     # omop_domain=['measurement','observation'],
-    #                     min_score=0.8,
-    #                     collection_name="studies_metadata_sapbert",
-    #                 )
-    # print(results)
+    vector_db, embedding_model = generate_studies_embeddings(cohort_file_path, "localhost", f"studies_metadata_{model_name}_{embedding_mode}", model_name=model_name, embedding_mode=embedding_mode, recreate_db=False)
     source_study = "time-chf"
-    # target_studies = ["cardiateam", "aachen-hf", "cachexia", "gissi-hf", "gissi-hf_outcomes", "tim-hf", "ear","bigfoot", "horuz", "sfdt1", "lups"]
-    target_studies = ["gissi-hf","aachen-hf"] 
+    # # target_studies = ["cardiateam", "aachen-hf", "cachexia", "gissi-hf", "gissi-hf_outcomes", "tim-hf", "ear","bigfoot", "horuz", "sfdt1", "lups"]
+    target_studies = ["gissi-hf", "aachen-hf"] 
 
     
-    # target_studies = ['interval']
+    # # target_studies = ['interval']
     new_studies= []
     if select_relevant_studies:
         for tstudy in target_studies:
@@ -577,23 +547,46 @@ if __name__ == '__main__':
     for tstudy in target_studies:
         mapping_transformed=map_source_target(source_study_name=source_study, target_study_name=tstudy, 
                                                 embedding_model=embedding_model, vector_db=vector_db, 
-                                                collection_name=f"studies_metadata_{model_name}_{mapping_mode}",
+                                                collection_name=f"studies_metadata_{model_name}_{embedding_mode}",
+                                                mapping_mode=mapping_mode,
                                                 graph=graph)
 
         print(mapping_transformed)
         
         # mapping_transformed = mapping_transformed.drop_duplicates(keep='first') if not mapping_transformed.empty else pd.DataFrame(columns=["source_variable", "target_variable", "source_omop_id", "target_omop_id"])
-        mapping_transformed.to_csv(f'{data_dir}/output/cross_mapping/{source_study}_{tstudy}_{model_name}_{mapping_mode}_full.csv', index=False)
+        mapping_transformed.to_csv(f'{data_dir}/output/cross_mapping/{model_name}/{source_study}_{tstudy}_{model_name}_{mapping_mode}_full.csv', index=False)
         
     tstudy_str = "_".join(target_studies)
     combine_all_mappings_to_json(
         source_study=source_study,
         target_studies=target_studies,
-        output_dir="/Users/komalgilani/Documents/GitHub/CohortVarLinker/data/output/cross_mapping",
-        json_path=os.path.join("/Users/komalgilani/Documents/GitHub/CohortVarLinker/data/output/cross_mapping", f"{source_study}_{tstudy_str}_{model_name}_{mapping_mode}.json")
-        ,model_name=f"{model_name}_{mapping_mode}"
+        output_dir=f"/Users/komalgilani/Documents/GitHub/CohortVarLinker/data/output/cross_mapping/{model_name}",
+        json_path=os.path.join(f"/Users/komalgilani/Documents/GitHub/CohortVarLinker/data/output/cross_mapping/{model_name}", f"{source_study}_{tstudy_str}_{model_name}_{mapping_mode}.json"),
+        model_name=f"{model_name}_{mapping_mode}"
     )
     print(f"Total time taken: {time.time() - start_time:.2f} seconds")
+    # min_score_list = [0.5,0.6,0.65,0.7, 0.75, 0.8, 0.85, 0.9]
+    # for min_score in min_score_list:
+    #     # print(f"********** Results from {model_name} for min_score in  = {min_score} **********")
+    #     results=search_in_db(
+    #                         vectordb=vector_db,
+    #                         embedding_model=embedding_model,
+    #                         query_text="diastolic blood pressure",
+    #                         target_study='time-chf',
+    #                         limit=100,
+    #                         # omop_domain=['measurement','observation'],
+    #                         min_score=min_score,
+    #                         collection_name=f"studies_metadata_{model_name}_{embedding_mode}",
+    #                     )
+    #     ordered_unique_results = []
+        
+    #     for res in results:
+    #         if res not in ordered_unique_results:
+    #             ordered_unique_results.append(res)
+    #     results = ordered_unique_results
+    #     print(f"Results: {results} for min_score = {min_score} in {model_name}")
+    
+   
 
     #add_data_access_spec(study_name="time-chf", data_policy=['disease specific research'], data_modifier=['ethics approval required'], disease_concept_code="snomed:42343007", disease_concept_label="congestive heart failure", disease_concept_omop_id="42343007", study_metadata_graph_file_path=f"{data_dir}/graphs/studies_metadata.trig")
     
