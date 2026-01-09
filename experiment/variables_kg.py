@@ -9,7 +9,7 @@ from .config import settings
 import json
 import re
 # import os
-from .validate_cde import validate_dictionary
+from validate_cde import validate_dictionary
 from .ontology_model import  Concept
 from .study_kg import update_metadata_graph
 from .utils import (
@@ -853,6 +853,7 @@ def add_categories_to_graph(g: Graph, var_uri: URIRef, cohort_uri: URIRef, row: 
             g.add((permissible_uri, RDF.type, OntologyNamespaces.OBI.value.categorical_value_specification, cohort_uri))
             # g.add((var_uri, OntologyNamespaces.OBI.value.has_value_specification, permissible_uri, cohort_uri))
             g.add((permissible_uri, OntologyNamespaces.OBI.value.specifies_value_of, var_uri, cohort_uri))
+            
             g.add((permissible_uri, RDFS.label, Literal(defined_value, datatype=XSD.string), cohort_uri))
             if data_type_value == 'str':
                 g.add((permissible_uri, OntologyNamespaces.CMEO.value.has_value, Literal(value, datatype=XSD.string), cohort_uri))

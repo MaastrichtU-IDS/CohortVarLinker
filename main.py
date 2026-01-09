@@ -9,7 +9,8 @@ import json
 import os
 import glob
 import time
-from experiment.variables_kg import process_variables_metadata_file
+# from experiment.run import StudyMapper
+from experiment.variables_kg_v2 import process_variables_metadata_file
 from experiment.study_kg import generate_studies_kg, add_data_access_spec
 from experiment.vector_db import generate_studies_embeddings, search_in_db
 from experiment.utils import (
@@ -20,7 +21,7 @@ from experiment.utils import (
         get_member_studies
     
     )
-from experiment.modes import MappingType, EmbeddingType 
+from experiment.constraints import MappingType, EmbeddingType 
 
 from experiment.fetch_v2 import map_source_target
 
@@ -30,7 +31,6 @@ def create_study_metadata_graph(file_path, recreate=False):
 
     if recreate:
         base_path = os.path.dirname(os.path.abspath(__file__))
-        
         graph_file_path = f"{base_path}/data/graphs/studies_metadata.trig"
         g=generate_studies_kg(file_path)
         print(f"length of graph: {len(g)}")
@@ -407,6 +407,7 @@ def combine_all_mappings_to_json(
             if "transformation_rule" in df.columns:
                 mapping[f"{target}_transformation_rule"] = row["transformation_rule"]
             # Add to source variable
+            
             mappings[src_var].append(mapping)
     # Compose final JSON dict
     final_json = {}
@@ -420,96 +421,107 @@ def combine_all_mappings_to_json(
         json.dump(final_json, f, indent=2, ensure_ascii=False)
     print(f"✅ All mappings combined and saved to {json_path}")
 
-def combine_cross_mappings_v3(
-    source_study,
-    target_studies,
-    output_dir,
-    combined_output_path,
-    extra_columns=None
-):
-    if extra_columns is None:
-        extra_columns = [
-            "category","mapping_type","source_visit","target_visit",
-            "source_type","source_unit","source_data_type",
-            "target_type","target_unit","target_data_type","transformation_rule"
-        ]
+# def combine_cross_mappings_v3(
+#     source_study,
+#     target_studies,
+#     output_dir,
+#     combined_output_path,
+#     extra_columns=None
+# ):
+#     if extra_columns is None:
+#         extra_columns = [
+#             "category","mapping_type","source_visit","target_visit",
+#             "source_type","source_unit","source_data_type",
+#             "target_type","target_unit","target_data_type","transformation_rule"
+#         ]
 
-    omop_id_tracker = {}
-    mapping_dict = {}
-    mapping_details = {}
-    source_details = {}
+#     omop_id_tracker = {}
+#     mapping_dict = {}
+#     mapping_details = {}
+#     source_details = {}
 
-    for tstudy in target_studies:
-        out_path = os.path.join(output_dir, f'{source_study}_{tstudy}_full.csv')
-        df = pd.read_csv(out_path)
-        if tstudy not in mapping_dict:
-            mapping_dict[tstudy] = {}
-            mapping_details[tstudy] = {}
-        for _, row in df.iterrows():
-            src = str(row["source"]).strip()
-            tgt = str(row["target"]).strip()
-            somop = str(row["somop_id"]).strip()
-            tomop = str(row["tomop_id"]).strip()
-            slabel = str(row.get("slabel", "")).strip()
-            if src not in omop_id_tracker:
-                omop_id_tracker[src] = (somop, slabel)
-            mapping_dict[tstudy][src] = (tgt, tomop)
-            # Target variable details
-            tdetail_pieces = []
-            for col in extra_columns:
-                if col == "transformation_rule":
-                    val = row.get(col, "")
-                    if pd.isna(val) or val == "":
-                        val = ""
-                    else:
-                        val = f"{src}→{tgt}:{val}"
-                    tdetail_pieces.append(f"{col}={val}")
-                else:
-                    val = row.get(col, "")
-                    if pd.isna(val):
-                        val = ""
-                    tdetail_pieces.append(f"{col}={val}")
-            mapping_details[tstudy][src] = (tgt, ", ".join(tdetail_pieces))
-            # Source variable details (collected once per unique source var)
-            if src not in source_details:
-                sdetail_pieces = []
-                for col in extra_columns:
-                    sval = row.get(f"source_{col}", row.get(col, ""))
-                    if pd.isna(sval):
-                        sval = ""
-                    sdetail_pieces.append(f"{col}={sval}")
-                source_details[src] = ", ".join(sdetail_pieces)
+#     for tstudy in target_studies:
+#         out_path = os.path.join(output_dir, f'{source_study}_{tstudy}_full.csv')
+#         df = pd.read_csv(out_path)
+#         if tstudy not in mapping_dict:
+#             mapping_dict[tstudy] = {}
+#             mapping_details[tstudy] = {}
+#         for _, row in df.iterrows():
+#             src = str(row["source"]).strip()
+#             tgt = str(row["target"]).strip()
+#             somop = str(row["somop_id"]).strip()
+#             tomop = str(row["tomop_id"]).strip()
+#             slabel = str(row.get("slabel", "")).strip()
+#             if src not in omop_id_tracker:
+#                 omop_id_tracker[src] = (somop, slabel)
+#             mapping_dict[tstudy][src] = (tgt, tomop)
+#             # Target variable details
+#             tdetail_pieces = []
+#             for col in extra_columns:
+#                 if col == "transformation_rule":
+#                     val = row.get(col, "")
+#                     if pd.isna(val) or val == "":
+#                         val = ""
+#                     else:
+#                         val = f"{src}→{tgt}:{val}"
+#                     tdetail_pieces.append(f"{col}={val}")
+#                 else:
+#                     val = row.get(col, "")
+#                     if pd.isna(val):
+#                         val = ""
+#                     tdetail_pieces.append(f"{col}={val}")
+#             mapping_details[tstudy][src] = (tgt, ", ".join(tdetail_pieces))
+#             # Source variable details (collected once per unique source var)
+#             if src not in source_details:
+#                 sdetail_pieces = []
+#                 for col in extra_columns:
+#                     sval = row.get(f"source_{col}", row.get(col, ""))
+#                     if pd.isna(sval):
+#                         sval = ""
+#                     sdetail_pieces.append(f"{col}={sval}")
+#                 source_details[src] = ", ".join(sdetail_pieces)
 
-    # Group source variables by OMOP ID
-    omop_to_source_vars = defaultdict(list)
-    for src_var, (somop_id, slabel) in omop_id_tracker.items():
-        omop_to_source_vars[somop_id].append(src_var)
+#     # Group source variables by OMOP ID
+#     omop_to_source_vars = defaultdict(list)
+#     for src_var, (somop_id, slabel) in omop_id_tracker.items():
+#         omop_to_source_vars[somop_id].append(src_var)
 
-    matched_rows = []
-    for _, src_vars in omop_to_source_vars.items():
-        row = {}
-        # Source study: list source vars with details
-        row[source_study] = ' | '.join(
-            f"{src_var}: {source_details.get(src_var, '')}" for src_var in sorted(set(src_vars))
-        )
-        # Each target: list mapped target vars with details
-        for tstudy in target_studies:
-            tdict = mapping_dict.get(tstudy, {})
-            tdetail = mapping_details.get(tstudy, {})
-            targets = []
-            for src_var in src_vars:
-                tgt_pair = tdict.get(src_var)
-                if tgt_pair:
-                    tgt = tgt_pair[0]
-                    detail_str = tdetail.get(src_var, "")
-                    targets.append(f"{tgt}: {detail_str}")
-            row[tstudy] = ' | '.join(targets) if targets else ''
-        matched_rows.append(row)
+#     matched_rows = []
+#     for _, src_vars in omop_to_source_vars.items():
+#         row = {}
+#         # Source study: list source vars with details
+#         row[source_study] = ' | '.join(
+#             f"{src_var}: {source_details.get(src_var, '')}" for src_var in sorted(set(src_vars))
+#         )
+#         # Each target: list mapped target vars with details
+#         for tstudy in target_studies:
+#             tdict = mapping_dict.get(tstudy, {})
+#             tdetail = mapping_details.get(tstudy, {})
+#             targets = []
+#             for src_var in src_vars:
+#                 tgt_pair = tdict.get(src_var)
+#                 if tgt_pair:
+#                     tgt = tgt_pair[0]
+#                     detail_str = tdetail.get(src_var, "")
+#                     targets.append(f"{tgt}: {detail_str}")
+#             row[tstudy] = ' | '.join(targets) if targets else ''
+#         matched_rows.append(row)
     
-    final_df = pd.DataFrame(matched_rows)
-    final_df.to_csv(combined_output_path, index=False)
-    print(f"✅ Combined existing mappings with source and target details saved to: {combined_output_path}")
+#     final_df = pd.DataFrame(matched_rows)
+#     final_df.to_csv(combined_output_path, index=False)
+#     print(f"✅ Combined existing mappings with source and target details saved to: {combined_output_path}")
 
+def generate_hierarchial_visualization_of_mappings(mapping_json_path, output_dir):
+    # we need to check all found mappings codes (source and target) and get their hierarchy from omop graph
+    # we should provide an easy overview to data analyst to understand what codes (within what context) are available across studies
+    # we can group variables based on their omop domain and then show hierarchy within each domain
+    
+    json_data = None
+    group_by_domain = defaultdict(list)
+    with open(mapping_json_path, 'r', encoding='utf-8') as f:
+        json_data = json.load(f)
+        
+    pass
 if __name__ == '__main__':
 
     data_dir = 'data'
@@ -544,14 +556,20 @@ if __name__ == '__main__':
 
     
     graph = OmopGraphNX(csv_file_path=settings.concepts_file_path)
+    # mapper = StudyMapper(vector_db=vector_db, embed_model=embedding_model, graph=graph)
     for tstudy in target_studies:
         mapping_transformed=map_source_target(source_study_name=source_study, target_study_name=tstudy, 
-                                                embedding_model=embedding_model, vector_db=vector_db, 
+                                                vector_db=vector_db, embedding_model=embedding_model,
                                                 collection_name=f"studies_metadata_{model_name}_{embedding_mode}",
                                                 mapping_mode=mapping_mode,
                                                 graph=graph)
+        # mapping_transformed = mapper.run_pipeline(
+        #     src_study=source_study,
+        #     tgt_study=tstudy,
+        #     mapping_mode=mapping_mode,
+        #     collection_name=f"studies_metadata_{model_name}_{embedding_mode}")
 
-        print(mapping_transformed)
+        print(mapping_transformed.head(5))
         
         # mapping_transformed = mapping_transformed.drop_duplicates(keep='first') if not mapping_transformed.empty else pd.DataFrame(columns=["source_variable", "target_variable", "source_omop_id", "target_omop_id"])
         mapping_transformed.to_csv(f'{data_dir}/output/cross_mapping/{model_name}/{source_study}_{tstudy}_{model_name}_{mapping_mode}_full.csv', index=False)
@@ -574,7 +592,7 @@ if __name__ == '__main__':
     #                         query_text="diastolic blood pressure",
     #                         target_study='time-chf',
     #                         limit=100,
-    #                         # omop_domain=['measurement','observation'],
+    #                         # data_domain=['measurement','observation'],
     #                         min_score=min_score,
     #                         collection_name=f"studies_metadata_{model_name}_{embedding_mode}",
     #                     )

@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>OMOP Harmonization Graph</title>
+
+  <!-- Cytoscape (graph) -->
+  <script src="https://unpkg.com/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
+
+  <!-- PapaParse (CSV parsing) -->
+  <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
+
+  <style>
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    .wrap { display: grid; grid-template-columns: 360px 1fr; height: 100vh; }
+    .panel { padding: 14px; border-right: 1px solid #e5e5e5; overflow: auto; }
+    .panel h2 { margin: 0 0 10px; font-size: 16px; }
+    .row { margin: 10px 0; }
+    label { font-size: 13px; display: block; margin-bottom: 6px; }
+    input[type="text"], select { width: 100%; padding: 8px; font-size: 13px; }
+    .statuses { display: grid; grid-template-columns: 1fr; gap: 6px; max-height: 220px; overflow: auto; padding: 8px; border: 1px solid #eee; }
+    .status-item { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+    .chip { width: 14px; height: 14px; border-radius: 4px; display: inline-block; border: 1px solid rgba(0,0,0,.15); }
+    .btns { display: flex; gap: 8px; }
+    button { padding: 8px 10px; font-size: 13px; cursor: pointer; }
+    #cy { width: 100%; height: 100%; }
+    .muted { color: #666; font-size: 12px; line-height: 1.35; }
+    pre { white-space: pre-wrap; word-break: break-word; background: #fafafa; padding: 10px; border: 1px solid #eee; }
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+  <div class="panel">
+    <h2>OMOP Harmonization Graph</h2>
+
+    <div class="row">
+      <label>Upload cross-mapping CSV</label>
+      <input id="csvFile" type="file" accept=".csv" />
+      <div class="muted" style="margin-top:6px;">
+        Expected columns (editable in code): <br/>
+        <code>category</code>, <code>harmonization_status</code>,<code>slabel</code>, <code>tlabel</code>
+      </div>
+    </div>
+
+    <div class="row">
+      <label>Category filter</label>
+      <select id="categoryFilter" disabled>
+        <option value="">(All)</option>
+      </select>
+    </div>
+
+    <div class="row">
+      <label>Harmonization status filter</label>
+      <div id="statusList" class="statuses"></div>
+      <div class="btns" style="margin-top:8px;">
+        <button id="selectAll" disabled>Select all</button>
+        <button id="selectNone" disabled>Select none</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <label>Options</label>
+      <div class="status-item">
+        <input type="checkbox" id="showCategoryEdges" checked disabled />
+        <span>Show category → node links</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <label>Search node by OMOP ID</label>
+      <input id="searchBox" type="text" placeholder="e.g., 4065387" disabled />
+      <div class="btns" style="margin-top:8px;">
+        <button id="searchBtn" disabled>Find & focus</button>
+        <button id="resetView" disabled>Reset view</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <label>Selection details</label>
+      <pre id="details" class="muted">Load a CSV, then click a node/edge…</pre>
+    </div>
+  </div>
+
+  <div id="cy"></div>
+</div>
+
+<script>
+  // ====== CONFIG: adjust these to match your CSV column names ======
+  const COLS = {
+    category: "category",
+    status: "harmonization_status",
+    sId: "somop_id",
+    tId: "tomop_id",
+    sLabel: "slabel",   // optional
+    tLabel: "tlabel"    // optional
+  };
+
+  // Harmonization status → edge color
+  // (Add/rename keys to match your pipeline’s exact labels.)
+  const STATUS_COLOR = {
+    "Identical Match":   "#2ca02c",
+    "Compatible Match":  "#1f77b4",
+    "Partial Match (Proximate)":    "#ff7f0e",
+    "Partial Match (Tentative)":    "#d62728",
+    "Not Applicable":       "#9467bd",
+  };
+
+  let cy = null;
+  let ORIGINAL = { elements: [], statuses: [], categories: [] };
+
+  function norm(x) {
+    if (x === null || x === undefined) return "";
+    return String(x).trim();
+  }
+
+  function nodeId(omopId) {
+    return `omop_${omopId}`;
+  }
+
+  function catId(cat) {
+    return `cat_${cat}`;
+  }
+
+  function getStatusColor(status) {
+    return STATUS_COLOR[status] || STATUS_COLOR["Unknown"];
+  }
+
+  function buildElements(rows) {
+  const nodes = new Map();
+  const edges = [];
+  const catEdges = new Set();
+  const statuses = new Set();
+  const categories = new Set();
+
+  function upsertOmopNode(omopId, labelMaybe, role) {
+    const id = nodeId(omopId);
+    const existing = nodes.get(id);
+    const label = labelMaybe && norm(labelMaybe) ? norm(labelMaybe) : `OMOP ${omopId}`;
+
+    if (!existing) {
+      nodes.set(id, {
+        data: {
+          id,
+          kind: "omop",
+          omop_id: norm(omopId),
+          label,
+          is_source: role === "source" ? "1" : "0",
+          is_target: role === "target" ? "1" : "0"
+        }
+      });
+    } else {
+      if (existing.data.label.startsWith("OMOP ") && label && !label.startsWith("OMOP ")) {
+        existing.data.label = label;
+      }
+      if (role === "source") existing.data.is_source = "1";
+      if (role === "target") existing.data.is_target = "1";
+    }
+    return id;
+  }
+
+  function upsertCategoryNode(category) {
+    const id = catId(category);
+    if (!nodes.has(id)) {
+      nodes.set(id, { data: { id, kind: "category", label: category, category } });
+    }
+    return id;
+  }
+
+  // Aggregate mapping edges: one edge per (category, status, sourceConcept, targetConcept)
+  const mappingAgg = new Map(); // key -> {count, sNode, tNode, status, category}
+
+  rows.forEach((r) => {
+    const category = norm(r[COLS.category]);
+    const status = norm(r[COLS.status]) || "Unknown";
+    const s = norm(r[COLS.sId]);
+    const t = norm(r[COLS.tId]);
+    if (!s || !t || !category) return;
+
+    categories.add(category);
+    statuses.add(status);
+
+    const sNode = upsertOmopNode(s, r[COLS.sLabel], "source");
+    const tNode = upsertOmopNode(t, r[COLS.tLabel], "target");
+    const cNode = upsertCategoryNode(category);
+
+    // mapping aggregation
+    const key = `${category}||${status}||${sNode}||${tNode}`;
+    const cur = mappingAgg.get(key);
+    if (cur) cur.count += 1;
+    else mappingAgg.set(key, { count: 1, sNode, tNode, status, category });
+
+    // category membership edges (add once)
+    const key1 = `${cNode}__${sNode}`;
+    const key2 = `${cNode}__${tNode}`;
+    if (!catEdges.has(key1)) {
+      catEdges.add(key1);
+      edges.push({ data: { id: `cat_${key1}`, kind: "category_edge", source: cNode, target: sNode } });
+    }
+    if (!catEdges.has(key2)) {
+      catEdges.add(key2);
+      edges.push({ data: { id: `cat_${key2}`, kind: "category_edge", source: cNode, target: tNode } });
+    }
+  });
+
+  // Create ONE edge per aggregated mapping
+  let i = 0;
+  for (const m of mappingAgg.values()) {
+    edges.push({
+      data: {
+        id: `map_${i++}`,
+        kind: "mapping",
+        source: m.sNode,
+        target: m.tNode,
+        category: m.category,
+        harmonization_status: m.status,
+        color: getStatusColor(m.status),
+        count: m.count,
+        <!-- edge_label: m.count > 1 ? String(m.count) : "" -->
+      }
+    });
+  }
+
+  return {
+    elements: [...nodes.values(), ...edges],
+    statuses: [...statuses].sort(),
+    categories: [...categories].sort()
+  };
+}
+
+  function initCytoscape(elements) {
+    cy = cytoscape({
+      container: document.getElementById("cy"),
+      elements,
+      style: [
+        // OMOP nodes
+        {
+          selector: 'node[kind="omop"]',
+          style: {
+            "label": "data(label)",
+            "font-size": 10,
+            "text-wrap": "wrap",
+            "text-max-width": 120,
+            "text-valign": "bottom",
+            "text-halign": "center",
+            "width": 22,
+            "height": 22,
+            "background-color": "#4c78a8",
+            "border-width": 0
+          }
+        },
+        // Target-only nodes look different (orange-ish)
+        {
+          selector: 'node[kind="omop"][is_source="0"][is_target="1"]',
+          style: { "background-color": "#f58518" }
+        },
+        // Nodes that are both source and target get a border
+        {
+          selector: 'node[kind="omop"][is_source="1"][is_target="1"]',
+          style: { "border-width": 3, "border-color": "#222" }
+        },
+
+        // Category nodes
+        {
+          selector: 'node[kind="category"]',
+          style: {
+            "label": "data(label)",
+            "shape": "round-rectangle",
+            "padding": "10px",
+            "background-color": "#54a24b",
+            "font-size": 10,
+            "text-valign": "center",
+            "text-halign": "center",
+            "width": "label",
+            "height": 26
+          }
+        },
+
+        // Mapping edges (colored by status)
+        {
+            selector: 'edge[kind="mapping"]',
+            style: {
+                "label": "data(edge_label)",
+                "width": "mapData(count, 1, 20, 2, 8)"
+            }
+        },
+
+
+        // Category edges (subtle)
+        {
+          selector: 'edge[kind="category_edge"]',
+          style: {
+            "curve-style": "straight",
+            "line-color": "#cccccc",
+            "target-arrow-shape": "none",
+            "width": 1,
+            "opacity": 0.5
+          }
+        },
+
+        // Hidden class
+        { selector: ".hidden", style: { "display": "none" } },
+
+        // Highlighted selection
+        {
+          selector: ".highlighted",
+          style: {
+            "border-width": 4,
+            "border-color": "#000",
+            "width": 30,
+            "height": 30
+          }
+        }
+      ],
+      layout: { name: "cose", animate: false, fit: true, padding: 30 }
+    });
+
+    // Click interactions → details panel
+    cy.on("tap", "node", (evt) => {
+      const n = evt.target;
+      document.getElementById("details").textContent = JSON.stringify(n.data(), null, 2);
+    });
+
+    cy.on("tap", "edge", (evt) => {
+      const e = evt.target;
+      document.getElementById("details").textContent = JSON.stringify(e.data(), null, 2);
+    });
+
+    cy.on("tap", (evt) => {
+      if (evt.target === cy) {
+        document.getElementById("details").textContent = "Click a node/edge…";
+      }
+    });
+  }
+
+  function populateFilters(statuses, categories) {
+    const catSel = document.getElementById("categoryFilter");
+    catSel.innerHTML = `<option value="">(All)</option>` + categories.map(c => `<option value="${c}">${c}</option>`).join("");
+
+    const statusBox = document.getElementById("statusList");
+    statusBox.innerHTML = statuses.map(s => {
+      const col = getStatusColor(s);
+      return `
+        <label class="status-item">
+          <input type="checkbox" class="statusChk" value="${s}" checked />
+          <span class="chip" style="background:${col}"></span>
+          <span>${s}</span>
+        </label>
+      `;
+    }).join("");
+  }
+
+  function applyFilters() {
+    const selectedCategory = document.getElementById("categoryFilter").value;
+    const showCatEdges = document.getElementById("showCategoryEdges").checked;
+
+    const checkedStatuses = new Set(
+      [...document.querySelectorAll(".statusChk")].filter(x => x.checked).map(x => x.value)
+    );
+
+    cy.batch(() => {
+      cy.elements().removeClass("hidden");
+
+      // hide category edges if requested
+      if (!showCatEdges) {
+        cy.edges('edge[kind="category_edge"]').addClass("hidden");
+      }
+
+      // filter mapping edges
+      cy.edges('edge[kind="mapping"]').forEach(e => {
+        const st = e.data("harmonization_status");
+        const cat = e.data("category");
+        const statusOk = checkedStatuses.has(st);
+        const catOk = !selectedCategory || cat === selectedCategory;
+
+        if (!(statusOk && catOk)) e.addClass("hidden");
+      });
+
+      // hide OMOP nodes that have no visible mapping edges
+      cy.nodes('node[kind="omop"]').forEach(n => {
+        const visibleMappingEdges = n.connectedEdges('edge[kind="mapping"]').filter(e => !e.hasClass("hidden"));
+        if (visibleMappingEdges.length === 0) n.addClass("hidden");
+      });
+
+      // hide category nodes with no visible mapping edges incident (through category edges)
+      cy.nodes('node[kind="category"]').forEach(n => {
+        const visible = n.connectedEdges('edge[kind="category_edge"]').connectedNodes('node[kind="omop"]').filter(x => !x.hasClass("hidden"));
+        if (visible.length === 0 && selectedCategory) n.addClass("hidden");
+        if (selectedCategory && n.data("category") !== selectedCategory) n.addClass("hidden");
+      });
+    });
+  }
+
+  function enableUI() {
+    ["categoryFilter","showCategoryEdges","searchBox","searchBtn","resetView","selectAll","selectNone"]
+      .forEach(id => document.getElementById(id).disabled = false);
+
+    document.getElementById("categoryFilter").addEventListener("change", applyFilters);
+    document.getElementById("showCategoryEdges").addEventListener("change", applyFilters);
+
+    document.getElementById("statusList").addEventListener("change", (e) => {
+      if (e.target.classList.contains("statusChk")) applyFilters();
+    });
+
+    document.getElementById("selectAll").onclick = () => {
+      document.querySelectorAll(".statusChk").forEach(x => x.checked = true);
+      applyFilters();
+    };
+    document.getElementById("selectNone").onclick = () => {
+      document.querySelectorAll(".statusChk").forEach(x => x.checked = false);
+      applyFilters();
+    };
+
+    document.getElementById("searchBtn").onclick = () => {
+      const q = norm(document.getElementById("searchBox").value);
+      if (!q) return;
+
+      // remove previous highlight
+      cy.nodes().removeClass("highlighted");
+
+      const n = cy.getElementById(nodeId(q));
+      if (n && n.length > 0 && !n.hasClass("hidden")) {
+        n.addClass("highlighted");
+        cy.animate({ center: { eles: n }, zoom: 1.2 }, { duration: 300 });
+        document.getElementById("details").textContent = JSON.stringify(n.data(), null, 2);
+      } else {
+        document.getElementById("details").textContent = `Node not found (or filtered out): OMOP ${q}`;
+      }
+    };
+
+    document.getElementById("resetView").onclick = () => {
+      cy.nodes().removeClass("highlighted");
+      cy.fit(undefined, 30);
+    };
+  }
+
+  // ====== CSV Upload handling ======
+  document.getElementById("csvFile").addEventListener("change", (evt) => {
+    const file = evt.target.files?.[0];
+    if (!file) return;
+
+    Papa.parse(file, {
+      header: true,
+      skipEmptyLines: true,
+      complete: (res) => {
+        const rows = res.data || [];
+        const { elements, statuses, categories } = buildElements(rows);
+
+        ORIGINAL = { elements, statuses, categories };
+
+        // (Re)initialize graph
+        document.getElementById("details").textContent = "Building graph...";
+        if (cy) cy.destroy();
+
+        initCytoscape(elements);
+        populateFilters(statuses, categories);
+        enableUI();
+        applyFilters();
+
+        document.getElementById("details").textContent =
+          `Loaded ${rows.length} rows.\nNodes: ${cy.nodes().length}\nEdges: ${cy.edges().length}\n\nClick a node/edge for details.`;
+      },
+      error: (err) => {
+        document.getElementById("details").textContent = `CSV parse error: ${err}`;
+      }
+    });
+  });
+</script>
+</body>
+</html>

@@ -6,18 +6,13 @@ authors = [
     {name = "Komal Gilani",email = "komalsyeda29@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.10,<3.12"
-
-
+requires-python = ">=3.11,<3.12"
 
 [tool.poetry.dependencies]
-    pandas = "*"
-    numpy = "*"
     matplotlib = "*"
     seaborn = "*"
     requests = "*"
-    tqdm = "*"
-    ydata-profiling = "*"
+    tqdm = "4.66.6"
     setuptools = "*"
     pyreadstat = "*"
     dateinfer = "*"
@@ -33,35 +28,34 @@ requires-python = ">=3.10,<3.12"
     ontospy="*"
     pylode= "*"
     openai="*"
-    langchain = "*"
-    langchain-community = "*"
-    langchain-core = "*"
-    langgraph = "*"
     faiss-cpu = "*"
-    langchain-together = "*"
     owlready2 = "*"
     asyncpg = "*"
     greenlet = "*"
     torch = "*"
     transformers = "*"
-    scipy = "*"
-    langchain-qdrant = "*"
-    scikit-learn = "*"
+    scipy = "1.13.1"
+    scikit-learn = "1.5.2"
     jinja2 = "*"
     pyvis = "*"
     optimum = "*"
     openpyxl = "*"
-thefuzz = "^0.22.1"
-pint = "^0.24.4"
-qdrant-client = "^1.14.2"
-pyreadr = "^0.5.3"
-bdi-kit = "^0.8.0"
-sentence-transformers = "^5.1.2"
+    thefuzz = "^0.22.1"
+    pint = "^0.24.4"
+    pyreadr = "^0.5.3"
+    sentence-transformers = "^5.1.2"
+    squarify = "^0.4.4"
+    circlify = "^0.15.1"
+    tensorflow = "2.18.0"
+    tf-keras = "==2.18.*"
+    pandas = "^2.3.3"
+    numpy = "<2.3"
+qdrant-client = "1.14.2"
 
 
 
 [tool.poetry]
-packages = [{include = "src"}]
+packages = [{include = "experiment"}]
 
 
 [build-system]

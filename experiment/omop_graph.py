@@ -3,9 +3,9 @@ import networkx as nx
 import pandas as pd
 import pickle
 import os
-from typing import List,Set,Tuple
-
-from collections import deque
+from typing import Iterable, List, Optional,Set,Tuple
+from matplotlib import pyplot as plt
+from collections import deque, OrderedDict
 
 class OmopGraphNX:
     """
@@ -26,6 +26,8 @@ class OmopGraphNX:
         else:
             print(f"graph file does not exist")
             self.build_graph(csv_file_path, force_rebuild=True)
+        self._sssp_cache = OrderedDict()
+        self._sssp_cache_max = 20000   # tune (500–20000 typically OK)
 
     def build_graph(self, csv_file_path=None, force_rebuild=False):
         """
@@ -64,6 +66,7 @@ class OmopGraphNX:
             'maps to': 'mapped from',
             'component of': 'has component',
             'has component': 'component of',
+            
             # 'cpt4 - loinc eq': 'loinc - cpt4 eq',
             # 'loinc - cpt4 eq': 'cpt4 - loinc eq',
             # 'cpt4 - snomed eq': 'snomed - cpt4 eq',
@@ -72,9 +75,11 @@ class OmopGraphNX:
             # 'snomed - atc eq': 'atc - snomed eq',
         }
    
-        directed_child_to_parent = {
+        directed_hierarchical = {
             'is a': 'subsumes',
-            'subsumes': 'is a'
+            'subsumes': 'is a',
+            'has answer': 'answer of',
+            'answer of':'has answer'
         }
         # directed_others_ = {
         #     'has disposition': 'is disposition of',
@@ -95,6 +100,9 @@ class OmopGraphNX:
             domain2 = (row['concept_2_domain']).strip().lower() if pd.notna(row['concept_2_domain']) else ""
             concept_class1 = (row['concept_1_concept_class']).strip().lower() if pd.notna(row['concept_1_concept_class']) else ""
             concept_class2 = (row['concept_2_concept_class']).strip().lower() if pd.notna(row['concept_2_concept_class']) else ""
+            concept_synonym1 = (row['concept_synonym_1']).strip().lower() if pd.notna(row['concept_synonym_1']) else ""
+            concept_synonym2 = (row['concept_synonym_2']).strip().lower() if pd.notna(row['concept_synonym_2']) else ""
+            
             if rel_id in eq_relationships:
                 rel_id_ = f"{rel_id} eq"
                 inv_rel_ = f"{eq_relationships[rel_id]} eq"
@@ -102,8 +110,8 @@ class OmopGraphNX:
                     self.graph.add_edge(c1, c2, relation=rel_id_)
                 if not self.graph.has_edge(c2, c1):
                     self.graph.add_edge(c2, c1, relation=inv_rel_)
-            elif rel_id in directed_child_to_parent:
-                inv_rel = directed_child_to_parent[rel_id]
+            elif rel_id in directed_hierarchical:
+                inv_rel = directed_hierarchical[rel_id]
                 if not self.graph.has_edge(c1, c2):
                     self.graph.add_edge(c1, c2, relation=rel_id)
                 if not self.graph.has_edge(c2, c1):
@@ -114,7 +122,7 @@ class OmopGraphNX:
                     concept_code=concept_code1,
                     domain=domain1,
                     vocabulary=vocab1,
-                    
+                    synonyms = concept_synonym1,
                     concept_class=concept_class1
                 )
 
@@ -124,13 +132,204 @@ class OmopGraphNX:
                     concept_code=concept_code2,
                     domain=domain2,
                     vocabulary=vocab2,
+                    synonyms = concept_synonym2,
                     concept_class=concept_class2
                 )
         self.save_graph(self.output_file)
 
         print(f"[INFO] Graph built successfully with {self.graph.number_of_nodes()} nodes and {self.graph.number_of_edges()} edges.")
 
+    def _sssp_lengths(self, start: int, cutoff: int = 3) -> dict[int, int]:
+        """
+        Distances in number of edges from start to nodes within cutoff.
+        Cached by (start, cutoff).
+        """
+        key = (start, cutoff)
+        hit = self._sssp_cache.get(key)
+        if hit is not None:
+            self._sssp_cache.move_to_end(key)
+            return hit
 
+        dist = dict(nx.single_source_shortest_path_length(self.graph, start, cutoff=cutoff))
+        self._sssp_cache[key] = dist
+        if len(self._sssp_cache) > self._sssp_cache_max:
+            self._sssp_cache.popitem(last=False)
+        return dist
+    
+    def source_to_targets_paths( self, start, target_ids,  max_depth: int = 1, domain: str = "drug",
+    ) -> List[Tuple[int, str]]:
+        try:
+            start = int(start)
+        except (TypeError, ValueError):
+            return []
+
+        if start not in self.graph:
+            return []
+
+        # target_ids coming from your pipeline are already ints; keep conversion cheap anyway
+        targets = set()
+        for ti in target_ids:
+            try:
+                ti = int(ti)
+            except (TypeError, ValueError):
+                continue
+            if ti in self.graph and ti != start:
+                targets.add(ti)
+
+        if not targets:
+            return []
+
+        start_node = self.graph.nodes[start]
+        vocab_start = (start_node.get("vocabulary") or "").lower()
+        domain_lower = (domain or "").lower()
+
+        # IMPORTANT: cutoff must cover your largest "allowed" (you sometimes allow +3)
+        cutoff = max_depth + 2
+        dists = self._sssp_lengths(start, cutoff=cutoff)
+
+        results: List[Tuple[int, str]] = []
+
+        # Iterate reached nodes (small) instead of iterating targets (huge)
+        for tid, dist_edges in dists.items():
+            if tid not in targets:
+                continue
+
+            node_t = self.graph.nodes[tid]
+            vocab_goal = (node_t.get("vocabulary") or "").lower()
+
+            # --- allowed depth in EDGES ---
+            allowed = max_depth
+            if vocab_goal not in {"rxnorm", "atc"} and vocab_start not in {"rxnorm", "atc"}:
+                allowed = max_depth
+            else:
+                if vocab_start != vocab_goal:
+                    if (vocab_start, vocab_goal) in {("atc", "rxnorm"), ("rxnorm", "atc")}:
+                        allowed = max_depth + 1
+                    elif (vocab_start, vocab_goal) in {("snomed", "atc"), ("atc", "snomed")}:
+                        allowed = max_depth + 2
+                    elif (vocab_start, vocab_goal) in {("snomed", "rxnorm"), ("rxnorm", "snomed")}:
+                        allowed = max_depth + 3
+                    else:
+                        allowed = max_depth + 1
+                else:
+                    
+                     allowed = max_depth + 1 if vocab_start in ("rxnorm", "atc") else max_depth
+
+            if dist_edges > allowed:
+                continue
+
+            # --- mapping_relation ---
+            # For multi-hop matches, you currently treat as related anyway.
+            match_relation = "skos:relatedMatch"
+            
+            if dist_edges == 1:
+                edge_data = self.graph.get_edge_data(start, tid) or {}
+                rel = (edge_data.get("relation") or "").lower()
+                if "subsumes" in rel:
+                    match_relation = "skos:narrowMatch"
+                elif "is a" in rel:
+                    match_relation = "skos:broadMatch"
+                elif "eq" in rel:
+                    match_relation = "skos:exactMatch"
+                
+            else:
+                if vocab_goal in {"rxnorm", "atc", "snomed"} and vocab_start in {"rxnorm", "atc", "snomed"}:
+                    match_relation = "skos:closeMatch"
+
+            results.append((tid, match_relation))
+
+        return results
+
+    # def source_to_targets_paths(
+    #     self,
+    #     start,
+    #     target_ids,
+    #     max_depth: int = 3,
+    #     domain: str = "drug",
+    # ) -> List[Tuple[int, str]]:
+    #     """
+    #     Fast path-existence + rough mapping_relation using a single BFS.
+
+    #     Returns: list of (target_id, mapping_relation)
+    #     """
+    #     try:
+    #         start = int(start)
+    #     except (TypeError, ValueError):
+    #         return []
+
+    #     # Normalize targets and filter out things not in graph
+    #     targets = {ti for ti in map(int, target_ids) if ti in self.graph}
+    #     if start not in self.graph or not targets:
+    #         return []
+
+    #     dist = self.bfs_path_exists(start, targets, max_depth=max_depth + 3)
+    #     # print(f"dist keys are {dist.keys()}")
+    #     start_node = self.graph.nodes[start]
+    #     vocab_start = (start_node.get("vocabulary") or "").lower()
+    #     domain_lower = (domain or "").lower()
+
+    #     results: List[Tuple[int, str]] = []
+
+    #     for tid in targets:
+    #         if tid == start:
+    #             continue
+    #         if tid not in dist:
+    #             continue
+
+    #         path_len = len(dist[tid])
+    #         print(f"Path length from {start} to {tid} is {path_len}")
+    #         node_t = self.graph.nodes[tid]
+    #         vocab_goal = (node_t.get("vocabulary") or "").lower()
+
+    #         # --- per-target allowed depth (same logic as before, but local) ---
+    #         allowed = max_depth
+
+    #         if "drug" not in domain_lower:
+    #             # original code: if not drug, allow +1
+    #             allowed = max_depth + 1
+    #         else:
+    #             # drug domain heuristics
+    #             if vocab_start != vocab_goal:
+    #                 if vocab_start == "atc" and vocab_goal == "rxnorm":
+    #                     allowed = max_depth + 2
+    #                 elif vocab_start == "rxnorm" and vocab_goal == "atc":
+    #                     allowed = max_depth + 2
+    #                 elif (
+    #                     (vocab_start == "snomed" and vocab_goal == "atc") or
+    #                     (vocab_start == "atc" and vocab_goal == "snomed")
+    #                 ):
+    #                     allowed = max_depth + 3
+    #                 elif vocab_start == "snomed" and vocab_goal == "rxnorm":
+    #                     allowed = max_depth + 2
+    #                 elif vocab_start == "rxnorm" and vocab_goal == "snomed":
+    #                     allowed = max_depth + 2
+    #                 else:
+    #                     allowed = max_depth + 1
+    #             else:
+    #                 # same vocab, allow a tiny bit more
+    #                 allowed = max_depth + 1
+
+    #         if path_len > allowed:
+    #             print(f"Skipping {tid} due to path length {path_len} > allowed {allowed}")
+    #             continue
+
+    #         # --- mapping_relation (same idea as before) ---
+    #         match_relation = "skos:relatedMatch"
+    #         edge_data = self.graph.get_edge_data(start, tid)
+    #         if edge_data:
+    #             rel = (edge_data.get("relation") or "").lower()
+    #             if "subsumes" in rel:
+    #                 match_relation = "skos:narrowMatch"
+    #             elif "is a" in rel:
+    #                 match_relation = "skos:broadMatch"
+
+    #             elif "eq" in rel:
+    #                 match_relation = "skos:closeMatch"
+    #         # self._dist_cache[(start, tid)] = dist[tid]
+    #         results.append((tid, match_relation))
+
+       
+    #     return results
     def bfs_all_reachable_subsumes(self, start, max_depth=5):
         """
         Return all nodes reachable from `start` in self.graph by following only downward edges 
@@ -257,6 +456,7 @@ class OmopGraphNX:
         reachable_target_ids = set(upward) | set(downward) | set(equivalents) | set(siblings)
         reachable_target_ids = reachable_target_ids.intersection(target_ids)
         return reachable_target_ids
+    
     def get_equivalent_nodes(self, node, max_depth=3):
         """
         Recursively find all equivalent nodes to the given node via 'eq' relationships (multi-hop).
@@ -293,6 +493,31 @@ class OmopGraphNX:
         visited.discard(node)  # Remove the original node
         return visited
 
+    
+    def get_direct_equivalents(self, node: int) -> set[int]:
+        """Direct neighbors connected via an 'eq' relationship."""
+        if node not in self.graph:
+            return set()
+
+        eq_neighbors = set()
+
+        # outgoing
+        for nb in self.graph.successors(node):
+            rel = (self.graph.get_edge_data(node, nb) or {}).get("relation", "").lower()
+            if "eq" in rel:
+                eq_neighbors.add(nb)
+
+        # incoming
+        for nb in self.graph.predecessors(node):
+            rel = (self.graph.get_edge_data(nb, node) or {}).get("relation", "").lower()
+            if "eq" in rel:
+                eq_neighbors.add(nb)
+
+        return eq_neighbors
+            
+                        
+        
+       
 
 
     def bfs_upward_with_equivalences(self, start, candidate_ids, max_depth=5):
@@ -406,7 +631,7 @@ class OmopGraphNX:
 
         # Include target equivalents
         target_equiv_map = {
-            tid: self.get_equivalent_nodes(tid, max_depth=1) | {tid}
+            tid: self.get_direct_equivalents(tid) | {tid}
             for tid in target_ids
         }
         all_target_equivs = set().union(*target_equiv_map.values())
@@ -540,34 +765,35 @@ class OmopGraphNX:
        # print(f"is {node1} and {node2} below atc 4th level? {flag} and {flag_2}")
         return flag or flag_2
 
-    def bfs_path(self, start, target_ids, max_depth=15):
-        """
-        Return all nodes reachable from `start` in self.graph and check if target_ids are reachable.
-        """
-        if start not in self.graph:
-            # print(f"[WARN] Node {start} does not exist in the graph.")
-            return []
+    # def bfs_path(self, start, target_ids, max_depth=15):
+    #     """
+    #     Return all nodes reachable from `start` in self.graph and check if target_ids are reachable.
+    #     """
+    #     if start not in self.graph:
+    #         # print(f"[WARN] Node {start} does not exist in the graph.")
+    #         return []
         
-        # Get all reachable nodes using shortest path lengths
-        reachable_nodes = nx.single_source_shortest_path_length(self.graph, start,cutoff=max_depth)
-        # reachable_targets = {target for target in target_ids 
-        #                  if target in reachable_nodes and reachable_nodes[target] < max_depth}
-        reachable_targets = {target for target in target_ids 
-                         if target in reachable_nodes}
-        # Find which target IDs are reachable
-        # reachable_targets = target_ids.intersection(reachable_nodes)
+    #     # Get all reachable nodes using shortest path lengths
+    #     reachable_nodes = nx.single_source_shortest_path_length(self.graph, start,cutoff=max_depth)
+    #     # reachable_targets = {target for target in target_ids 
+    #     #                  if target in reachable_nodes and reachable_nodes[target] < max_depth}
+    #     reachable_targets = {target for target in target_ids 
+    #                      if target in reachable_nodes}
+    #     # Find which target IDs are reachable
+    #     # reachable_targets = target_ids.intersection(reachable_nodes)
 
-        # print(f"len of reachable nodes is {len(reachable_nodes)}")
-        # print(f"reachable target ids via graph path is {len(reachable_targets)}")
-        # reachable_targets_with_depth = {
-        #         target: reachable_nodes[target] 
-        #         for target in target_ids 
-        #         if target in reachable_nodes
-        #     }
-        return list(reachable_targets)
-        # return reachable_targets_with_depth
+    #     # print(f"len of reachable nodes is {len(reachable_nodes)}")
+    #     # print(f"reachable target ids via graph path is {len(reachable_targets)}")
+    #     # reachable_targets_with_depth = {
+    #     #         target: reachable_nodes[target] 
+    #     #         for target in target_ids 
+    #     #         if target in reachable_nodes
+    #     #     }
+    #     return list(reachable_targets)
+    #     # return reachable_targets_with_depth
 
-    def bfs_path_exists(self, start, goal, add_inferred=True):
+    
+    def bfs_path_exists(self, start, target_ids,  max_depth=3):
         """
         Uses networkx to check if a path exists between start and goal.
         Optionally, adds an inferred edge (shortcut) if a path is found.
@@ -578,31 +804,34 @@ class OmopGraphNX:
         :return: True if a path exists, else False.
         """
         start = int(start)
-        goal = int(goal)
+        # target_ids = [int(t) for t in target_ids]
         path = None
-        is_match = False
-        if start not in self.graph or goal not in self.graph:
-            # print(f"[WARN] One of the nodes {start} or {goal} does not exist in the graph.")
-            is_match = False
+        reachable_targets = dict()
+        # is_match = False
+        if start not in self.graph:
+            # print(f"[WARN] One of the nodes {start} or {target_ids} does not exist in the graph.")
+            return []
         else:
-            if start == goal:
-                is_match = True
-            else:
+            if start not in target_ids:
                 try:
                     # networkx.shortest_path uses efficient algorithms.
-                    path = nx.shortest_path(self.graph, source=start, target=goal)
-                    # print (f"for {start} to {goal} path is {path}")
-                    if path and len(path) < 6:
-                        is_match = True
-                    elif len(path) >=6:
-                         is_match = False
-                         
-                    # if add_inferred and not self.graph.has_edge(start, goal):
-                        # self.add_inferred_edge(start, goal)
-                        
+                    for goal in target_ids:
+                        if goal  in self.graph:
+                            if (start, goal) in self._path_cache and self._path_cache[(start, goal)] is not None:
+                                print(f"[CACHE HIT] Using cached path for {start} -> {goal}")
+                                path = self._path_cache[(start, goal)]
+                            else:
+                                
+                                path = nx.shortest_path(self.graph, source=start, target=goal)
+                                print(f"[PATH FOUND] Path from {start} to {goal}: {path}")
+                                self._path_cache[(start, goal)] = path
+                            if len(path) <= max_depth:
+                                reachable_targets[goal] = path
+                                    
+                           
                 except nx.NetworkXNoPath:
-                    is_match = False
-        return is_match, path
+                    pass
+        return reachable_targets
 
 
 
@@ -702,7 +931,8 @@ class OmopGraphNX:
                         queue.append((parent, depth + 1))
         
         return visited
-
+    
+    
 
     def find_sibling_targets(
         self, 
@@ -768,6 +998,8 @@ class OmopGraphNX:
             return False, []
         
         
+    
+
     def _is_valid_drug_graph_match(self, start: int, target: int) -> bool:
         """
         Extra guardrail for drug-domain concepts.
@@ -812,80 +1044,145 @@ class OmopGraphNX:
         # ---------- ATC–RxNorm (cross-vocabulary) ----------
         elif (vocab1 == "atc" and vocab2 == "rxnorm") or (vocab1 == "rxnorm" and vocab2 == "atc"):
             print(f"checking ATC–RxNorm match between {start} and {target} and eq notes are {self.get_equivalent_nodes(start, max_depth=1)} and {self.get_equivalent_nodes(target, max_depth=1)}")
-        #     # Only accept if they are directly equivalent according to 'eq' relations.
-        #     eqs_start = self.get_equivalent_nodes(start, max_depth=2)
-        #     if target in eqs_start:
-                
-        #          return True
-        #     # Also try the reverse direction just in case.
-        #     eqs_target = self.get_equivalent_nodes(target, max_depth=2)
-        #     if start in eqs_target:
-        #         return True
-        #     return False
-
-        # # ---------- Same non-ATC vocabulary (e.g. RxNorm–RxNorm) ----------
-        # if vocab1 == vocab2:
-        #     return True
-
-        # Everything else (mixed vocabularies with drugs): be conservative.
+       
             return True
         return False
+    def _normalize_ids(self, ids):
+        out = set()
+        for x in ids:
+            try:
+                xi = int(x)
+            except (TypeError, ValueError):
+                continue
+            if xi in self.graph:
+                out.add(xi)
+        return out
+    def reduce_graph(
+        self,
+        seed_ids: Iterable,
+        hops: int = 0,
+        treat_as_undirected: bool = True,
+        keep_relations: Optional[Set[str]] = None,
+        drop_isolates: bool = False,
+        copy: bool = True,
+    ) -> nx.DiGraph:
+        """
+        Reduce the big OMOP graph to:
+          - just seed_ids (hops=0), or
+          - seed_ids + all nodes within <= hops (k-hop neighborhood).
 
-# # Example usage
+        Parameters
+        ----------
+        seed_ids : iterable
+            Your set/list of OMOP concept_ids.
+        hops : int
+            0 = induced subgraph on seed_ids only.
+            >0 = include k-hop neighbors too.
+        treat_as_undirected : bool
+            If True, neighborhood expansion ignores edge direction (recommended for matching).
+        keep_relations : set[str] | None
+            If provided, keeps only edges whose data['relation'] is in this set (case-insensitive).
+        drop_isolates : bool
+            If True, removes nodes with degree 0 after edge filtering.
+        copy : bool
+            If True returns an independent DiGraph; if False returns a NetworkX view.
 
-# def print_downward_path(graph, start, target, max_depth=5):
-#         try:
-#             paths = nx.all_simple_paths(graph.reverse(copy=False), source=target, target=start, cutoff=max_depth)
-#             paths = list(paths)
-#             if paths:
-#                 for p in paths:
-#                     print(f"[PATH from {start} to {target} (downward)]: {list(reversed(p))}")
-#             else:
-#                 print("No downward path found.")
-#         except Exception as e:
-#             print(f"Error in path tracing: {e}")
+        Returns
+        -------
+        nx.DiGraph
+            Reduced graph.
+        """
+        seeds = self._normalize_ids(seed_ids)
+        if not seeds:
+            return nx.DiGraph()
+
+        # ---- node expansion ----
+        nodes = set(seeds)
+        if hops and hops > 0:
+            if treat_as_undirected:
+                G = self.graph.to_undirected(as_view=True)
+                q = deque([(s, 0) for s in seeds])
+                seen = set(seeds)
+                while q:
+                    cur, d = q.popleft()
+                    if d >= hops:
+                        continue
+                    for nb in G.neighbors(cur):
+                        if nb not in seen:
+                            seen.add(nb)
+                            q.append((nb, d + 1))
+                nodes = seen
+            else:
+                # directed expansion: successors+predecessors (still direction-aware)
+                q = deque([(s, 0) for s in seeds])
+                seen = set(seeds)
+                while q:
+                    cur, d = q.popleft()
+                    if d >= hops:
+                        continue
+                    for nb in self.graph.successors(cur):
+                        if nb not in seen:
+                            seen.add(nb)
+                            q.append((nb, d + 1))
+                    for nb in self.graph.predecessors(cur):
+                        if nb not in seen:
+                            seen.add(nb)
+                            q.append((nb, d + 1))
+                nodes = seen
+
+        # ---- subgraph ----
+        H = self.graph.subgraph(nodes)
+        if copy:
+            H = H.copy()
+
+        # ---- optional edge filtering by relation ----
+        if keep_relations:
+            keep_rel = {r.lower() for r in keep_relations}
+            to_remove = []
+            for u, v, data in H.edges(data=True):
+                rel = (data.get("relation") or "").lower()
+                if rel not in keep_rel:
+                    to_remove.append((u, v))
+            H.remove_edges_from(to_remove)
+
+        if drop_isolates:
+            isolates = [n for n in H.nodes if H.degree(n) == 0]
+            H.remove_nodes_from(isolates)
+        self.graph = H
+        return H
+    def visualize_graph(self):
+        """
+        Visualize the subgraph defined by the given path.
+        """
+        # select random path for visualization with enriched edges
+        path = list(self.graph.nodes)[:15]  # Example: first 15 nodes
+        subgraph = self.graph.subgraph(path)
+        pos = nx.spring_layout(subgraph)
+        plt.figure(figsize=(12, 8))
+        nx.draw(subgraph, pos, with_labels=True, node_size=500, node_color='lightblue', font_size=10, font_weight='bold', arrows=True)
+        edge_labels = nx.get_edge_attributes(subgraph, 'relation')
+        nx.draw_networkx_edge_labels(subgraph, pos, edge_labels=edge_labels, font_color='red')
+        plt.title("Subgraph Visualization")
+        plt.savefig("/Users/komalgilani/Documents/GitHub/CohortVarLinker/data/subgraph_visualization.png")
+
+
 if __name__ == "__main__":
     csv_path = "/Users/komalgilani/Documents/GitHub/CohortVarLinker/data/concept_relationship_enriched.csv"
     
     omop_nx = OmopGraphNX(csv_path)
     omop_nx.build_graph()
+    omop_nx.visualize_graph()
+    # start_time = time.time()
+    # start_concept = 3027018   
+    # end_concept = [40771525] 
+    # reachable_targets = omop_nx.source_to_targets_paths(21601855, [42536050], max_depth=1, domain='drug')
+    # print(f"Reachable targets: {reachable_targets}")
+    # reachable_targets = omop_nx.source_to_targets_paths(4306037, [21601682], max_depth=1, domain='drug')
+    # print(f"Reachable targets: {reachable_targets}") 
+    # reachable_targets = omop_nx.source_to_targets_paths(4306037, [21601682], max_depth=1, domain='drug')
+    # print(f"Reachable targets: {reachable_targets}") 
+    # reachable_targets = omop_nx.source_to_targets_paths(21601855, [42536050], max_depth=1, domain='drug')
+    # print(f"Reachable targets: {reachable_targets}") 
     
-    start_time = time.time()
-    start_concept = 3027018   
-    end_concept = [40771525] 
-    # if start_concept not in omop_nx.graph:
-    #     print(f"{start_concept} does not exist")
-    # if end_concept[0] not in omop_nx.graph: 
-    #     print(f"{end_concept[0]} does not exist")
-    # ,1340128,1341927,1334456,1342439,21601822
-    # print(omop_nx.bfs_bidirectional_reachable(start_concept, end_concept, max_depth=5))
-    # print(omop_nx.find_sibling_targets(start_concept=start_concept, target_ids=end_concept, max_depth=5))
-    
-    # print(omop_nx.find_sibling_targets(21601783, [21601822], max_depth=1))
-    # print(omop_nx.get_all_parents(21601783, max_depth=1))
-    # print(omop_nx.get_equivalent_nodes(1338005))
-    # is_match, path = omop_nx.bfs_path_exists(21601689, 21601665)
-    # print(f"Match: {is_match}, path: {path}") 
-    # reachable_parents = omop_nx.bfs_upward_reachable(21601783,[], max_depth=5)
-    # print(reachable_parents)  # should include 21601665
-
-    # children = omop_nx.bfs_downward_reachable(21601689, target_ids=[21601665], max_depth=5)
-    # print(21601665 in children)  # should be True
-   # print(omop_nx.bfs_bidirectional_reachable(21601784, [1308216], max_depth=2))
-   # print(omop_nx.bfs_bidirectional_reachable(4329847, [312327], max_depth=2))
-    #print(omop_nx.bfs_downward_reachable(21601784, target_ids=[1308216], max_depth=2))
-    # print(omop_nx.bfs_bidirectional_reachable(21601665, target_ids=[1338005], max_depth=2))
-    # print(omop_nx.bfs_bidirectional_reachable(956874, target_ids=[4186998], max_depth=2))    
-    #print(omop_nx.bfs_bidirectional_reachable(21601782, target_ids=[1308216], max_depth=3))
-    
-    # print(omop_nx.bfs_bidirectional_reachable(956874, target_ids=[21601517], max_depth=2))
-    print(omop_nx.only_upward_or_downward(3012888, target_ids=[4268883], max_depth=1))
-    print(omop_nx.only_upward_or_downward(3012888, target_ids=[4236281], max_depth=1))
-    print(omop_nx.only_upward_or_downward(3654996, target_ids=[316866], max_depth=1))
-    print(omop_nx.only_upward_or_downward(3654996, target_ids=[316866], max_depth=2))
-    # print(3000285 in omop_nx.graph)
-    print(omop_nx.concept_exists(715983, "omop5160877", ["omop extension"]))
-    
-    # find relationships between two nodes
-    # print(omop_nx.bfs_path(3020491, [4156660], max_depth=1))
-    # print(omop_nx.find_sibling_targets(3028437, [44817294], max_depth=1))
+ 
+ 

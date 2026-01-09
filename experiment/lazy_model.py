@@ -131,3 +131,10 @@ def get_model(backend: Optional[str] = None):
 
 def get_backend_name() -> Optional[str]:
     return _backend
+
+def similarity_score(emb_model, text_a, text_b):
+    embedding_model, embedding_size = get_model(backend=emb_model)
+    vec_a = embedding_model.embed_text(text_a)
+    vec_b = embedding_model.embed_text(text_b)
+    score = cosine_similarity([vec_a], [vec_b])[0][0]
+    return score

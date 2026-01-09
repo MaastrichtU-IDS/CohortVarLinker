@@ -11,6 +11,7 @@ from qdrant_client.http.models import (
     
 
 )
+from .config import settings
 from .utils import load_dictionary
 import glob
 import uuid
@@ -227,7 +228,7 @@ def insert_in_db(vectordb: QdrantClient, embedding_model: 'ModelEmbedding', poin
 #     return var_labels
 
 
-def search_in_db(vectordb: QdrantClient, embedding_model: 'ModelEmbedding', query_text: str, limit: int = 20, target_study:str="gissi-hf", omop_domain:List[str]=["drug_exposure","condition_occurrence","condition_era","observation","observation_era","measurement","visit_occurrence","procedure_occurrence","device_exposure","person"], min_score:int=0.4, collection_name:str="studies_metadata") -> List[Any]:
+def search_in_db(vectordb: QdrantClient, embedding_model: 'ModelEmbedding', query_text: str, limit: int = 20, target_study:list[str]=["gissi-hf"], data_domain:List[str]=settings.DATA_DOMAINS, min_score:int=0.4, collection_name:str="studies_metadata") -> List[Any]:
         query_vector =  embedding_model.embed_text(query_text)
         # print(f"query_vector length={len(query_vector)}")
         results = vectordb.search(
@@ -239,14 +240,14 @@ def search_in_db(vectordb: QdrantClient, embedding_model: 'ModelEmbedding', quer
                     must=[
                         models.FieldCondition(
                             key='study_name',
-                            match=models.MatchValue(
-                                value=target_study
+                            match=models.MatchAny(
+                                any=target_study
                             )
                         ),
                         models.FieldCondition(
                             key='domain',
                             match=models.MatchAny(
-                                any=omop_domain
+                                any=data_domain
                             )
                         )
 
@@ -263,7 +264,7 @@ def search_in_db(vectordb: QdrantClient, embedding_model: 'ModelEmbedding', quer
 
          
 
-def search_in_db_group_by(vectordb: QdrantClient, embedding_model: 'ModelEmbedding', query_text: str, limit: int = 100, target_study:str="gissi-hf", omop_domain:str="drug_exposure", collection_name:str="studies_metadata") -> List[Any]:
+def search_in_db_group_by(vectordb: QdrantClient, embedding_model: 'ModelEmbedding', query_text: str, limit: int = 100, target_study:str="gissi-hf", data_domain:list[str]=settings.DATA_DOMAINS, collection_name:str="studies_metadata") -> List[Any]:
     """
     Searches the Qdrant collection for points similar to the provided query text.
     Returns the top 'limit' results with payload metadata.
@@ -289,8 +290,8 @@ def search_in_db_group_by(vectordb: QdrantClient, embedding_model: 'ModelEmbeddi
                         ),
                          models.FieldCondition(
                             key='domain',
-                            match=models.MatchValue(
-                                value=omop_domain
+                            match=models.MatchAny(
+                                any=data_domain
                             )
                         )
 
@@ -349,7 +350,6 @@ def generate_studies_embeddings(dir_path:str, vectordb_path:str, collection_name
             except Exception as e:
                 print(f"Error retrieving vector count: {e}")
     return vectordb, embedding_model
-
 
 
 
