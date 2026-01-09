@@ -1,7 +1,7 @@
-**🧬 **CohortVarLinker**:** A Hybrid Semantic Matching Engine for Cross-Study Variable Harmonization
+**🧬 **CohortVarLinker**:** A Hybrid Semantic Matching Engine for Metadata-driven Cohort Alignment
 
 
-CohortVarLinker is a semantic matching tool designed to align and harmonize variables across heterogeneous clinical cohort studies. It leverages a hybrid approach that combines ontology-based reasoning with text-based semantic similarity (e.g., embeddings) to identify equivalent or related data elements between studies, even when they differ in naming conventions, granularity, or coding systems.
+CohortVarLinker is a semantic matching tool designed to align variables (based on semantics and statistics) across heterogeneous clinical cohort studies. It leverages a hybrid approach that combines ontology-based reasoning with text-based semantic similarity (e.g., embeddings) to identify equivalent or related data elements between studies, even when they differ in naming conventions, granularity, or coding systems.
 
 **🔧 Key Features:**
 
