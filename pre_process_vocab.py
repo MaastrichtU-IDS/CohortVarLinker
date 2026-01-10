@@ -380,14 +380,14 @@ def ucum_hierarchy(
 #     print(f"[INFO] Rows written: {len(out):,}")
 
 
-def add_snomed_atc_equivalence_viarxnorm(concept_file, concept_syn_file, relationship_file, output_file="/Users/komalgilani/Desktop/CohortVarLinker/data/concept_relationship_snomed_atc_equivalence_only.csv"):
+def add_snomed_atc_equivalence_viarxnorm_v1(concept_file, concept_syn_file, relationship_file, output_file="/Users/komalgilani/Desktop/CohortVarLinker/data/concept_relationship_snomed_atc_equivalence_only.csv"):
     # use snomed to rxnom relationship and rxnorm to atc relationship to create snomed to atc equivalence relationship
     concept_df = pd.read_csv(concept_file, sep='\t', dtype=str)
     concept_df  = concept_df.apply(lambda x: x.astype(str).str.lower())
     relationship_df = pd.read_csv(relationship_file, sep='\t', dtype=str)
     relationship_df = relationship_df.apply(lambda x: x.astype(str).str.lower())    
     concept_df.columns = concept_df.columns.str.lower()
-    concept_df = enrich_concept_synonyms(concept_df, concept_syn_file)
+    # concept_df = enrich_concept_synonyms(concept_df, concept_syn_file)
     relationship_df.columns = relationship_df.columns.str.lower()
     print(relationship_df['relationship_id'].unique())
     # get snomed to rxnorm relationships
@@ -421,6 +421,53 @@ def add_snomed_atc_equivalence_viarxnorm(concept_file, concept_syn_file, relatio
     # Merge to get vocabulary and names for concept_id_2
     new_relationships_final = new_relationships_final.merge(concept_df, left_on="concept_id_2", right_on="concept_id", how="left")
     new_relationships_final.rename(columns={"concept_name": "concept_name_2", "vocabulary_id": "concept_2_vocabulary","domain_id":"concept_2_domain","concept_class_id":"concept_2_concept_class","concept_code":"concept_code_2", "synonyms": "concept_synonym_2"}, inplace=True)
+    new_relationships_final.drop(columns=["concept_id"], inplace=True)  
+    new_relationships_final.to_csv(output_file, index=False)
+    print(f"Snomed-ATC equivalence relationships saved as: {output_file}")
+
+
+
+def add_snomed_atc_equivalence_viarxnorm(concept_file, relationship_file, output_file="/Users/komalgilani/Desktop/CohortVarLinker/data/concept_relationship_snomed_atc_equivalence_only.csv"):
+    # use snomed to rxnom relationship and rxnorm to atc relationship to create snomed to atc equivalence relationship
+    concept_df = pd.read_csv(concept_file, sep='\t', dtype=str)
+    concept_df  = concept_df.apply(lambda x: x.astype(str).str.lower())
+    relationship_df = pd.read_csv(relationship_file, sep='\t', dtype=str)
+    relationship_df = relationship_df.apply(lambda x: x.astype(str).str.lower())    
+    concept_df.columns = concept_df.columns.str.lower()
+    # concept_df = enrich_concept_synonyms(concept_df, concept_syn_file)
+    relationship_df.columns = relationship_df.columns.str.lower()
+    print(relationship_df['relationship_id'].unique())
+    # get snomed to rxnorm relationships
+    snomed_rxnorm_df = relationship_df[relationship_df['relationship_id'].isin(['snomed - rxnorm eq'])]
+    # get rxnorm to atc relationships
+    rxnorm_atc_df = relationship_df[relationship_df['relationship_id'].isin(['rxnorm - atc pr lat'])]
+    
+     # all snomed concept that are rxnorm equivalent and have relationship 'is disposition of' with other snomed concepts should be add as equivalence relationship with atc concepts which are lat pr of those rxnorm concepts.
+
+    # merge on concept_id_2 of snomed_rxnorm and concept_id_1 of rxnorm_atc
+    
+    merged_df = snomed_rxnorm_df.merge(rxnorm_atc_df, left_on="concept_id_2", right_on="concept_id_1", how="inner", suffixes=('_snomed_rxnorm', '_rxnorm_atc'))
+    # create new dataframe with columns
+   
+    
+    new_relationships = pd.DataFrame()
+    new_relationships['concept_id_1'] = merged_df['concept_id_1_snomed_rxnorm']
+    new_relationships['concept_id_2'] = merged_df['concept_id_2_rxnorm_atc']
+    # make bidirectional relationship snomed - atc eq and atc - snomed eq
+    new_relationships_1 = new_relationships.copy()
+    new_relationships_1['relationship_id'] = 'snomed - atc eq'
+    new_relationships_2 = new_relationships.copy()
+    new_relationships_2['relationship_id'] = 'atc - snomed eq'
+    new_relationships_final = pd.concat([new_relationships_1, new_relationships_2], axis=0, ignore_index=True)
+    # merge to get concept names and vocabularies
+    concept_df = concept_df[['concept_id', 'concept_name', 'vocabulary_id', 'domain_id', 'concept_class_id', 'concept_code']]
+    # Merge to get vocabulary and names for concept_id_1
+    new_relationships_final = new_relationships_final.merge(concept_df, left_on="concept_id_1", right_on="concept_id", how="left")
+    new_relationships_final.rename(columns={"concept_name": "concept_name_1", "vocabulary_id": "concept_1_vocabulary","domain_id":"concept_1_domain","concept_class_id":"concept_1_concept_class","concept_code":"concept_code_1"}, inplace=True)
+    new_relationships_final.drop(columns=["concept_id"], inplace=True)  
+    # Merge to get vocabulary and names for concept_id_2
+    new_relationships_final = new_relationships_final.merge(concept_df, left_on="concept_id_2", right_on="concept_id", how="left")
+    new_relationships_final.rename(columns={"concept_name": "concept_name_2", "vocabulary_id": "concept_2_vocabulary","domain_id":"concept_2_domain","concept_class_id":"concept_2_concept_class","concept_code":"concept_code_2"}, inplace=True)
     new_relationships_final.drop(columns=["concept_id"], inplace=True)  
     new_relationships_final.to_csv(output_file, index=False)
     print(f"Snomed-ATC equivalence relationships saved as: {output_file}")
@@ -512,7 +559,7 @@ def add_eq_for_share_synonyms(concept_file, concept_syn_file, relationship_file,
     new_relationships_df.drop(columns=["concept_id"], inplace=True)  
     new_relationships_df.to_csv(output_file, index=False)
     print(f"Equivalence relationships based on shared synonyms saved as: {output_file}")
-def enrich_relationships(concept_file, concept_syn_file, relationship_file, icarecvd_vocab_df, output_file="/Users/komalgilani/Desktop/CohortVarLinker/data/concept_relationship.csv"):
+def enrich_relationships_v1(concept_file, concept_syn_file, relationship_file, icarecvd_vocab_df, output_file="/Users/komalgilani/Desktop/CohortVarLinker/data/concept_relationship.csv"):
     # Load concept and relationship files
     
     include_relationshops = ['is a','subsumes',
@@ -561,6 +608,65 @@ def enrich_relationships(concept_file, concept_syn_file, relationship_file, icar
     standalone_concepts_self_rel['relationship_id'] = 'maps to'
     standalone_concepts_self_rel.rename(columns={"concept_name": "concept_name_1","concept_code": "concept_code_1", "vocabulary_id": "concept_1_vocabulary", "domain_id":"concept_1_domain","concept_class_id":"concept_1_concept_class", "synonyms": "concept_synonym_1"}, inplace=True)
     standalone_concepts_self_rel.rename(columns={"concept_name": "concept_name_2","concept_code": "concept_code_2", "vocabulary_id": "concept_2_vocabulary", "domain_id":"concept_2_domain","concept_class_id":"concept_2_concept_class", "synonyms": "concept_synonym_2"}, inplace=True)
+    # standalone_concepts_self_rel.drop(columns=["concept_id"], inplace=True)
+    relationship_df = pd.concat([relationship_df, standalone_concepts_self_rel], axis=0, ignore_index=True)
+    # print(f"Total standalone concepts: {len(standalone_concepts)}")
+    merged_df=pd.concat([relationship_df, icarecvd_vocab_df], axis=0, ignore_index=True)
+    # convert all values to lowercase
+    # merged_df = merged_df.apply(lambda x: x.astype(str).str.lower())
+    merged_df = ucum_hierarchy(concept_df=concept_df, relationship_df=merged_df)
+    merged_df.to_csv(output_file, index=False)
+    print(f"Enriched file saved as: {output_file}")
+
+def enrich_relationships(concept_file, relationship_file, icarecvd_vocab_df, output_file="/Users/komalgilani/Desktop/CohortVarLinker/data/concept_relationship.csv"):
+    # Load concept and relationship files
+    
+    include_relationshops = ['is a','subsumes',
+                                'rxnorm - atc pr lat', 'atc - rxnorm pr lat',
+                                'rxnorm - atc','atc - rxnorm',
+                                'atc - snomed eq', 'snomed - atc eq',
+                                'disposition of' ,'has disposition',
+                                "has answer", "answer of", "Component of", "has component", 
+                                'cpt4 - snomed eq', 'snomed - cpt4 eq', 
+                                'cpt4 - loinc eq' , 'loinc - cpt4 eq',
+                                'snomed - rxnorm eq','rxnorm - snomed eq'
+                                
+                                                             ]
+    concept_df = pd.read_csv(concept_file, sep='\t', dtype=str)
+    # concept_syn = pd.read_csv(concept_syn_file, sep='\t', dtype=str)
+    concept_df  = concept_df.apply(lambda x: x.astype(str).str.lower())
+    print(f"unique invalid reasons {concept_df['invalid_reason'].unique().tolist()}")
+    relationship_df = pd.read_csv(relationship_file, sep='\t', dtype=str)
+    relationship_df = relationship_df.apply(lambda x: x.astype(str).str.lower())
+    
+    concept_df.columns = concept_df.columns.str.lower()
+    relationship_df.columns = relationship_df.columns.str.lower()
+    print(relationship_df['relationship_id'].unique())
+    relationship_df = relationship_df[relationship_df['relationship_id'].isin([rel.lower() for rel in include_relationshops])]
+    relationship_df = relationship_df[relationship_df['concept_id_1'] != relationship_df['concept_id_2']]
+    concept_df = concept_df[(concept_df['invalid_reason'] =='nan')]
+    print(f"len of total rows {len(concept_df)}")
+    concept_df = concept_df[['concept_id', 'concept_name', 'concept_code', 'vocabulary_id', 'domain_id', 'concept_class_id']]
+
+    # Merge to get vocabulary and names for concept_id_1
+    relationship_df = relationship_df.merge(concept_df, left_on="concept_id_1", right_on="concept_id", how="left")
+    relationship_df.rename(columns={"concept_name": "concept_name_1","concept_code": "concept_code_1", "vocabulary_id": "concept_1_vocabulary", "domain_id":"concept_1_domain","concept_class_id":"concept_1_concept_class"}, inplace=True)
+    relationship_df.drop(columns=["concept_id"], inplace=True)
+
+    # Merge to get vocabulary and names for concept_id_2
+    relationship_df = relationship_df.merge(concept_df, left_on="concept_id_2", right_on="concept_id", how="left")
+    relationship_df.rename(columns={"concept_name": "concept_name_2", "concept_code": "concept_code_2", "vocabulary_id": "concept_2_vocabulary","domain_id":"concept_2_domain","concept_class_id":"concept_2_concept_class"}, inplace=True)
+    relationship_df.drop(columns=["concept_id"], inplace=True)
+
+    # concept df where the concepts dont have any relationships like they are standalone concepts
+    standalone_concepts = concept_df[~concept_df['concept_id'].isin(relationship_df['concept_id_1'].tolist() + relationship_df['concept_id_2'].tolist())]
+    # create their relationship toselves
+    standalone_concepts_self_rel = standalone_concepts.copy()
+    standalone_concepts_self_rel['concept_id_1'] = standalone_concepts_self_rel['concept_id']
+    standalone_concepts_self_rel['concept_id_2'] = standalone_concepts_self_rel['concept_id']
+    standalone_concepts_self_rel['relationship_id'] = 'maps to'
+    standalone_concepts_self_rel.rename(columns={"concept_name": "concept_name_1","concept_code": "concept_code_1", "vocabulary_id": "concept_1_vocabulary", "domain_id":"concept_1_domain","concept_class_id":"concept_1_concept_class"}, inplace=True)
+    standalone_concepts_self_rel.rename(columns={"concept_name": "concept_name_2","concept_code": "concept_code_2", "vocabulary_id": "concept_2_vocabulary", "domain_id":"concept_2_domain","concept_class_id":"concept_2_concept_class"}, inplace=True)
     # standalone_concepts_self_rel.drop(columns=["concept_id"], inplace=True)
     relationship_df = pd.concat([relationship_df, standalone_concepts_self_rel], axis=0, ignore_index=True)
     # print(f"Total standalone concepts: {len(standalone_concepts)}")
@@ -637,7 +743,7 @@ if __name__ == "__main__":
     output_dir = "/Users/komalgilani/Documents/GitHub/CohortVarLinker/data"
     add_snomed_atc_equivalence_viarxnorm(
         concept_file=f"{athena_vocab_dir}/CONCEPT.csv",
-        concept_syn_file=f"{athena_vocab_dir}/CONCEPT_SYNONYM.csv",
+        # concept_syn_file=f"{athena_vocab_dir}/CONCEPT_SYNONYM.csv",
         relationship_file=f"{athena_vocab_dir}/CONCEPT_RELATIONSHIP.csv",
         output_file=f"{output_dir}/concept_relationship_snomed_atc_equivalence_only.csv",
     )
@@ -652,13 +758,13 @@ if __name__ == "__main__":
     
     enrich_relationships(
         concept_file=f"{athena_vocab_dir}/CONCEPT.csv",
-        concept_syn_file=f"{athena_vocab_dir}/CONCEPT_SYNONYM.csv",
+        # concept_syn_file=f"{athena_vocab_dir}/CONCEPT_SYNONYM.csv",
         relationship_file=f"{athena_vocab_dir}/CONCEPT_RELATIONSHIP.csv",
         icarecvd_vocab_df=df,
         output_file=f"{output_dir}/concept_relationship_enriched.csv",
     )
     df = pd.read_csv("/Users/komalgilani/Documents/GitHub/CohortVarLinker/data/concept_relationship_enriched.csv", dtype=str)
-    explore_relationships(df, 1112807)
+    # explore_relationships(df, 1112807)
     
     snomed_atc_df = pd.read_csv(f"{output_dir}/concept_relationship_snomed_atc_equivalence_only.csv", dtype=str)
     enrich_df = pd.read_csv(f"{output_dir}/concept_relationship_enriched.csv", dtype=str)

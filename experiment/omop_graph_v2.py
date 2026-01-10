@@ -2,6 +2,7 @@ import networkx as nx
 import pandas as pd
 import pickle
 import os
+import gzip
 # import zlib 
 import time
 from typing import List, Tuple
@@ -9,7 +10,7 @@ from collections import deque, OrderedDict
 from matplotlib import pyplot as plt
 
 class OmopGraphNX:
-    def __init__(self, csv_file_path=None, output_file='graph_nx.pkl'):
+    def __init__(self, csv_file_path=None, output_file='graph_nx.pkl.gz'):
         self.csv_file_path = csv_file_path
         self.output_file = output_file
         self.graph = nx.DiGraph()
@@ -68,7 +69,7 @@ class OmopGraphNX:
             "has answer": "answer of",
             "answer of": "has answer",
         }
-        keep_rels = set(eq_relationships) | set(directed)
+        keep_rels = set(eq_relationships.keys()) | set(directed.keys())
         df = df[df["relationship_id"].str.lower().isin(keep_rels)].copy()
         print(f"Rows to process: {len(df):,}")
 
@@ -251,15 +252,30 @@ class OmopGraphNX:
             results.append((tid, match_relation))
         return results
 
+    # def save_graph(self, pickle_file):
+    #     with open(pickle_file, 'wb') as f:
+    #         pickle.dump(self.graph, f, protocol=pickle.HIGHEST_PROTOCOL)
+    #     print(f"[INFO] Graph saved to {pickle_file}.")
     def save_graph(self, pickle_file):
-        with open(pickle_file, 'wb') as f:
+        # write graph_nx.pkl.gz
+        out = pickle_file if pickle_file.endswith(".gz") else pickle_file + ".gz"
+        with gzip.open(out, "wb", compresslevel=6) as f:
             pickle.dump(self.graph, f, protocol=pickle.HIGHEST_PROTOCOL)
-        print(f"[INFO] Graph saved to {pickle_file}.")
+        print(f"[INFO] Graph saved to {out}")
 
+    # def load_graph(self, pickle_file):
+    #     with open(pickle_file, 'rb') as f:
+    #         self.graph = pickle.load(f)
+    #     print(f"[INFO] Graph loaded. Nodes: {self.graph.number_of_nodes()}")
     def load_graph(self, pickle_file):
-        with open(pickle_file, 'rb') as f:
+        path = pickle_file
+        if not path.endswith(".gz"):
+            gz = path + ".gz"
+            if os.path.exists(gz):
+                path = gz
+        with gzip.open(path, "rb") as f:
             self.graph = pickle.load(f)
-        print(f"[INFO] Graph loaded. Nodes: {self.graph.number_of_nodes()}")
+        print(f"[INFO] Graph loaded from {path}. Nodes: {self.graph.number_of_nodes()} Edges: {self.graph.number_of_edges()}")
 
     def concept_exists(self, concept_id: int, concept_code:str, vocabulary:List[str]) -> Tuple[bool, str]:
         """
@@ -307,7 +323,7 @@ if __name__ == "__main__":
     start_time = time.time()
     csv_path = "/Users/komalgilani/Documents/GitHub/CohortVarLinker/data/concept_relationship_enriched.csv"
     
-    omop_nx = OmopGraphNX(csv_path, output_file='graph_nx.pkl')
+    omop_nx = OmopGraphNX(csv_path, output_file='graph_nx.pkl.gz')
     print(f"Total Execution Time: {time.time() - start_time:.2f} seconds")
     
     reachable_targets = omop_nx.source_to_targets_paths(3036277, [37160442], max_depth=1)

@@ -1,7 +1,7 @@
 import pandas as pd
 # import cProfile
 # import pstats
-from experiment.omop_graph import OmopGraphNX
+from experiment.omop_graph_v2 import OmopGraphNX
 from experiment.config import settings
 from SPARQLWrapper import SPARQLWrapper, JSON
 from collections import defaultdict
