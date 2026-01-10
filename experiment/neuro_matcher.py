@@ -39,7 +39,7 @@ class NeuroSymbolicMatcher:
             matched_candidates: Set[Tuple[int, str]] = set()
             if self.graph:
                 reachable = self.graph.source_to_targets_paths(
-                    sid, candidate_tgt_ids, max_depth=1, domain=rep["category"]
+                    sid, candidate_tgt_ids, max_depth=1
                 )
                 if reachable: matched_candidates = reachable
 
@@ -77,7 +77,7 @@ class NeuroSymbolicMatcher:
                             "scode": src.get("code"), "slabel": src.get("code_label"),
                             "tcode": tgt.get("code"), "tlabel": tgt.get("code_label"),
                             "category": src["category"], # Simplified
-                            "mapping_relation": relation
+                            # "mapping_relation": relation
                         })
                         
         return final_matches

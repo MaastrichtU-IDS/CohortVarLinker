@@ -9,7 +9,7 @@ import json
 import os
 import glob
 import time
-# from experiment.run import StudyMapper
+from experiment.run import StudyMapper
 from experiment.variables_kg_v2 import process_variables_metadata_file
 from experiment.study_kg import generate_studies_kg, add_data_access_spec
 from experiment.vector_db import generate_studies_embeddings, search_in_db
@@ -556,18 +556,18 @@ if __name__ == '__main__':
 
     
     graph = OmopGraphNX(csv_file_path=settings.concepts_file_path)
-    # mapper = StudyMapper(vector_db=vector_db, embed_model=embedding_model, graph=graph)
+    mapper = StudyMapper(vector_db=vector_db, embed_model=embedding_model, graph=graph)
     for tstudy in target_studies:
-        mapping_transformed=map_source_target(source_study_name=source_study, target_study_name=tstudy, 
-                                                vector_db=vector_db, embedding_model=embedding_model,
-                                                collection_name=f"studies_metadata_{model_name}_{embedding_mode}",
-                                                mapping_mode=mapping_mode,
-                                                graph=graph)
-        # mapping_transformed = mapper.run_pipeline(
-        #     src_study=source_study,
-        #     tgt_study=tstudy,
-        #     mapping_mode=mapping_mode,
-        #     collection_name=f"studies_metadata_{model_name}_{embedding_mode}")
+        # mapping_transformed=map_source_target(source_study_name=source_study, target_study_name=tstudy, 
+        #                                         vector_db=vector_db, embedding_model=embedding_model,
+        #                                         collection_name=f"studies_metadata_{model_name}_{embedding_mode}",
+        #                                         mapping_mode=mapping_mode,
+        #                                         graph=graph)
+        mapping_transformed = mapper.run_pipeline(
+            src_study=source_study,
+            tgt_study=tstudy,
+            mapping_mode=mapping_mode,
+            collection_name=f"studies_metadata_{model_name}_{embedding_mode}")
 
         print(mapping_transformed.head(5))
         

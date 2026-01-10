@@ -298,7 +298,7 @@ def _parse_bindings(bindings: Iterable[Dict[str, Any]]) -> tuple[List, List, Lis
                         "somop_id": omop, "tomop_id": omop,
                         "scode": code_value, "tcode": code_value,
                         "slabel": code_label, "tlabel": code_label,
-                        "mapping_relation": "skos:exactMatch",
+                        # "mapping_relation": "skos:exactMatch",
                         "source_visit": sv, "target_visit": tv
                     })
 

@@ -23,7 +23,7 @@ class StudyMapper:
             code_value = result.get("code_value", {}).get("value", "")
             src_cat = result["source_domain"]["value"].strip().lower()
             tgt_cat = result["target_domain"]["value"].strip().lower()
-
+              
             def parse_raw(raw_list):
                 vars_, visits_ = [], []
                 if not raw_list: return vars_, visits_
@@ -50,7 +50,7 @@ class StudyMapper:
                             "somop_id": omop, "tomop_id": omop,
                             "scode": code_value, "tcode": code_value,
                             "slabel": code_label, "tlabel": code_label,
-                            "mapping_relation": "skos:exactMatch",
+                            # "mapping_relation": "skos:exactMatch",
                             "source_visit": sv, "target_visit": tv,
                             "category": category
                         })
@@ -105,6 +105,13 @@ class StudyMapper:
         df[["transformation_rule", "harmonization_status"]] = df.apply(
             lambda r: solve_row(r), axis=1, result_type="expand"
         )
-        
-        return df
+        # remove if source or target variable is missing
+        df = df.dropna(subset=["source", "target"])
+        for col in df.columns:
+            if df[col].apply(lambda x: isinstance(x, dict)).any():
+                df[col] = df[col].apply(json.dumps)
+            elif df[col].apply(lambda x: isinstance(x, list)).any():
+                df[col] = df[col].apply(str)
+        return df.drop_duplicates(keep="first")
+        # return df
     
